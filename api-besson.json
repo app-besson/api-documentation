@@ -1,0 +1,327 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "API Besson documenation",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/customers": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Rechercher des clients",
+        "description": "",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "description": "Email du client",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not found",
+            "content": {
+              "text/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "msg": {
+                            "type": "string",
+                            "examples": [
+                              "No customers found"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Créer un nouveau client",
+        "description": "",
+        "requestBody": {
+          "description": "Créer un nouveau client ou prospect. Création en parallèle dans Cashfid et Splio (mobile wallet).",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "msg": {
+                            "type": "string",
+                            "examples": [
+                              "Invalid value"
+                            ]
+                          },
+                          "param": {
+                            "type": "string",
+                            "examples": [
+                              "email"
+                            ]
+                          },
+                          "location": {
+                            "type": "string",
+                            "examples": [
+                              "body"
+                            ]
+                          },
+                          "value": {
+                            "type": "string",
+                            "examples": [
+                              "test.test.fr"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "text/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "msg": {
+                            "type": "string",
+                            "examples": [
+                              "Le compte client existe déjà (email en doublon)"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CustomerCreate": {
+        "type": "object",
+        "required": [
+          "storeId",
+          "email"
+        ],
+        "properties": {
+          "storeId": {
+            "type": "string",
+            "examples": [
+              "195"
+            ]
+          },
+          "gender": {
+            "type": "string",
+            "examples": [
+              "male"
+            ]
+          },
+          "firstname": {
+            "type": "string",
+            "examples": [
+              "John"
+            ]
+          },
+          "lastname": {
+            "type": "string",
+            "examples": [
+              "Doe"
+            ]
+          },
+          "birthday": {
+            "type": "string",
+            "examples": [
+              "2000-01-01"
+            ]
+          },
+          "countryCode": {
+            "type": "string",
+            "examples": [
+              "FRA"
+            ]
+          },
+          "postalCode": {
+            "type": "string",
+            "examples": [
+              "63170"
+            ]
+          },
+          "phoneNumber": {
+            "type": "string",
+            "examples": [
+              "+33600000000"
+            ]
+          },
+          "optinEmail": {
+            "type": "integer",
+            "format": "int64",
+            "examples": [
+              0
+            ]
+          },
+          "optinPhone": {
+            "type": "integer",
+            "format": "int64",
+            "examples": [
+              0
+            ]
+          },
+          "email": {
+            "type": "string",
+            "examples": [
+              "john.doe@mail.com"
+            ]
+          },
+          "source": {
+            "type": "string",
+            "examples": [
+              "myEnterprise"
+            ]
+          }
+        }
+      },
+      "Customer": {
+        "type": "object",
+        "required": [
+          "storeId",
+          "email"
+        ],
+        "properties": {
+          "storeId": {
+            "type": "string",
+            "examples": [
+              "195"
+            ]
+          },
+          "gender": {
+            "type": "string",
+            "examples": [
+              "male"
+            ]
+          },
+          "firstname": {
+            "type": "string",
+            "examples": [
+              "John"
+            ]
+          },
+          "lastname": {
+            "type": "string",
+            "examples": [
+              "Doe"
+            ]
+          },
+          "birthday": {
+            "type": "string",
+            "examples": [
+              "2000-01-01"
+            ]
+          },
+          "countryCode": {
+            "type": "string",
+            "examples": [
+              "FR"
+            ]
+          },
+          "postalCode": {
+            "type": "string",
+            "examples": [
+              "63170"
+            ]
+          },
+          "phoneNumber": {
+            "type": "string",
+            "examples": [
+              "+33600000000"
+            ]
+          },
+          "optinEmail": {
+            "type": "integer",
+            "format": "int64",
+            "examples": [
+              0
+            ]
+          },
+          "optinPhone": {
+            "type": "integer",
+            "format": "int64",
+            "examples": [
+              0
+            ]
+          },
+          "email": {
+            "type": "string",
+            "examples": [
+              "john.doe@mail.com"
+            ]
+          },
+          "cardNumber": {
+            "type": "string",
+            "examples": [
+              "9980003968037"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
