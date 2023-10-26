@@ -884,7 +884,7 @@ components:
                   description: Pour STORE_SELECTION
                   examples:
                   - - '1 rue des Frères Montgolfier null'
-                  - - '63170 AUBIERE'
+                    - '63170 AUBIERE'
             isWeb:
               type: boolean
               description: Pour STORE_SELECTION
