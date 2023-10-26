@@ -871,6 +871,11 @@ components:
               description: Pour STORE_SELECTION
               examples:
                 - "001"
+            isWeb:
+              type: boolean
+              description: Pour STORE_SELECTION
+              examples:
+                - true
     Unauthorized:
       type: object
       properties:
