@@ -867,21 +867,23 @@ components:
               examples:
                 - false
             store:
-              id:
-                type: string
-                description: Pour STORE_SELECTION
-                examples:
-                  - "001"
-              name:
-                type: string
-                description: Pour STORE_SELECTION
-                examples:
-                 - "Besson Chaussures CLERMONT AUBIERE"
-              address:
-                type: string table
-                description: Pour STORE_SELECTION
-                examples:
-                 - "[1 rue des Frères Montgolfier null, 63170 AUBIERE]"
+              type: array
+              items:
+                id:
+                  type: string
+                  description: Pour STORE_SELECTION
+                  examples:
+                    - "001"
+                name:
+                  type: string
+                  description: Pour STORE_SELECTION
+                  examples:
+                  - "Besson Chaussures CLERMONT AUBIERE"
+                address:
+                  type: string table
+                  description: Pour STORE_SELECTION
+                  examples:
+                  - "[1 rue des Frères Montgolfier null, 63170 AUBIERE]"
             isWeb:
               type: boolean
               description: Pour STORE_SELECTION
