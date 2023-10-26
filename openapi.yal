@@ -1,0 +1,980 @@
+openapi: 3.1.0
+info:
+  title: API Besson documenation
+  version: 1.0.0
+paths:
+  /onboarding:
+    get:
+      tags:
+        - Onboarding
+      summary: Onboarding d'un utilisateur dans l'application fidélité
+      description: >
+        Retourne l'étape d'onboarding de l'utilisaur dans l'application
+        fidélité. 
+        
+          Les étapes possibles : 
+
+          * **SIGN_UP_FORM** (nouveau client)
+          * **PROFILE_COMPLETION_FORM** (client existant mais avec des infos manquantes)
+          * **CONSENTS** (acceptation des conditions pour les nouveaux clients)
+          * **STORE_SELECTION** (sélection de son magasin favoris)
+          * **DONE** (le client a déjà fait l'onboarding)
+      responses:
+        '200':
+          description: OKCustomer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Onboarding'
+        '401':
+          description: Unauthorized
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+  /onboarding/sign-up:
+    post:
+      tags:
+        - Onboarding
+      summary: Valide l'étape SIGN_UP_FORM de l'utilisateur
+      description: >
+        Retourne l'étape d'onboarding **CONSENTS**
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignUp'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Consents'
+        '401':
+          description: Unauthorized
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableOnboarding'
+  /onboarding/complete-profile:
+    post:
+      tags:
+        - Onboarding
+      summary: Valide l'étape PROFILE_COMPLETION_FORM de l'utilisateur
+      description: >
+        Retourne l'étape d'onboarding **STORE_SELECTION**
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignUp'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreSelection'
+        '401':
+          description: Unauthorized
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableOnboarding'
+  /onboarding/consents:
+    post:
+      tags:
+        - Onboarding
+      summary: Valide l'étape CONSENTS de l'utilisateur
+      description: >
+        Retourne l'étape d'onboarding **STORE_SELECTION**
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TermOfUse'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreSelection'
+        '401':
+          description: Unauthorized
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableOnboarding'
+  /onboarding/store-selection:
+    post:
+      tags:
+        - Onboarding
+      summary: Valide l'étape STORE_SELECTION de l'utilisateur
+      description: >
+        Retourne l'étape d'onboarding **DONE**
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IdString'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Done'
+        '401':
+          description: Unauthorized
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableOnboarding'
+  /stores:
+    get:
+      tags:
+        - Stores
+      summary: Liste de tous les magasins
+      description: >-
+        Retourne la liste des magasins Besson pour un utilisateur authentifié
+        par keycloak
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stores'
+  /news:
+    get:
+      tags:
+        - News
+      summary: Liste des actualités
+      parameters:
+        - name: language
+          in: query
+          description: Langue des actualitées
+          required: false
+          schema:
+            type: string
+            default: fr
+      description: >-
+        Retourne la liste des actualités Besson pour un utilisateur authentifié
+        par keycloak
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/News'
+  /me:
+    get:
+      tags:
+        - Me
+      summary: Informations d'un client
+      description: Retourne les informations d'un client authentifié par keycloak
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Me'
+  /me/affected-store:
+    get:
+      tags:
+        - Me
+      summary: Informations du magasin affecté à un client
+      description: >-
+        Retourne les informations du magasin affecté à un client authentifié par
+        keycloak
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AffectedStore'
+  /me/offers:
+    get:
+      tags:
+        - Me
+      summary: Liste des offres d'un client
+      description: Retourne les offres associées à un client authentifié par keycloak
+      parameters:
+        - name: language
+          in: query
+          description: Langue des offres
+          required: false
+          schema:
+            type: string
+            default: fr
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Offers'
+  /me/offers/{id}/activate:
+    post:
+      tags:
+        - Me
+      summary: Active l'offre d'un client
+      description: >-
+        Active l'offre d'un client authentifié par keycloak. L'offre est
+        disponible immédiatement en caisse
+      parameters:
+        - name: id
+          in: path
+          description: id de l'offre à activer pour le client
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+  /me/points-history:
+    get:
+      tags:
+        - Me
+      summary: Historique des points d'un client
+      description: Retourne l'histrique des points d'un client authentifié par keycloak
+      parameters:
+        - name: language
+          in: query
+          description: Langue des categories de mouvements de point
+          required: false
+          schema:
+            type: string
+            default: fr
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PointsHistory'
+  /customers:
+    get:
+      tags:
+        - Customers
+      summary: Rechercher des clients
+      description: ''
+      parameters:
+        - name: email
+          in: query
+          description: Email du client
+          required: false
+          schema:
+            type: string
+      responses:
+        '404':
+          description: Not found
+          content:
+            text/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+                          examples:
+                            - No customers found
+    post:
+      tags:
+        - Customers
+      summary: Créer un nouveau client
+      description: ''
+      requestBody:
+        description: >-
+          Créer un nouveau client ou prospect. Création en parallèle dans
+          Cashfid et Splio (mobile wallet).
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerCreate'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '400':
+          description: Bad Request
+          content:
+            text/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+                          examples:
+                            - Invalid value
+                        param:
+                          type: string
+                          examples:
+                            - email
+                        location:
+                          type: string
+                          examples:
+                            - body
+                        value:
+                          type: string
+                          examples:
+                            - test.test.fr
+        '422':
+          description: Unprocessable Entity
+          content:
+            text/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+                          examples:
+                            - Le compte client existe déjà (email en doublon)
+components:
+  schemas:
+    CustomerCreate:
+      type: object
+      required:
+        - storeId
+        - email
+      properties:
+        storeId:
+          type: string
+          examples:
+            - '195'
+        gender:
+          type: string
+          enum:
+            - male
+            - female
+        firstname:
+          type: string
+          examples:
+            - John
+        lastname:
+          type: string
+          examples:
+            - Doe
+        birthday:
+          type: string
+          examples:
+            - '2000-01-01'
+        countryCode:
+          type: string
+          examples:
+            - FRA
+        postalCode:
+          type: string
+          examples:
+            - '63170'
+        phoneNumber:
+          type: string
+          examples:
+            - '+33600000000'
+        optinEmail:
+          type: integer
+          format: int64
+          examples:
+            - 0
+        optinPhone:
+          type: integer
+          format: int64
+          examples:
+            - 0
+        email:
+          type: string
+          examples:
+            - john.doe@mail.com
+        source:
+          type: string
+          examples:
+            - myEnterprise
+    Customer:
+      type: object
+      required:
+        - storeId
+        - email
+      properties:
+        storeId:
+          type: string
+          examples:
+            - '195'
+        gender:
+          type: string
+          examples:
+            - male
+        firstname:
+          type: string
+          examples:
+            - John
+        lastname:
+          type: string
+          examples:
+            - Doe
+        birthday:
+          type: string
+          examples:
+            - '2000-01-01'
+        countryCode:
+          type: string
+          examples:
+            - FR
+        postalCode:
+          type: string
+          examples:
+            - '63170'
+        phoneNumber:
+          type: string
+          examples:
+            - '+33600000000'
+        optinEmail:
+          type: integer
+          format: int64
+          examples:
+            - 0
+        optinPhone:
+          type: integer
+          format: int64
+          examples:
+            - 0
+        email:
+          type: string
+          examples:
+            - john.doe@mail.com
+        cardNumber:
+          type: string
+          examples:
+            - '9980003968037'
+    Me:
+      type: object
+      properties:
+        firstname:
+          type: string
+          examples:
+            - John
+        lastname:
+          type: string
+          examples:
+            - Doe
+        loyalSince:
+          type: string
+          format: date
+          examples:
+            - '2000-01-01'
+        birthday:
+          type: string
+          format: date
+          examples:
+            - '2000-01-01'
+        phoneNumber:
+          type: string
+          examples:
+            - '+33600000000'
+        optinEmail:
+          type: boolean
+          examples:
+            - true
+        optinPhone:
+          type: boolean
+          examples:
+            - true
+        email:
+          type: string
+          format: email
+          examples:
+            - john.doe@mail.com
+        points:
+          type: integer
+          format: int64
+          examples:
+            - 100
+        cardNumber:
+          type: string
+          examples:
+            - '9980003968037'
+        status:
+          type: object
+          properties:
+            value:
+              type: string
+              enum:
+                - lover
+                - addict
+            endDate:
+              type: string
+              format: date
+              description: uniquement présent quand le client est lover
+              examples:
+                - '2000-01-01'
+        offersCount:
+          type: integer
+          format: int64
+          examples:
+            - 4
+    AffectedStore:
+      type: object
+      properties:
+        id:
+          type: string
+          examples:
+            - '011'
+        name:
+          type: string
+          examples:
+            - BESSON CHAUSSURES COURNON
+        address:
+          type: array
+          items:
+            type: string
+          examples:
+            - - Z.I - 67 AVENUE D AUBIERE (à coté de B&M)
+              - 63800 COURNON D AUVERGNE
+        coordinates:
+          type: object
+          properties:
+            lat:
+              type: string
+              examples:
+                - '45.7423'
+            lng:
+              type: string
+              examples:
+                - '3.16893'
+        timezoneOffset:
+          type: string
+          examples:
+            - '+02:00'
+        hours:
+          type: array
+          items:
+            type: array
+            items:
+              type: array
+              examples:
+                - - '09:00'
+                  - '12:00'
+                - - '14:00'
+                  - '19:00'
+    Stores:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            examples:
+              - '011'
+          name:
+            type: string
+            examples:
+              - John
+          address:
+            type: array
+            items:
+              type: string
+            examples:
+              - - Z.I - 67 AVENUE D AUBIERE (à coté de B&M)
+                - 63800 COURNON D AUVERGNE
+          coordinates:
+            type: object
+            properties:
+              lat:
+                type: string
+                examples:
+                  - '45.7423'
+              lng:
+                type: string
+                examples:
+                  - '3.16893'
+          timezoneOffset:
+            type: string
+            examples:
+              - '+02:00'
+          hours:
+            type: array
+            items:
+              type: array
+              items:
+                type: array
+                examples:
+                  - - '09:00'
+                    - '12:00'
+                  - - '14:00'
+                    - '19:00'
+    Offers:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            examples:
+              - '1'
+          type:
+            type: string
+            enum:
+              - points
+              - event
+              - activable
+          missingPoints:
+            type: integer
+            format: int64
+            description: Uniquement alimenté pour le type points
+            examples:
+              - 25
+          name:
+            type: string
+            examples:
+              - 5% - 75 points
+          image:
+            type: object
+            properties:
+              light:
+                type: string
+                examples:
+                  - >-
+                    https://www.besson-chaussures.com/img/mobile_webapp/vector/logo_site_lang_fr.svg?frz-v=827
+              dark:
+                type: string
+                examples:
+                  - >-
+                    https://www.besson-chaussures.com/img/mobile_webapp/vector/logo_site_lang_fr.svg?frz-v=827
+          description:
+            type: string
+            examples:
+              - Vous avez droit à 5%
+          expirationDate:
+            type: string
+            format: date
+            examples:
+              - '2030-12-01'
+          isActive:
+            type: integer
+            description: Uniquement pour les offres de type activable
+            examples:
+              - false
+    News:
+      type: object
+      properties:
+        id:
+          type: string
+          examples:
+            - '1'
+        name:
+          type: string
+          examples:
+            - Soldes
+        main:
+          type: object
+          properties:
+            image:
+              type: object
+              properties:
+                light:
+                  type: string
+                  examples:
+                    - >-
+                      https://www.besson-chaussures.com/img/mobile_webapp/vector/logo_site_lang_fr.svg?frz-v=827
+                dark:
+                  type: string
+                  examples:
+                    - >-
+                      https://www.besson-chaussures.com/img/mobile_webapp/vector/logo_site_lang_fr.svg?frz-v=827
+            video:
+              type: object
+              properties:
+                light:
+                  type: string
+                  examples:
+                    - >-
+                      https://www.besson-chaussures.com/img/mobile_webapp/vector/logo_site_lang_fr.svg?frz-v=827
+                dark:
+                  type: string
+                  examples:
+                    - >-
+                      https://www.besson-chaussures.com/img/mobile_webapp/vector/logo_site_lang_fr.svg?frz-v=827
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              image:
+                type: object
+                properties:
+                  light:
+                    type: string
+                    examples:
+                      - >-
+                        https://www.besson-chaussures.com/img/mobile_webapp/vector/logo_site_lang_fr.svg?frz-v=827
+                  dark:
+                    type: string
+                    examples:
+                      - >-
+                        https://www.besson-chaussures.com/img/mobile_webapp/vector/logo_site_lang_fr.svg?frz-v=827
+    PointsHistory:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            examples:
+              - '1'
+          date:
+            type: string
+            format: date
+            examples:
+              - '2023-09-01'
+          amount:
+            type: integer
+            format: int64
+            examples:
+              - 10
+          categoryLabel:
+            type: string
+            examples:
+              - Achat
+          category:
+            type: string
+            enum:
+              - purchase
+              - besson-for-change
+              - points-expiration
+              - manual
+              - recycling
+              - other
+          purchaseReceiptUrl:
+            type: string
+            descrption: Uniquement pour les mouvement d'achat/retour
+            examples:
+              - xxxx.pdf
+    Consents:
+      type: object
+      properties:
+        step:
+          type: string
+          examples:
+            - CONSENTS
+    Onboarding:
+      type: object
+      properties:
+        step:
+          type: string
+          enum:
+            - SIGN_UP_FORM
+            - PROFILE_COMPLETION_FORM
+            - CONSENTS
+            - STORE_SELECTION
+            - DONE
+        data:
+          type: object
+          properties:
+            gender:
+                type: string
+                description: Pour PROFILE_COMPLETION_FORM
+                enum:
+                    - male
+                    - female
+            firstname:
+              type: string
+              description: Pour PROFILE_COMPLETION_FORM
+              examples:
+                - John
+            lastname:
+              type: string
+              description: Pour PROFILE_COMPLETION_FORM
+              examples:
+                - Doe
+            birthday:
+              type: string
+              description: Pour PROFILE_COMPLETION_FORM
+              examples:
+                - '2000-01-01'
+            countryCode:
+              type: string
+              description: Pour PROFILE_COMPLETION_FORM
+              examples:
+                - FRA
+            postalCode:
+              type: string
+              description: Pour PROFILE_COMPLETION_FORM
+              examples:
+                - '63170'
+            phoneNumber:
+              type: string
+              description: Pour PROFILE_COMPLETION_FORM
+              examples:
+                - '+33600000000'
+            optinEmail:
+              type: boolean
+              description: Pour PROFILE_COMPLETION_FORM
+              examples:
+                - true
+            optinPhone:
+              type: boolean
+              description: Pour PROFILE_COMPLETION_FORM
+              examples:
+                - false
+            storeId:
+              type: string
+              description: Pour STORE_SELECTION
+              examples:
+                - "001"
+    Unauthorized:
+      type: object
+      properties:
+        head:
+          type: object
+          properties:
+            title:
+              examples:
+              - 401 Authorization Required
+      xml:
+        name: 'html'
+    SignUp:
+      type: object
+      properties:
+        gender:
+            type: string
+            description: Pour PROFILE_COMPLETION_FORM
+            enum:
+                - male
+                - female
+        firstname:
+          type: string
+          description: Pour PROFILE_COMPLETION_FORM
+          examples:
+            - John
+        lastname:
+          type: string
+          description: Pour PROFILE_COMPLETION_FORM
+          examples:
+            - Doe
+        birthday:
+          type: string
+          description: Pour PROFILE_COMPLETION_FORM
+          examples:
+            - '2000-01-01'
+        countryCode:
+          type: string
+          description: Pour PROFILE_COMPLETION_FORM
+          examples:
+            - FRA
+        postalCode:
+          type: string
+          description: Pour PROFILE_COMPLETION_FORM
+          examples:
+            - '63170'
+        phoneNumber:
+          type: string
+          description: Pour PROFILE_COMPLETION_FORM
+          examples:
+            - '+33600000000'
+        optinEmail:
+          type: boolean
+          description: Pour PROFILE_COMPLETION_FORM
+          examples:
+            - true
+        optinPhone:
+          type: boolean
+          description: Pour PROFILE_COMPLETION_FORM
+          examples:
+            - false
+    UnprocessableOnboarding:
+      type: object
+      properties:
+        errors:
+            type: array
+            items:
+              type: object
+              properties:
+                msg:
+                  type: string
+                  examples:
+                    - 'Wrong endpoint for the in-base onboarding step'
+    StoreSelection:
+      type: object
+      properties:
+        step:
+          type: string
+          examples:
+            - STORE_SELECTION
+        data:
+          type: object
+          properties:
+            storeId:
+              type: string
+              examples:
+                - "001"
+    IdString:
+      type: object
+      properties:
+        id:
+          type: string
+          examples:
+            - "001"
+    Done:
+      type: object
+      properties:
+        step:
+          type: string
+          examples:
+            - "DONE"
+    TermOfUse:
+      type: object
+      properties:
+        termsOfUseConsent:
+          type: boolean
+          examples:
+            - true
