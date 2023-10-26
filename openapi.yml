@@ -21,7 +21,7 @@ paths:
           * **DONE** (le client a déjà fait l'onboarding)
       responses:
         '200':
-          description: OKCustomer
+          description: OK
           content:
             application/json:
               schema:
