@@ -562,6 +562,29 @@ components:
           format: int64
           examples:
             - 4
+        billingAddress:
+          type: object
+          properties:
+            address1:
+              type: string
+              examples:
+                - '1 AVENUE DES FRERES MONTGOLFIER'
+            address2:
+              type: string
+              examples:
+                - null
+            city:
+              type: string
+              examples:
+                - 'AUBIERE'
+            postalCode:
+              type: string
+              examples:
+                - '63170'
+            countryCode:
+              type: string
+              examples:
+                - 'FR'
     AffectedStore:
       type: object
       properties:
