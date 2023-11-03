@@ -234,7 +234,7 @@ paths:
                         msg:
                           type: string
                           examples:
-                            - No customers found  
+                            - The customer does not exist  
   /me/affected-store:
     get:
       tags:
