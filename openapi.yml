@@ -211,6 +211,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Me'
+    delete:
+      tags:
+        - Me
+      summary: Suppression d'un client
+      description: Supprime le client authentifié par keycloak
+      responses:
+        '204':
+          description: No Content  
   /me/affected-store:
     get:
       tags:
