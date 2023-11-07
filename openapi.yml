@@ -165,6 +165,19 @@ paths:
       tags:
         - Stores
       summary: Liste de tous les magasins
+      parameters:
+        - name: latitude
+          in: query
+          description: Latitude de la position dont on veut connaître la distance aux magasins
+          required: false
+          schema:
+            type: string
+        - name: longitude
+          in: query
+          description: Longitude de la position dont on veut connaître la distance aux magasins
+          required: false
+          schema:
+            type: string
       description: >-
         Retourne la liste des magasins Besson pour un utilisateur authentifié
         par keycloak
@@ -699,6 +712,11 @@ components:
                     - '12:00'
                   - - '14:00'
                     - '19:00'
+          distance:
+            type: string
+            description: Uniquement alimenté si les cooronnées sont transmises dans les paramètres de l'appel
+            examples:
+              - '2839 km'
     Offers:
       type: array
       items:
