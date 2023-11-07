@@ -172,7 +172,6 @@ paths:
           required: false
           schema:
             type: string
-            exemple: '3.16893'
         - name: longitude
           in: query
           description: Longitude de la position dont on veut connaître la distance aux magasins
