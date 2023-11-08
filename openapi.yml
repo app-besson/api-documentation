@@ -1104,11 +1104,11 @@ components:
         choice:
           type: string
           examples:
-            - 'not_pronounced'
+            - "not_pronounced"
     ResponseOptinDemat:
       type: object
       properties:
         optinDematerialization:
           type: string
           examples:
-            - 'not_pronounced'
+            - "not_pronounced"
