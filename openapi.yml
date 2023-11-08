@@ -1120,7 +1120,7 @@ components:
     OptinDematResponse:
       type: object
       properties:
-        dematerialization:
+        optinDematerialization:
           enum:
             - 'yes'
             - 'no'
