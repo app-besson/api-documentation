@@ -285,13 +285,13 @@ paths:
         '200':
           description: OK
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/OptinDematResponse'
         '400':
           description: Bad Request
           content:
-            application/json:
+            text/json:
               examples:
                 Empty:
                   value:
@@ -308,6 +308,22 @@ paths:
                     param: choice
                     location: body
                     value: tyes
+        '404':
+          description: Not found
+          content:
+            text/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+                          examples:
+                            - The customer does not exist
   /me/offers:
     get:
       tags:
