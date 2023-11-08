@@ -1108,11 +1108,11 @@ components:
                 - 'no'
                 - not_pronounced
     ResponseOptinDemat:
-      type: object
-      properties:
-        optinDematerialization:
+      optinDematerialization:
+        type: object
+        properties:
+          value:
             type: string
-            examples:
-                - 'yes'
-                - 'no'
-                - not_pronounced
+            enum:
+              - lover
+              - addict
