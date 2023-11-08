@@ -1104,15 +1104,15 @@ components:
         choice:
             type: string
             enum:
-                - "yes"
-                - "no"
-                - "not_pronounced"
+                - yes
+                - no
+                - not_pronounced
     ResponseOptinDemat:
       type: object
       properties:
         optinDematerialization:
             type: string
             enum:
-                - "yes"
-                - "no"
-                - "not_pronounced"
+                - yes
+                - no
+                - not_pronounced
