@@ -11,7 +11,7 @@ paths:
       description: >
         Retourne l'étape d'onboarding de l'utilisaur dans l'application
         fidélité. 
-        
+
           Les étapes possibles : 
 
           * **SIGN_UP_FORM** (nouveau client)
@@ -37,7 +37,7 @@ paths:
       tags:
         - Onboarding
       summary: Valide l'étape SIGN_UP_FORM de l'utilisateur
-      description: >
+      description: |
         Retourne l'étape d'onboarding **CONSENTS**
       requestBody:
         content:
@@ -69,7 +69,7 @@ paths:
       tags:
         - Onboarding
       summary: Valide l'étape PROFILE_COMPLETION_FORM de l'utilisateur
-      description: >
+      description: |
         Retourne l'étape d'onboarding **STORE_SELECTION**
       requestBody:
         content:
@@ -101,7 +101,7 @@ paths:
       tags:
         - Onboarding
       summary: Valide l'étape CONSENTS de l'utilisateur
-      description: >
+      description: |
         Retourne l'étape d'onboarding **STORE_SELECTION**
       requestBody:
         content:
@@ -133,7 +133,7 @@ paths:
       tags:
         - Onboarding
       summary: Valide l'étape STORE_SELECTION de l'utilisateur
-      description: >
+      description: |
         Retourne l'étape d'onboarding **DONE**
       requestBody:
         content:
@@ -168,13 +168,17 @@ paths:
       parameters:
         - name: latitude
           in: query
-          description: Latitude de la position dont on veut connaître la distance aux magasins
+          description: >-
+            Latitude de la position dont on veut connaître la distance aux
+            magasins
           required: false
           schema:
             type: string
         - name: longitude
           in: query
-          description: Longitude de la position dont on veut connaître la distance aux magasins
+          description: >-
+            Longitude de la position dont on veut connaître la distance aux
+            magasins
           required: false
           schema:
             type: string
@@ -247,7 +251,7 @@ paths:
                         msg:
                           type: string
                           examples:
-                            - The customer does not exist  
+                            - The customer does not exist
   /me/affected-store:
     get:
       tags:
@@ -269,7 +273,8 @@ paths:
         - Me
       summary: Affecte le choix de l'optin dematerialisation du client
       description: >-
-        Affecte le choix de l'optin dematerialisation du client yes / no / not_pronounced
+        Affecte le choix de l'optin dematerialisation du client yes / no /
+        not_pronounced
       requestBody:
         content:
           application/json:
@@ -286,47 +291,23 @@ paths:
         '400':
           description: Bad Request
           content:
-            text/json:
-              schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        msg:
-                          type: string
-                          examples:
-                            - Choice must be in 'yes', 'no', 'not_pronounced'
-                        param:
-                          type: string
-                          examples:
-                            - choice
-                        location:
-                          type: string
-                          examples:
-                            - body
-                        value:
-                          type: string
-                          examples:
-                            - 'test'
-        '404':
-          description: Not found
-          content:
-            text/json:
-              schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        msg:
-                          type: string
-                          examples:
-                            - The customer does not exist  
+            application/json:
+              examples:
+                Empty:
+                  value:
+                    errors:
+                      - msg: Choice is mandatory
+                        param: choice
+                        location: body
+                      - msg: Choice must be in 'yes', 'no', 'not_pronounced'
+                        param: choice
+                        location: body
+                Wrong value:
+                  value:
+                    msg: Choice must be in 'yes', 'no', 'not_pronounced'
+                    param: choice
+                    location: body
+                    value: tyes
   /me/offers:
     get:
       tags:
@@ -669,7 +650,7 @@ components:
             address1:
               type: string
               examples:
-                - '1 AVENUE DES FRERES MONTGOLFIER'
+                - 1 AVENUE DES FRERES MONTGOLFIER
             address2:
               type: string
               examples:
@@ -677,7 +658,7 @@ components:
             city:
               type: string
               examples:
-                - 'AUBIERE'
+                - AUBIERE
             postalCode:
               type: string
               examples:
@@ -685,7 +666,7 @@ components:
             countryCode:
               type: string
               examples:
-                - 'FR'
+                - FR
     AffectedStore:
       type: object
       properties:
@@ -778,9 +759,11 @@ components:
                     - '19:00'
           distance:
             type: string
-            description: Uniquement alimenté si les cooronnées sont transmises dans les paramètres de l'appel
+            description: >-
+              Uniquement alimenté si les cooronnées sont transmises dans les
+              paramètres de l'appel
             examples:
-              - '2839 km'
+              - 2839 km
     Offers:
       type: array
       items:
@@ -950,11 +933,11 @@ components:
           type: object
           properties:
             gender:
-                type: string
-                description: Pour PROFILE_COMPLETION_FORM
-                enum:
-                    - male
-                    - female
+              type: string
+              description: Pour PROFILE_COMPLETION_FORM
+              enum:
+                - male
+                - female
             firstname:
               type: string
               description: Pour PROFILE_COMPLETION_FORM
@@ -1002,18 +985,18 @@ components:
                   type: string
                   description: Pour STORE_SELECTION
                   examples:
-                    - "001"
+                    - '001'
                 name:
                   type: string
                   description: Pour STORE_SELECTION
                   examples:
-                  - "Besson Chaussures CLERMONT AUBIERE"
+                    - Besson Chaussures CLERMONT AUBIERE
                 address:
                   type: array
                   description: Pour STORE_SELECTION
                   examples:
-                    - - '1 rue des Frères Montgolfier null'
-                      - '63170 AUBIERE'
+                    - - 1 rue des Frères Montgolfier null
+                      - 63170 AUBIERE
             isWeb:
               type: boolean
               description: Pour STORE_SELECTION
@@ -1027,18 +1010,18 @@ components:
           properties:
             title:
               examples:
-              - 401 Authorization Required
+                - 401 Authorization Required
       xml:
-        name: 'html'
+        name: html
     SignUp:
       type: object
       properties:
         gender:
-            type: string
-            description: Pour PROFILE_COMPLETION_FORM
-            enum:
-                - male
-                - female
+          type: string
+          description: Pour PROFILE_COMPLETION_FORM
+          enum:
+            - male
+            - female
         firstname:
           type: string
           description: Pour PROFILE_COMPLETION_FORM
@@ -1083,14 +1066,14 @@ components:
       type: object
       properties:
         errors:
-            type: array
-            items:
-              type: object
-              properties:
-                msg:
-                  type: string
-                  examples:
-                    - 'Wrong endpoint for the in-base onboarding step'
+          type: array
+          items:
+            type: object
+            properties:
+              msg:
+                type: string
+                examples:
+                  - Wrong endpoint for the in-base onboarding step
     StoreSelection:
       type: object
       properties:
@@ -1104,21 +1087,21 @@ components:
             storeId:
               type: string
               examples:
-                - "001"
+                - '001'
     IdString:
       type: object
       properties:
         id:
           type: string
           examples:
-            - "001"
+            - '001'
     Done:
       type: object
       properties:
         step:
           type: string
           examples:
-            - "DONE"
+            - DONE
     TermOfUse:
       type: object
       properties:
@@ -1131,14 +1114,14 @@ components:
       properties:
         choice:
           enum:
-            - yes
-            - no
+            - 'yes'
+            - 'no'
             - not_pronounced
     OptinDematResponse:
       type: object
       properties:
         dematerialization:
           enum:
-            - yes
-            - no
+            - 'yes'
+            - 'no'
             - not_pronounced
