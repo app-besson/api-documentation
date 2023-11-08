@@ -1112,7 +1112,7 @@ components:
       properties:
         optinDematerialization:
             type: string
-            enum:
+            examples:
                 - 'yes'
                 - 'no'
                 - not_pronounced
