@@ -293,7 +293,7 @@ paths:
           content:
             text/json:
               examples:
-                Empty:
+                Empty Body:
                   value:
                     errors:
                       - msg: Choice is mandatory
