@@ -263,6 +263,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AffectedStore'
+  me/dematerialization:
+    post:
+      tags:
+        - Me
+      summary: Affecte le choix de l'optin dematerialisation du client
+      description: >-
+        Affecte le choix de l'optin dematrialisation du client yes / no / not_pronounced
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OptinDemat'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOptinDemat'
+        '404':
+          description: Not found
+          content:
+            text/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+                          examples:
+                            - The customer does not exist  
   /me/offers:
     get:
       tags:
@@ -1062,3 +1098,21 @@ components:
           type: boolean
           examples:
             - true
+    OptinDemat:
+      type: object
+      properties:
+        choice:
+            type: string
+            enum:
+                - "yes"
+                - "no"
+                - "not_pronounced"
+    ResponseOptinDemat:
+      type: object
+      properties:
+        optinDematerialization:
+            type: string
+            enum:
+                - "yes"
+                - "no"
+                - "not_pronounced"
