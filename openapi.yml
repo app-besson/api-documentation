@@ -1103,16 +1103,12 @@ components:
       properties:
         choice:
             type: string
-            enum:
-                - 'yes'
-                - 'no'
+            examples:
                 - not_pronounced
     ResponseOptinDemat:
-      optinDematerialization:
         type: object
         properties:
-          value:
+          optinDematerialization:
             type: string
-            enum:
-              - lover
-              - addict
+            examples:
+                - not_pronounced
