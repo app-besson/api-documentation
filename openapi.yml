@@ -269,7 +269,7 @@ paths:
         - Me
       summary: Affecte le choix de l'optin dematerialisation du client
       description: >-
-        Affecte le choix de l'optin dematrialisation du client yes / no / not_pronounced
+        Affecte le choix de l'optin dematerialisation du client yes / no / not_pronounced
       requestBody:
         content:
           application/json:
