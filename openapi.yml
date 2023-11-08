@@ -1104,8 +1104,8 @@ components:
         choice:
             type: string
             enum:
-                - yes
-                - no
+                - 'yes'
+                - 'no'
                 - not_pronounced
     ResponseOptinDemat:
       type: object
@@ -1113,6 +1113,6 @@ components:
         optinDematerialization:
             type: string
             enum:
-                - yes
-                - no
+                - 'yes'
+                - 'no'
                 - not_pronounced
