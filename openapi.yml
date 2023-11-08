@@ -263,7 +263,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AffectedStore'
-  me/dematerialization:
+  /me/dematerialization:
     post:
       tags:
         - Me
@@ -274,7 +274,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/OptinDemat'
+              $ref: '#/components/schemas/OptinDematBody'
         required: true
       responses:
         '200':
@@ -282,7 +282,35 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseOptinDemat'
+                $ref: '#/components/schemas/OptinDematResponse'
+        '400':
+          description: Bad Request
+          content:
+            text/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+                          examples:
+                            - Choice must be in 'yes', 'no', 'not_pronounced'
+                        param:
+                          type: string
+                          examples:
+                            - choice
+                        location:
+                          type: string
+                          examples:
+                            - body
+                        value:
+                          type: string
+                          examples:
+                            - 'test'
         '404':
           description: Not found
           content:
@@ -1098,17 +1126,19 @@ components:
           type: boolean
           examples:
             - true
-    OptinDemat:
+    OptinDematBody:
       type: object
       properties:
         choice:
-          type: string
-          examples:
-            - "not_pronounced"
-    ResponseOptinDemat:
+          enum:
+            - yes
+            - no
+            - not_pronounced
+    OptinDematResponse:
       type: object
       properties:
-        optinDematerialization:
-          type: string
-          examples:
-            - "not_pronounced"
+        dematerialization:
+          enum:
+            - yes
+            - no
+            - not_pronounced
