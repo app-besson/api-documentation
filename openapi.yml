@@ -185,6 +185,8 @@ paths:
       description: >-
         Retourne la liste des magasins Besson pour un utilisateur authentifié
         par keycloak
+        Si lat et lng sont renseignés, l'api retourne les 5 magasins les plus proches,
+        du plus proche ou plus lointain
       responses:
         '200':
           description: OK
