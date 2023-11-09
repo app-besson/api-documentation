@@ -166,7 +166,7 @@ paths:
         - Stores
       summary: Liste de tous les magasins
       parameters:
-        - name: latitude
+        - name: lat
           in: query
           description: >-
             Latitude de la position dont on veut connaître la distance aux
@@ -174,7 +174,7 @@ paths:
           required: false
           schema:
             type: string
-        - name: longitude
+        - name: lng
           in: query
           description: >-
             Longitude de la position dont on veut connaître la distance aux
@@ -739,7 +739,7 @@ components:
           name:
             type: string
             examples:
-              - John
+              - BESSON CHAUSSURES COURNON
           address:
             type: array
             items:
@@ -768,11 +768,11 @@ components:
               type: array
               items:
                 type: array
-                examples:
-                  - - '09:00'
-                    - '12:00'
-                  - - '14:00'
-                    - '19:00'
+              examples:
+                - - '09:00'
+                  - '12:00'
+                - - '14:00'
+                  - '19:00'
           distance:
             type: string
             description: >-
