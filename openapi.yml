@@ -184,8 +184,7 @@ paths:
             type: string
       description: >-
         Retourne la liste des magasins Besson pour un utilisateur authentifié
-        par keycloak
-        Si lat et lng sont renseignés, l'api retourne les 5 magasins les plus proches,
+        par keycloak. Si lat et lng sont renseignés, l'api retourne les 5 magasins les plus proches,
         du plus proche ou plus lointain
       responses:
         '200':
@@ -766,15 +765,15 @@ components:
               - '+02:00'
           hours:
             type: array
-            items:
-              type: array
-              items:
-                type: array
-              examples:
-                - - '09:00'
-                  - '12:00'
-                - - '14:00'
-                  - '19:00'
+            example:
+                - - - '09:00'
+                    - '19:00'
+                - - - '09:30'
+                    - '19:00'
+                - - - '10:00'
+                    - '12:00'
+                  - - '14:00'
+                    - '19:00'
           distance:
             type: string
             description: >-
