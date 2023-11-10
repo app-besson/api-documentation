@@ -190,9 +190,50 @@ paths:
         '200':
           description: OK
           content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Stores'
+            application/json: 
+              examples:
+                Empty parameters:
+                  value:
+                  - id: 011'
+                    name: BESSON CHAUSSURES COURNON
+                    address:
+                      - Z.I - 67 AVENUE D AUBIERE (à coté de B&M)
+                      - 63800 COURNON D AUVERGNE
+                    coordinates:
+                      lat: '45.7423'
+                      lng: '3.16893'
+                    timezoneOffset: '+02:00'
+                    hours:
+                            - - - '09:00'
+                                - '19:00'
+                            - - - '09:30'
+                                - '19:00'
+                            - - - '10:00'
+                                - '12:00'
+                              - - '14:00'
+                                - '19:00'
+                Coordinates:
+                  value:
+                  - id: 011'
+                    name: BESSON CHAUSSURES COURNON
+                    address:
+                      - Z.I - 67 AVENUE D AUBIERE (à coté de B&M)
+                      - 63800 COURNON D AUVERGNE
+                    coordinates:
+                      lat: '45.7423'
+                      lng: '3.16893'
+                    timezoneOffset: '+02:00'
+                    hours:
+                            - - - '09:00'
+                                - '19:00'
+                            - - - '09:30'
+                                - '19:00'
+                            - - - '10:00'
+                                - '12:00'
+                              - - '14:00'
+                                - '19:00'
+                    distance: "85 km"
+
   /news:
     get:
       tags:
@@ -765,7 +806,7 @@ components:
               - '+02:00'
           hours:
             type: array
-            example:
+            examples:
                 - - - '09:00'
                     - '19:00'
                 - - - '09:30'
