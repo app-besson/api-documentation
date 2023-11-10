@@ -115,7 +115,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StoreSelection'
+                $ref: '#/components/schemas/StoreSelectionConsents'
         '401':
           description: Unauthorized
           content:
@@ -1142,10 +1142,32 @@ components:
         data:
           type: object
           properties:
+            isWeb:
+              type: string
+              examples: 
+                - false
             storeId:
               type: string
               examples:
-                - '001'
+                - null
+    StoreSelectionConsents:
+      type: object
+      properties:
+        step:
+          type: string
+          examples:
+            - STORE_SELECTION
+        data:
+          type: object
+          properties:
+            isWeb:
+              type: string
+              examples: 
+                - false
+            storeId:
+              type: string
+              examples:
+                - null
     IdString:
       type: object
       properties:
