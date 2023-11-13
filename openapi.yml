@@ -279,6 +279,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/News'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                        examples:
+                          - No news found
   /me:
     get:
       tags:
@@ -950,6 +964,11 @@ components:
                       - >-
                         https://www.besson-chaussures.com/img/mobile_webapp/vector/logo_site_lang_fr.svg?frz-v=827
                   dark:
+                    type: string
+                    examples:
+                      - >-
+                        https://www.besson-chaussures.com/img/mobile_webapp/vector/logo_site_lang_fr.svg?frz-v=827
+                  url:
                     type: string
                     examples:
                       - >-
