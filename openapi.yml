@@ -920,7 +920,7 @@ components:
         name:
           type: string
           examples:
-            - Soldes
+            - Calendrier de l'avent
         main:
           type: object
           properties:
@@ -931,12 +931,12 @@ components:
                   type: string
                   examples:
                     - >-
-                      https://www.besson-chaussures.com/img/mobile_webapp/vector/logo_site_lang_fr.svg?frz-v=827
+                      https://besson-assets.fra1.cdn.digitaloceanspaces.com/news/d%C3%A9cembre2023/calendrier%20de%20l'avent_home-page.png
                 dark:
                   type: string
                   examples:
                     - >-
-                      https://www.besson-chaussures.com/img/mobile_webapp/vector/logo_site_lang_fr.svg?frz-v=827
+                      https://besson-assets.fra1.cdn.digitaloceanspaces.com/news/d%C3%A9cembre2023/calendrier%20de%20l'avent_home-page.png
             video:
               type: object
               properties:
@@ -962,17 +962,16 @@ components:
                     type: string
                     examples:
                       - >-
-                        https://www.besson-chaussures.com/img/mobile_webapp/vector/logo_site_lang_fr.svg?frz-v=827
+                        https://besson-assets.fra1.cdn.digitaloceanspaces.com/news/d%C3%A9cembre2023/calendrier%20de%20l'avent_page-d%C3%A9di%C3%A9e_.png
                   dark:
                     type: string
                     examples:
                       - >-
-                        https://www.besson-chaussures.com/img/mobile_webapp/vector/logo_site_lang_fr.svg?frz-v=827
+                        https://besson-assets.fra1.cdn.digitaloceanspaces.com/news/d%C3%A9cembre2023/calendrier%20de%20l'avent_page-d%C3%A9di%C3%A9e_.png
                   url:
                     type: string
                     examples:
-                      - >-
-                        https://www.besson-chaussures.com/img/mobile_webapp/vector/logo_site_lang_fr.svg?frz-v=827
+                      - null
     PointsHistory:
       type: array
       items:
