@@ -82,8 +82,30 @@ paths:
           description: OK
           content:
             application/json:
-              schema:
-                $ref: '#/components/schemas/StoreSelection'
+              examples:
+                Pas de magasins affectation:
+                  value:
+                    step: STORE_SELECTION
+                    data: 
+                      isWeb: false
+                      store: null
+                Magasin affectation non web:
+                  value:
+                    step: STORE_SELECTION
+                    data:
+                      isWeb: false
+                      store:
+                        id: '001'
+                        name: Besson Chaussures CLERMONT AUBIERE
+                        address:
+                          - 1 rue des Frères Montgolfier null
+                          - 63170 AUBIERE
+                Magasin affectation web:
+                  value:
+                    step: STORE_SELECTION
+                    date:
+                      isWeb: true
+                      store: null
         '401':
           description: Unauthorized
           content:
@@ -192,7 +214,7 @@ paths:
           content:
             application/json: 
               examples:
-                Empty parameters:
+                Paramètres vides:
                   value:
                   - id: 011'
                     name: BESSON CHAUSSURES COURNON
@@ -212,7 +234,7 @@ paths:
                                 - '12:00'
                               - - '14:00'
                                 - '19:00'
-                Coordinates:
+                Coordonnées renseignées:
                   value:
                   - id: 011'
                     name: BESSON CHAUSSURES COURNON
