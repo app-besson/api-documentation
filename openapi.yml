@@ -219,7 +219,7 @@ paths:
                   - id: 011'
                     name: BESSON CHAUSSURES COURNON
                     address:
-                      - Z.I - 67 AVENUE D AUBIERE (à coté de B&M)
+                      - z.i - 67 avenue d aubiere (à coté de b&m)
                       - 63800 COURNON D AUVERGNE
                     coordinates:
                       lat: '45.7423'
@@ -823,7 +823,7 @@ components:
             items:
               type: string
             examples:
-              - - Z.I - 67 AVENUE D AUBIERE (à coté de B&M)
+              - - z.i - 67 avenue d aubiere (à coté de b&m)
                 - 63800 COURNON D AUVERGNE
           coordinates:
             type: object
