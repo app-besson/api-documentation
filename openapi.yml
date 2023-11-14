@@ -682,7 +682,7 @@ components:
         lastname:
           type: string
           examples:
-            - Doe
+            - DOE
         loyalSince:
           type: string
           format: date
