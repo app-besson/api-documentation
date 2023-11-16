@@ -345,6 +345,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AffectedStore'
+    post:
+      tags:
+        - Me
+      summary: Affecte le magasin d'affectation au client 
+      description: >-
+       Affecte le magasin d'affectation au client authentifié par keycloak
+       requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postAffectedStore'
   /me/dematerialization:
     post:
       tags:
@@ -1139,7 +1150,7 @@ components:
           type: string
           description: Pour PROFILE_COMPLETION_FORM
           examples:
-            - FRA
+            - FR
         postalCode:
           type: string
           description: Pour PROFILE_COMPLETION_FORM
