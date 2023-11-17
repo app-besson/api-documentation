@@ -806,6 +806,12 @@ components:
               type: string
               examples:
                 - FR
+        optinDematerialization:
+          type: string
+          enum:
+            - yes
+            - no
+            - not_pronounced
     AffectedStore:
       type: object
       properties:
