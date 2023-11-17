@@ -433,7 +433,7 @@ paths:
           content:
             text/json:
               examples:
-                Empty body:
+                response:
                   value:
                     - id: 1
                       type: "event"
