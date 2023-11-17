@@ -20,18 +20,18 @@ paths:
           * **STORE_SELECTION** (sélection de son magasin favoris)
           * **DONE** (le client a déjà fait l'onboarding)
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Onboarding'
-        '401':
+                $ref: "#/components/schemas/Onboarding"
+        "401":
           description: Unauthorized
           content:
             application/xml:
               schema:
-                $ref: '#/components/schemas/Unauthorized'
+                $ref: "#/components/schemas/Unauthorized"
   /onboarding/sign-up:
     post:
       tags:
@@ -43,27 +43,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SignUp'
+              $ref: "#/components/schemas/SignUp"
         required: true
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Consents'
-        '401':
+                $ref: "#/components/schemas/Consents"
+        "401":
           description: Unauthorized
           content:
             application/xml:
               schema:
-                $ref: '#/components/schemas/Unauthorized'
-        '422':
+                $ref: "#/components/schemas/Unauthorized"
+        "422":
           description: Unprocessable Entity
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnprocessableOnboarding'
+                $ref: "#/components/schemas/UnprocessableOnboarding"
   /onboarding/complete-profile:
     post:
       tags:
@@ -75,10 +75,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SignUp'
+              $ref: "#/components/schemas/SignUp"
         required: true
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -86,7 +86,7 @@ paths:
                 Pas de magasins affectation:
                   value:
                     step: STORE_SELECTION
-                    data: 
+                    data:
                       isWeb: false
                       store: null
                 Magasin affectation non web:
@@ -95,7 +95,7 @@ paths:
                     data:
                       isWeb: false
                       store:
-                        id: '001'
+                        id: "001"
                         name: Besson Chaussures CLERMONT AUBIERE
                         address:
                           - 1 rue des Frères Montgolfier null
@@ -106,18 +106,18 @@ paths:
                     date:
                       isWeb: true
                       store: null
-        '401':
+        "401":
           description: Unauthorized
           content:
             application/xml:
               schema:
-                $ref: '#/components/schemas/Unauthorized'
-        '422':
+                $ref: "#/components/schemas/Unauthorized"
+        "422":
           description: Unprocessable Entity
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnprocessableOnboarding'
+                $ref: "#/components/schemas/UnprocessableOnboarding"
   /onboarding/consents:
     post:
       tags:
@@ -129,27 +129,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TermOfUse'
+              $ref: "#/components/schemas/TermOfUse"
         required: true
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StoreSelectionConsents'
-        '401':
+                $ref: "#/components/schemas/StoreSelectionConsents"
+        "401":
           description: Unauthorized
           content:
             application/xml:
               schema:
-                $ref: '#/components/schemas/Unauthorized'
-        '422':
+                $ref: "#/components/schemas/Unauthorized"
+        "422":
           description: Unprocessable Entity
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnprocessableOnboarding'
+                $ref: "#/components/schemas/UnprocessableOnboarding"
   /onboarding/store-selection:
     post:
       tags:
@@ -161,27 +161,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IdString'
+              $ref: "#/components/schemas/IdString"
         required: true
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Done'
-        '401':
+                $ref: "#/components/schemas/Done"
+        "401":
           description: Unauthorized
           content:
             application/xml:
               schema:
-                $ref: '#/components/schemas/Unauthorized'
-        '422':
+                $ref: "#/components/schemas/Unauthorized"
+        "422":
           description: Unprocessable Entity
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnprocessableOnboarding'
+                $ref: "#/components/schemas/UnprocessableOnboarding"
   /stores:
     get:
       tags:
@@ -209,52 +209,52 @@ paths:
         par keycloak. Si lat et lng sont renseignés, l'api retourne les 5 magasins les plus proches,
         du plus proche ou plus lointain
       responses:
-        '200':
+        "200":
           description: OK
           content:
-            application/json: 
+            application/json:
               examples:
                 Paramètres vides:
                   value:
-                  - id: 011'
-                    name: BESSON CHAUSSURES COURNON
-                    address:
-                      - z.i - 67 avenue d aubiere (à coté de b&m)
-                      - 63800 COURNON D AUVERGNE
-                    coordinates:
-                      lat: '45.7423'
-                      lng: '3.16893'
-                    timezoneOffset: '+02:00'
-                    hours:
-                            - - - '09:00'
-                                - '19:00'
-                            - - - '09:30'
-                                - '19:00'
-                            - - - '10:00'
-                                - '12:00'
-                              - - '14:00'
-                                - '19:00'
+                    - id: 011'
+                      name: BESSON CHAUSSURES COURNON
+                      address:
+                        - z.i - 67 avenue d aubiere (à coté de b&m)
+                        - 63800 COURNON D AUVERGNE
+                      coordinates:
+                        lat: "45.7423"
+                        lng: "3.16893"
+                      timezoneOffset: "+02:00"
+                      hours:
+                        - - - "09:00"
+                            - "19:00"
+                        - - - "09:30"
+                            - "19:00"
+                        - - - "10:00"
+                            - "12:00"
+                          - - "14:00"
+                            - "19:00"
                 Coordonnées renseignées:
                   value:
-                  - id: 011'
-                    name: BESSON CHAUSSURES COURNON
-                    address:
-                      - Z.I - 67 AVENUE D AUBIERE (à coté de B&M)
-                      - 63800 COURNON D AUVERGNE
-                    coordinates:
-                      lat: '45.7423'
-                      lng: '3.16893'
-                    timezoneOffset: '+02:00'
-                    hours:
-                            - - - '09:00'
-                                - '19:00'
-                            - - - '09:30'
-                                - '19:00'
-                            - - - '10:00'
-                                - '12:00'
-                              - - '14:00'
-                                - '19:00'
-                    distance: "85 km"
+                    - id: 011'
+                      name: BESSON CHAUSSURES COURNON
+                      address:
+                        - Z.I - 67 AVENUE D AUBIERE (à coté de B&M)
+                        - 63800 COURNON D AUVERGNE
+                      coordinates:
+                        lat: "45.7423"
+                        lng: "3.16893"
+                      timezoneOffset: "+02:00"
+                      hours:
+                        - - - "09:00"
+                            - "19:00"
+                        - - - "09:30"
+                            - "19:00"
+                        - - - "10:00"
+                            - "12:00"
+                          - - "14:00"
+                            - "19:00"
+                      distance: "85 km"
 
   /news:
     get:
@@ -273,13 +273,13 @@ paths:
         Retourne la liste des actualités Besson pour un utilisateur authentifié
         par keycloak
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/News'
-        '404':
+                $ref: "#/components/schemas/News"
+        "404":
           description: Not found
           content:
             application/json:
@@ -300,21 +300,21 @@ paths:
       summary: Informations d'un client
       description: Retourne les informations d'un client authentifié par keycloak
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Me'
+                $ref: "#/components/schemas/Me"
     delete:
       tags:
         - Me
       summary: Suppression d'un client
       description: Supprime le client authentifié par keycloak
       responses:
-        '204':
+        "204":
           description: No Content
-        '404':
+        "404":
           description: Not found
           content:
             text/json:
@@ -339,23 +339,23 @@ paths:
         Retourne les informations du magasin affecté à un client authentifié par
         keycloak
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AffectedStore'
+                $ref: "#/components/schemas/AffectedStore"
     post:
       tags:
         - Me
-      summary: Affecte le magasin d'affectation au client 
+      summary: Affecte le magasin d'affectation au client
       description: >-
-       Affecte le magasin d'affectation au client authentifié par keycloak
-       requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/postAffectedStore'
+        Affecte le magasin d'affectation au client authentifié par keycloak
+        requestBody:
+         content:
+           application/json:
+             schema:
+               $ref: '#/components/schemas/postAffectedStore'
   /me/dematerialization:
     post:
       tags:
@@ -368,16 +368,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/OptinDematBody'
+              $ref: "#/components/schemas/OptinDematBody"
         required: true
       responses:
-        '200':
+        "200":
           description: OK
           content:
             text/json:
               schema:
-                $ref: '#/components/schemas/OptinDematResponse'
-        '400':
+                $ref: "#/components/schemas/OptinDematResponse"
+        "400":
           description: Bad Request
           content:
             text/json:
@@ -397,7 +397,7 @@ paths:
                     param: choice
                     location: body
                     value: tyes
-        '404':
+        "404":
           description: Not found
           content:
             text/json:
@@ -428,12 +428,12 @@ paths:
             type: string
             default: fr
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Offers'
+                $ref: "#/components/schemas/Offers"
   /me/offers/{id}/activate:
     post:
       tags:
@@ -450,8 +450,12 @@ paths:
           schema:
             type: string
       responses:
-        '204':
-          description: No Content
+        "200":
+          description: OK
+          content:
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ActivateOfferResponse"
   /me/points-history:
     get:
       tags:
@@ -467,18 +471,18 @@ paths:
             type: string
             default: fr
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PointsHistory'
+                $ref: "#/components/schemas/PointsHistory"
   /customers:
     get:
       tags:
         - Customers
       summary: Rechercher des clients
-      description: ''
+      description: ""
       parameters:
         - name: email
           in: query
@@ -487,7 +491,7 @@ paths:
           schema:
             type: string
       responses:
-        '404':
+        "404":
           description: Not found
           content:
             text/json:
@@ -507,7 +511,7 @@ paths:
       tags:
         - Customers
       summary: Créer un nouveau client
-      description: ''
+      description: ""
       requestBody:
         description: >-
           Créer un nouveau client ou prospect. Création en parallèle dans
@@ -515,16 +519,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CustomerCreate'
+              $ref: "#/components/schemas/CustomerCreate"
         required: true
       responses:
-        '201':
+        "201":
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Customer'
-        '400':
+                $ref: "#/components/schemas/Customer"
+        "400":
           description: Bad Request
           content:
             text/json:
@@ -552,7 +556,7 @@ paths:
                           type: string
                           examples:
                             - test.test.fr
-        '422':
+        "422":
           description: Unprocessable Entity
           content:
             text/json:
@@ -579,7 +583,7 @@ components:
         storeId:
           type: string
           examples:
-            - '195'
+            - "195"
         gender:
           type: string
           enum:
@@ -596,7 +600,7 @@ components:
         birthday:
           type: string
           examples:
-            - '2000-01-01'
+            - "2000-01-01"
         countryCode:
           type: string
           examples:
@@ -604,11 +608,11 @@ components:
         postalCode:
           type: string
           examples:
-            - '63170'
+            - "63170"
         phoneNumber:
           type: string
           examples:
-            - '+33600000000'
+            - "+33600000000"
         optinEmail:
           type: integer
           format: int64
@@ -636,7 +640,7 @@ components:
         storeId:
           type: string
           examples:
-            - '195'
+            - "195"
         gender:
           type: string
           examples:
@@ -652,7 +656,7 @@ components:
         birthday:
           type: string
           examples:
-            - '2000-01-01'
+            - "2000-01-01"
         countryCode:
           type: string
           examples:
@@ -660,11 +664,11 @@ components:
         postalCode:
           type: string
           examples:
-            - '63170'
+            - "63170"
         phoneNumber:
           type: string
           examples:
-            - '+33600000000'
+            - "+33600000000"
         optinEmail:
           type: integer
           format: int64
@@ -682,7 +686,7 @@ components:
         cardNumber:
           type: string
           examples:
-            - '9980003968037'
+            - "9980003968037"
     Me:
       type: object
       properties:
@@ -698,16 +702,16 @@ components:
           type: string
           format: date
           examples:
-            - '2000-01-01'
+            - "2000-01-01"
         birthday:
           type: string
           format: date
           examples:
-            - '2000-01-01'
+            - "2000-01-01"
         phoneNumber:
           type: string
           examples:
-            - '+33600000000'
+            - "+33600000000"
         optinEmail:
           type: boolean
           examples:
@@ -729,7 +733,7 @@ components:
         cardNumber:
           type: string
           examples:
-            - '9980003968037'
+            - "9980003968037"
         status:
           type: object
           properties:
@@ -743,7 +747,7 @@ components:
               format: date
               description: uniquement présent quand le client est lover
               examples:
-                - '2000-01-01'
+                - "2000-01-01"
         offersCount:
           type: integer
           format: int64
@@ -767,7 +771,7 @@ components:
             postalCode:
               type: string
               examples:
-                - '63170'
+                - "63170"
             countryCode:
               type: string
               examples:
@@ -778,7 +782,7 @@ components:
         id:
           type: string
           examples:
-            - '011'
+            - "011"
         name:
           type: string
           examples:
@@ -796,15 +800,15 @@ components:
             lat:
               type: string
               examples:
-                - '45.7423'
+                - "45.7423"
             lng:
               type: string
               examples:
-                - '3.16893'
+                - "3.16893"
         timezoneOffset:
           type: string
           examples:
-            - '+02:00'
+            - "+02:00"
         hours:
           type: array
           items:
@@ -812,10 +816,10 @@ components:
             items:
               type: array
               examples:
-                - - '09:00'
-                  - '12:00'
-                - - '14:00'
-                  - '19:00'
+                - - "09:00"
+                  - "12:00"
+                - - "14:00"
+                  - "19:00"
     Stores:
       type: array
       items:
@@ -824,7 +828,7 @@ components:
           id:
             type: string
             examples:
-              - '011'
+              - "011"
           name:
             type: string
             examples:
@@ -842,26 +846,26 @@ components:
               lat:
                 type: string
                 examples:
-                  - '45.7423'
+                  - "45.7423"
               lng:
                 type: string
                 examples:
-                  - '3.16893'
+                  - "3.16893"
           timezoneOffset:
             type: string
             examples:
-              - '+02:00'
+              - "+02:00"
           hours:
             type: array
             examples:
-                - - - '09:00'
-                    - '19:00'
-                - - - '09:30'
-                    - '19:00'
-                - - - '10:00'
-                    - '12:00'
-                  - - '14:00'
-                    - '19:00'
+              - - - "09:00"
+                  - "19:00"
+              - - - "09:30"
+                  - "19:00"
+              - - - "10:00"
+                  - "12:00"
+                - - "14:00"
+                  - "19:00"
           distance:
             type: string
             description: >-
@@ -877,7 +881,7 @@ components:
           id:
             type: string
             examples:
-              - '1'
+              - "1"
           type:
             type: string
             enum:
@@ -915,7 +919,7 @@ components:
             type: string
             format: date
             examples:
-              - '2030-12-01'
+              - "2030-12-01"
           isActive:
             type: integer
             description: Uniquement pour les offres de type activable
@@ -927,7 +931,7 @@ components:
         id:
           type: string
           examples:
-            - '1'
+            - "1"
         name:
           type: string
           examples:
@@ -991,12 +995,12 @@ components:
           id:
             type: string
             examples:
-              - '1'
+              - "1"
           date:
             type: string
             format: date
             examples:
-              - '2023-09-01'
+              - "2023-09-01"
           amount:
             type: integer
             format: int64
@@ -1061,7 +1065,7 @@ components:
               type: string
               description: Pour PROFILE_COMPLETION_FORM
               examples:
-                - '2000-01-01'
+                - "2000-01-01"
             countryCode:
               type: string
               description: Pour PROFILE_COMPLETION_FORM
@@ -1071,12 +1075,12 @@ components:
               type: string
               description: Pour PROFILE_COMPLETION_FORM
               examples:
-                - '63170'
+                - "63170"
             phoneNumber:
               type: string
               description: Pour PROFILE_COMPLETION_FORM
               examples:
-                - '+33600000000'
+                - "+33600000000"
             optinEmail:
               type: boolean
               description: Pour PROFILE_COMPLETION_FORM
@@ -1094,7 +1098,7 @@ components:
                   type: string
                   description: Pour STORE_SELECTION
                   examples:
-                    - '001'
+                    - "001"
                 name:
                   type: string
                   description: Pour STORE_SELECTION
@@ -1145,7 +1149,7 @@ components:
           type: string
           description: Pour PROFILE_COMPLETION_FORM
           examples:
-            - '2000-01-01'
+            - "2000-01-01"
         countryCode:
           type: string
           description: Pour PROFILE_COMPLETION_FORM
@@ -1155,12 +1159,12 @@ components:
           type: string
           description: Pour PROFILE_COMPLETION_FORM
           examples:
-            - '63170'
+            - "63170"
         phoneNumber:
           type: string
           description: Pour PROFILE_COMPLETION_FORM
           examples:
-            - '+33600000000'
+            - "+33600000000"
         optinEmail:
           type: boolean
           description: Pour PROFILE_COMPLETION_FORM
@@ -1195,7 +1199,7 @@ components:
           properties:
             isWeb:
               type: string
-              examples: 
+              examples:
                 - false
             storeId:
               type: string
@@ -1213,7 +1217,7 @@ components:
           properties:
             isWeb:
               type: string
-              examples: 
+              examples:
                 - false
             storeId:
               type: string
@@ -1225,7 +1229,7 @@ components:
         id:
           type: string
           examples:
-            - '001'
+            - "001"
     Done:
       type: object
       properties:
@@ -1245,14 +1249,58 @@ components:
       properties:
         choice:
           enum:
-            - 'yes'
-            - 'no'
+            - "yes"
+            - "no"
             - not_pronounced
     OptinDematResponse:
       type: object
       properties:
         optinDematerialization:
           enum:
-            - 'yes'
-            - 'no'
+            - "yes"
+            - "no"
             - not_pronounced
+    ActivateOfferResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            examples:
+              - "2"
+          type:
+            type: string
+            examples:
+              - activable
+          name:
+            type: string
+            examples:
+              - AVANTAGE_BIENVENUE
+          image:
+            type: object
+            properties:
+              light:
+                type: string
+                examples:
+                  - >-
+                    https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20bienvenue%20blanc.png
+              dark:
+                type: string
+                examples:
+                  - >-
+                    https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20bienvenue%20noir.png
+          description:
+            type: string
+            examples:
+              - Vous avez droit à 5€
+          expirationDate:
+            type: string
+            format: date
+            examples:
+              - "01/12/2025"
+          isActive:
+            type: integer
+            description: Uniquement pour les offres de type activable
+            examples:
+              - true
