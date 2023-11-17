@@ -466,7 +466,7 @@ paths:
                     errors:
                       msg:
                         This offer is not activable
-                Already Used ou Activated:
+                Already Used or Activated:
                   value:
                     errors:
                       msg:
