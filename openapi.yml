@@ -543,6 +543,71 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PointsHistory'
+  /me/shoes-addict:
+    get:
+      tags:
+      - Me
+      summary: Rechercher les avantages shoes addict
+      description: Retourne les avantages shoes addict d'un client authentifié par keycloak
+      parameters:
+        - name: language
+          in: query
+          description: Langue des informations du partenaire
+          required: false
+          schema:
+            type: string
+            default: en
+      responses:
+        '200':
+          description: OK
+          content:
+            text/json:
+              examples:
+                Is Shoes Addict:
+                  value:
+                    sinceDate: "2023-02-19"
+                    benefitText: "-10% sur tous les produits d'entretien"
+                    benefitCode: "AVANTAGE_VIP"
+                    phoneNumber: "01 76 21 81 31"
+                    partners:
+                      - id: "nextory"
+                        logoLight: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_nextory_w.png"
+                        logoDark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_nextory_w.png"
+                      - id: "homair"
+                        logoLight: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_homair_w.png"
+                        logoDark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_homair_w.png"
+                      - id: "pixum"
+                        logoLight: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_pixum_w.png"
+                        logoDark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_pixum_w.png"
+                      - id: "wonderbox"
+                        logoLight: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_wonderbox_w.png"
+                        logoDark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_wonderbox_w.png"
+                Is Not Shoes Addict:
+                  value:
+                    benefitText: "-10% sur tous les produits d'entretien"
+                    partners:
+                      - id: "nextory"
+                        logoLight: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_nextory_w.png"
+                        logoDark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_nextory_w.png"
+                      - id: "homair"
+                        logoLight: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_homair_w.png"
+                        logoDark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_homair_w.png"
+                      - id: "pixum"
+                        logoLight: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_pixum_w.png"
+                        logoDark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_pixum_w.png"
+                      - id: "wonderbox"
+                        logoLight: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_wonderbox_w.png"
+                        logoDark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_wonderbox_w.png"
+        '404':
+          description: Not found
+          content:
+            text/json:
+              examples:
+                Customer Not Found:
+                  value:
+                    errors:
+                      msg:
+                        The customer does not exist
   /me/shoes-addict/partner/{id}:
     get:
       tags:
