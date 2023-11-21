@@ -23,7 +23,7 @@ paths:
         '200':
           description: OK
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/Onboarding'
         '401':
@@ -41,7 +41,7 @@ paths:
         Retourne l'étape d'onboarding **CONSENTS**
       requestBody:
         content:
-          application/json:
+          text/json:
             schema:
               $ref: '#/components/schemas/SignUp'
         required: true
@@ -49,7 +49,7 @@ paths:
         '200':
           description: OK
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/Consents'
         '401':
@@ -61,7 +61,7 @@ paths:
         '422':
           description: Unprocessable Entity
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/UnprocessableOnboarding'
   /onboarding/complete-profile:
@@ -73,7 +73,7 @@ paths:
         Retourne l'étape d'onboarding **STORE_SELECTION**
       requestBody:
         content:
-          application/json:
+          text/json:
             schema:
               $ref: '#/components/schemas/SignUp'
         required: true
@@ -81,7 +81,7 @@ paths:
         '200':
           description: OK
           content:
-            application/json:
+            text/json:
               examples:
                 Pas de magasins affectation:
                   value:
@@ -115,7 +115,7 @@ paths:
         '422':
           description: Unprocessable Entity
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/UnprocessableOnboarding'
   /onboarding/consents:
@@ -127,7 +127,7 @@ paths:
         Retourne l'étape d'onboarding **STORE_SELECTION**
       requestBody:
         content:
-          application/json:
+          text/json:
             schema:
               $ref: '#/components/schemas/TermOfUse'
         required: true
@@ -135,7 +135,7 @@ paths:
         '200':
           description: OK
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/StoreSelectionConsents'
         '401':
@@ -147,7 +147,7 @@ paths:
         '422':
           description: Unprocessable Entity
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/UnprocessableOnboarding'
   /onboarding/store-selection:
@@ -159,7 +159,7 @@ paths:
         Retourne l'étape d'onboarding **DONE**
       requestBody:
         content:
-          application/json:
+          text/json:
             schema:
               $ref: '#/components/schemas/IdString'
         required: true
@@ -167,7 +167,7 @@ paths:
         '200':
           description: OK
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/Done'
         '401':
@@ -179,7 +179,7 @@ paths:
         '422':
           description: Unprocessable Entity
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/UnprocessableOnboarding'
   /stores:
@@ -212,7 +212,7 @@ paths:
         '200':
           description: OK
           content:
-            application/json: 
+            text/json: 
               examples:
                 Paramètres vides:
                   value:
@@ -276,13 +276,13 @@ paths:
         '200':
           description: OK
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/News'
         '404':
           description: Not found
           content:
-            application/json:
+            text/json:
               schema:
                 type: object
                 properties:
@@ -303,7 +303,7 @@ paths:
         '200':
           description: OK
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/Me'
     delete:
@@ -342,7 +342,7 @@ paths:
         '200':
           description: OK
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/AffectedStore'
     post:
@@ -353,7 +353,7 @@ paths:
        Affecte le magasin d'affectation au client authentifié par keycloak
        requestBody:
         content:
-          application/json:
+          text/json:
             schema:
               $ref: '#/components/schemas/postAffectedStore'
   /me/dematerialization:
@@ -366,7 +366,7 @@ paths:
         not_pronounced
       requestBody:
         content:
-          application/json:
+          text/json:
             schema:
               $ref: '#/components/schemas/OptinDematBody'
         required: true
@@ -540,7 +540,7 @@ paths:
         '200':
           description: OK
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/PointsHistory'
   /me/shoes-addict:
@@ -632,7 +632,7 @@ paths:
         '200':
           description: OK
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/PartnerResponse'
         '404':
@@ -696,7 +696,7 @@ paths:
           Créer un nouveau client ou prospect. Création en parallèle dans
           Cashfid et Splio (mobile wallet).
         content:
-          application/json:
+          text/json:
             schema:
               $ref: '#/components/schemas/CustomerCreate'
         required: true
@@ -704,7 +704,7 @@ paths:
         '201':
           description: Created
           content:
-            application/json:
+            text/json:
               schema:
                 $ref: '#/components/schemas/Customer'
         '400':
