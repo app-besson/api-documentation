@@ -550,6 +550,12 @@ paths:
       summary: Rechercher un partenaire
       description: Retourne l'histrique des points d'un client authentifié par keycloak
       parameters:
+        - name: id
+          in: path
+          description: id de l'offre à activer pour le client
+          required: true
+          schema:
+            type: string
         - name: language
           in: query
           description: Langue des informations du partenaire
