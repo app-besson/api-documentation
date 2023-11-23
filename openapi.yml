@@ -669,6 +669,72 @@ paths:
           required: false
           schema:
             type: string
+        - name: email[contains]
+          in: query
+          description: Tout ou partie de l'Email du client
+          required: false
+          schema:
+            type: string
+        - name: take
+          in: query
+          description: Nombre d'éléments à afficher (1-50)
+          required: false
+          schema:
+            type: integer
+        - name: page
+          in: query
+          description: Numéro de la page de données à afficher (>0)
+          required: false
+          schema:
+            type: integer
+        - name: emailMD5
+          in: query
+          description: Email MD5 du client
+          required: false
+          schema:
+            type: string
+        - name: firstname
+          in: query
+          description: Prénom du client
+          required: false
+          schema:
+            type: string
+        - name: firstname[contains]
+          in: query
+          description: Tout ou partie du Prénom du client
+          required: false
+          schema:
+            type: string
+        - name: lastname
+          in: query
+          description: Nom du client
+          required: false
+          schema:
+            type: string
+        - name: lastname[contains]
+          in: query
+          description: Tout ou partie du Nom du client
+          required: false
+          schema:
+            type: string
+        - name: postalCode
+          in: query
+          description: Code Postal du client
+          required: false
+          schema:
+            type: string
+        - name: cardNumber
+          in: query
+          description: Code carte fidélité du client
+          required: false
+          schema:
+            type: string
+        - name: birthday
+          in: query
+          description: Date de naissance du client (YYYY-MM-DD)
+          required: false
+          schema:
+            type: string
       responses:
         '404':
           description: Not found
