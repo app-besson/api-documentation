@@ -573,15 +573,19 @@ paths:
                       - id: "nextory"
                         logoLight: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_nextory_w.png"
                         logoDark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_nextory_w.png"
+                        image: https://nextory.jpg
                       - id: "homair"
                         logoLight: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_homair_w.png"
                         logoDark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_homair_w.png"
+                        image: https://homair.jpg
                       - id: "pixum"
                         logoLight: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_pixum_w.png"
                         logoDark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_pixum_w.png"
+                        image: https://pixum.jpg
                       - id: "wonderbox"
                         logoLight: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_wonderbox_w.png"
                         logoDark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_wonderbox_w.png"
+                        image: https://wonderbox.jpg
                 Is Not Shoes Addict:
                   value:
                     benefitText: "-10% sur tous les produits d'entretien"
