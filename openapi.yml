@@ -337,7 +337,7 @@ paths:
       summary: Informations du magasin affecté à un client
       description: >-
         Retourne les informations du magasin affecté à un client authentifié par
-        keycloak
+        keycloak. Si le magasin d'affectation est le web, null est retourné.
       responses:
         '200':
           description: OK
