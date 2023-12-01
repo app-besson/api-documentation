@@ -821,6 +821,32 @@ paths:
                           type: string
                           examples:
                             - Le compte client existe déjà (email en doublon)
+  /customers/{code client}:
+    delete:
+      tags:
+        - Customers
+      summary: Supprimer un client
+      description: Supprime le client dont le code client est passé en paramètre.
+      parameters:
+        - name: code client
+          in: path
+          description: code client du client à supprimer
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: No content
+        '404':
+          description: Not found
+          content:
+            text/json:
+              examples:
+                Customer Not Found:
+                  value:
+                    errors:
+                      msg:
+                        The customer does not exist
 components:
   schemas:
     CustomerCreate:
