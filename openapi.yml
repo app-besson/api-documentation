@@ -351,11 +351,23 @@ paths:
       summary: Affecte le magasin d'affectation au client 
       description: >-
        Affecte le magasin d'affectation au client authentifié par keycloak
-       requestBody:
+      requestBody:
         content:
           text/json:
             schema:
-              $ref: '#/components/schemas/postAffectedStore'
+              type: object
+              properties: 
+                id:
+                  type: string
+                  examples:
+                    - "001"
+      responses: 
+        '200':
+          description: OK
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AffectedStore'
   /me/dematerialization:
     post:
       tags:
