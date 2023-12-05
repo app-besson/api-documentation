@@ -867,6 +867,10 @@ components:
         - storeId
         - email
       properties:
+        cardNumber:
+          type: string
+          examples:
+            - '9980007395396'
         storeId:
           type: string
           examples:
@@ -888,28 +892,24 @@ components:
           type: string
           examples:
             - '2000-01-01'
-        countryCode:
-          type: string
-          examples:
-            - FRA
-        postalCode:
-          type: string
-          examples:
-            - '63170'
         phoneNumber:
           type: string
           examples:
             - '+33600000000'
         optinEmail:
-          type: integer
-          format: int64
+          type: boolean
           examples:
-            - 0
+            - true
         optinPhone:
-          type: integer
-          format: int64
+          type: boolean
           examples:
-            - 0
+            - true
+        optinDematerialization:
+          type: string
+          enum:
+            - yes
+            - no
+            - not_pronounced
         email:
           type: string
           examples:
@@ -918,6 +918,29 @@ components:
           type: string
           examples:
             - myEnterprise
+        billingAddress:
+          type: object
+          properties:
+            address1:
+              type: string
+              examples:
+                - 1 avenue des frères montgolfier
+            address2:
+              type: string
+              examples:
+                - null
+            city:
+              type: string
+              examples: 
+                - Aubière
+            postalCode:
+              type: string
+              examples: 
+                - 63170
+            countryCode:
+              type: string
+              examples:
+                - FR
     Customer:
       type: object
       required:
