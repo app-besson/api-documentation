@@ -850,7 +850,7 @@ paths:
         required: true
       responses:
         '200':
-          description: Created
+          description: OK
           content:
             text/json:
               schema:
