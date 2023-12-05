@@ -849,7 +849,7 @@ paths:
               $ref: '#/components/schemas/CustomerPatch'
         required: true
       responses:
-        '201':
+        '200':
           description: Created
           content:
             text/json:
