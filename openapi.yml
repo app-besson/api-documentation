@@ -788,7 +788,7 @@ paths:
           content:
             text/json:
               schema:
-                $ref: '#/components/schemas/Customer'
+                $ref: '#/components/schemas/Customer201'
         '400':
           description: Bad Request
           content:
@@ -834,6 +834,71 @@ paths:
                           examples:
                             - Le compte client existe déjà (email en doublon)
   /customers/{code client}:
+    patch:
+      tags:
+        - Customers
+      summary: Modifier un client
+      description: ''
+      requestBody:
+        description: >-
+          Modifier un client. Modification en parallèle dans
+          Cashfid et envoi mail adhesion Splio (mobile wallet) si besoin.
+        content:
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CustomerPatch'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Customer201'
+        '400':
+          description: Bad Request
+          content:
+            text/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+                          examples:
+                            - Invalid value
+                        param:
+                          type: string
+                          examples:
+                            - email
+                        location:
+                          type: string
+                          examples:
+                            - body
+                        value:
+                          type: string
+                          examples:
+                            - test.test.fr
+        '422':
+          description: Unprocessable Entity
+          content:
+            text/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+                          examples:
+                            - Le compte client existe déjà (email en doublon)
     delete:
       tags:
         - Customers
@@ -941,12 +1006,86 @@ components:
               type: string
               examples:
                 - FR
-    Customer:
+    CustomerPatch:
       type: object
-      required:
-        - storeId
-        - email
       properties:
+        gender:
+          type: string
+          enum:
+            - male
+            - female
+        firstname:
+          type: string
+          examples:
+            - John
+        lastname:
+          type: string
+          examples:
+            - Doe
+        birthday:
+          type: string
+          examples:
+            - '2000-01-01'
+        phoneNumber:
+          type: string
+          examples:
+            - '+33600000000'
+        optinEmail:
+          type: boolean
+          examples:
+            - true
+        optinPhone:
+          type: boolean
+          examples:
+            - true
+        optinDematerialization:
+          type: string
+          enum:
+            - yes
+            - no
+            - not_pronounced
+        email:
+          type: string
+          examples:
+            - john.doe@mail.com
+        source:
+          type: string
+          examples:
+            - myEnterprise
+        billingAddress:
+          type: object
+          properties:
+            address1:
+              type: string
+              examples:
+                - 1 avenue des frères montgolfier
+            address2:
+              type: string
+              examples:
+                - null
+            city:
+              type: string
+              examples: 
+                - Aubière
+            postalCode:
+              type: string
+              examples: 
+                - 63170
+            countryCode:
+              type: string
+              examples:
+                - FR
+    Customer201:
+      type: object
+      properties:
+        id:
+          type: integer
+          examples:
+            - 15477
+        cardNumber:
+          type: string
+          examples:
+            - 9980007395396
         storeId:
           type: string
           examples:
@@ -967,36 +1106,55 @@ components:
           type: string
           examples:
             - '2000-01-01'
-        countryCode:
-          type: string
-          examples:
-            - FR
-        postalCode:
-          type: string
-          examples:
-            - '63170'
         phoneNumber:
           type: string
           examples:
             - '+33600000000'
         optinEmail:
-          type: integer
-          format: int64
+          type: boolean
           examples:
-            - 0
+            - true
         optinPhone:
-          type: integer
-          format: int64
+          type: boolean
           examples:
-            - 0
+            - false
+        optinDematerialization:
+          type: string
+          enum:
+            - yes
+            - no
+            - not_pronounced
+        source:
+          type: string
+          examples: 
+            - myCompany
         email:
           type: string
           examples:
             - john.doe@mail.com
-        cardNumber:
-          type: string
-          examples:
-            - '9980003968037'
+        billingAddress:
+          type: object
+          properties:
+            address1:
+              type: string
+              examples:
+                - 1 avenue des frères montgolfier
+            address2:
+              type: string
+              examples:
+                - null
+            city:
+              type: string
+              examples: 
+                - Aubière
+            postalCode:
+              type: string
+              examples: 
+                - 63170
+            countryCode:
+              type: string
+              examples:
+                - FR
     Me:
       type: object
       properties:
