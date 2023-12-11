@@ -788,7 +788,7 @@ paths:
           content:
             text/json:
               schema:
-                $ref: '#/components/schemas/Customer201'
+                $ref: '#/components/schemas/CustomerResponse201'
         '400':
           description: Bad Request
           content:
@@ -854,7 +854,7 @@ paths:
           content:
             text/json:
               schema:
-                $ref: '#/components/schemas/Customer201'
+                $ref: '#/components/schemas/CustomerResponse201'
         '400':
           description: Bad Request
           content:
@@ -911,6 +911,30 @@ paths:
           required: true
           schema:
             type: integer
+      responses:
+        '204':
+          description: No content
+        '404':
+          description: Not found
+          content:
+            text/json:
+              examples:
+                Customer Not Found:
+                  value:
+                    errors:
+                      msg:
+                        The customer does not exist
+  /customers/{code client}/modify-points:
+    post:
+      tags:
+        - Customers
+      summary: Modifier les points d'un client
+      description: Ajoute aux points du client dont le code client est passé en paramètre les points fournis dans le body.
+      requestBody:
+        content:
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CustomerModifyPoints'
       responses:
         '204':
           description: No content
@@ -1075,7 +1099,7 @@ components:
               type: string
               examples:
                 - FR
-    Customer201:
+    CustomerResponse201:
       type: object
       properties:
         id:
@@ -1155,6 +1179,17 @@ components:
               type: string
               examples:
                 - FR
+    CustomerModifyPoints:
+      type: object
+      properties:
+        points:
+          type: string
+          examples:
+            - 10
+        reason:
+          type: string
+          examples:
+            - manual
     Me:
       type: object
       properties:
