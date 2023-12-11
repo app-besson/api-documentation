@@ -314,6 +314,9 @@ paths:
       responses:
         '204':
           description: No Content
+          content:
+            text/json:
+              example: null
         '404':
           description: Not found
           content:
@@ -914,6 +917,9 @@ paths:
       responses:
         '204':
           description: No content
+          content:
+            text/json:
+              example: null
         '404':
           description: Not found
           content:
@@ -938,6 +944,9 @@ paths:
       responses:
         '204':
           description: No content
+          content:
+            text/json:
+              example: null
         '404':
           description: Not found
           content:
