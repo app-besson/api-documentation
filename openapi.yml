@@ -836,7 +836,7 @@ paths:
                           type: string
                           examples:
                             - Le compte client existe déjà (email en doublon)
-  /customers/{code client}:
+  /customers/{customerId}:
     patch:
       tags:
         - Customers
@@ -844,8 +844,7 @@ paths:
       description: ''
       requestBody:
         description: >-
-          Modifier un client. Modification en parallèle dans
-          Cashfid et envoi mail adhesion Splio (mobile wallet) si besoin.
+          Modifier un client. Envoi mail adhesion Splio (mobile wallet) si besoin.
         content:
           text/json:
             schema:
@@ -930,7 +929,7 @@ paths:
                     errors:
                       msg:
                         The customer does not exist
-  /customers/{code client}/modify-points:
+  /customers/{customerId}/modify-points:
     post:
       tags:
         - Customers
