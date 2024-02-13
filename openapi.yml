@@ -428,6 +428,47 @@ paths:
                           type: string
                           examples:
                             - The customer does not exist
+  /me/family:
+    get:
+      tags:
+        - Me
+      summary: Liste des membres de la famille d'un client
+      description: Retourne les membres de la famille d'un client authentifié par keycloak
+      responses:
+        '200':
+          description: OK
+          content:
+            text/json:
+              examples:
+                Response:
+                  value:
+                    - id: 1
+                      relationshipType: "child"
+                      birthdate: "1990-05-15"
+                      firstname: "Alice"
+                    - id: 2
+                      relationshipType: "husband"
+                      birthdate: "1985-02-20"
+                      firstname: "John"
+                    - id: 3
+                      relationshipType: "wife"
+                      birthdate: "1988-11-10"
+                      firstname: "Emma"
+        '204':
+          description: No content
+          content:
+            text/json:
+              example: null
+        '404':
+          description: Not found
+          content:
+            text/json:
+              examples:
+                Customer Not Found:
+                  value:
+                    errors:
+                      msg:
+                        The customer does not exist
   /me/offers:
     get:
       tags:
