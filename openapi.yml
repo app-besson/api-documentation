@@ -3,719 +3,6 @@ info:
   title: API Besson documenation
   version: 1.0.0
 paths:
-  /onboarding:
-    get:
-      tags:
-        - Onboarding
-      summary: Onboarding d'un utilisateur dans l'application fidélité
-      description: >
-        Retourne l'étape d'onboarding de l'utilisaur dans l'application
-        fidélité. 
-
-          Les étapes possibles : 
-
-          * **SIGN_UP_FORM** (nouveau client)
-          * **PROFILE_COMPLETION_FORM** (client existant mais avec des infos manquantes)
-          * **CONSENTS** (acceptation des conditions pour les nouveaux clients)
-          * **STORE_SELECTION** (sélection de son magasin favoris)
-          * **DONE** (le client a déjà fait l'onboarding)
-      responses:
-        '200':
-          description: OK
-          content:
-            text/json:
-              schema:
-                $ref: '#/components/schemas/Onboarding'
-        '401':
-          description: Unauthorized
-          content:
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Unauthorized'
-  /onboarding/sign-up:
-    post:
-      tags:
-        - Onboarding
-      summary: Valide l'étape SIGN_UP_FORM de l'utilisateur
-      description: |
-        Retourne l'étape d'onboarding **CONSENTS**
-      requestBody:
-        content:
-          text/json:
-            schema:
-              $ref: '#/components/schemas/SignUp'
-        required: true
-      responses:
-        '200':
-          description: OK
-          content:
-            text/json:
-              schema:
-                $ref: '#/components/schemas/Consents'
-        '401':
-          description: Unauthorized
-          content:
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Unauthorized'
-        '422':
-          description: Unprocessable Entity
-          content:
-            text/json:
-              schema:
-                $ref: '#/components/schemas/UnprocessableOnboarding'
-  /onboarding/complete-profile:
-    post:
-      tags:
-        - Onboarding
-      summary: Valide l'étape PROFILE_COMPLETION_FORM de l'utilisateur
-      description: |
-        Retourne l'étape d'onboarding **STORE_SELECTION**
-      requestBody:
-        content:
-          text/json:
-            schema:
-              $ref: '#/components/schemas/SignUp'
-        required: true
-      responses:
-        '200':
-          description: OK
-          content:
-            text/json:
-              examples:
-                Pas de magasins affectation:
-                  value:
-                    step: STORE_SELECTION
-                    data: 
-                      isWeb: false
-                      store: null
-                Magasin affectation non web:
-                  value:
-                    step: STORE_SELECTION
-                    data:
-                      isWeb: false
-                      store:
-                        id: '001'
-                        name: Besson Chaussures CLERMONT AUBIERE
-                        address:
-                          - 1 rue des Frères Montgolfier null
-                          - 63170 AUBIERE
-                Magasin affectation web:
-                  value:
-                    step: STORE_SELECTION
-                    date:
-                      isWeb: true
-                      store: null
-        '401':
-          description: Unauthorized
-          content:
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Unauthorized'
-        '422':
-          description: Unprocessable Entity
-          content:
-            text/json:
-              schema:
-                $ref: '#/components/schemas/UnprocessableOnboarding'
-  /onboarding/consents:
-    post:
-      tags:
-        - Onboarding
-      summary: Valide l'étape CONSENTS de l'utilisateur
-      description: |
-        Retourne l'étape d'onboarding **STORE_SELECTION**
-      requestBody:
-        content:
-          text/json:
-            schema:
-              $ref: '#/components/schemas/TermOfUse'
-        required: true
-      responses:
-        '200':
-          description: OK
-          content:
-            text/json:
-              schema:
-                $ref: '#/components/schemas/StoreSelectionConsents'
-        '401':
-          description: Unauthorized
-          content:
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Unauthorized'
-        '422':
-          description: Unprocessable Entity
-          content:
-            text/json:
-              schema:
-                $ref: '#/components/schemas/UnprocessableOnboarding'
-  /onboarding/store-selection:
-    post:
-      tags:
-        - Onboarding
-      summary: Valide l'étape STORE_SELECTION de l'utilisateur
-      description: |
-        Retourne l'étape d'onboarding **DONE**
-      requestBody:
-        content:
-          text/json:
-            schema:
-              $ref: '#/components/schemas/IdString'
-        required: true
-      responses:
-        '200':
-          description: OK
-          content:
-            text/json:
-              schema:
-                $ref: '#/components/schemas/Done'
-        '401':
-          description: Unauthorized
-          content:
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Unauthorized'
-        '422':
-          description: Unprocessable Entity
-          content:
-            text/json:
-              schema:
-                $ref: '#/components/schemas/UnprocessableOnboarding'
-  /stores:
-    get:
-      tags:
-        - Stores
-      summary: Liste de tous les magasins
-      parameters:
-        - name: lat
-          in: query
-          description: >-
-            Latitude de la position dont on veut connaître la distance aux
-            magasins
-          required: false
-          schema:
-            type: string
-        - name: lng
-          in: query
-          description: >-
-            Longitude de la position dont on veut connaître la distance aux
-            magasins
-          required: false
-          schema:
-            type: string
-      description: >-
-        Retourne la liste des magasins Besson pour un utilisateur authentifié
-        par keycloak. Si lat et lng sont renseignés, l'api retourne les 5 magasins les plus proches,
-        du plus proche ou plus lointain
-      responses:
-        '200':
-          description: OK
-          content:
-            text/json: 
-              examples:
-                Paramètres vides:
-                  value:
-                  - id: 011'
-                    name: BESSON CHAUSSURES COURNON
-                    address:
-                      - z.i - 67 avenue d aubiere (à coté de b&m)
-                      - 63800 COURNON D AUVERGNE
-                    coordinates:
-                      lat: '45.7423'
-                      lng: '3.16893'
-                    timezoneOffset: '+02:00'
-                    hours:
-                            - - - '09:00'
-                                - '19:00'
-                            - - - '09:30'
-                                - '19:00'
-                            - - - '10:00'
-                                - '12:00'
-                              - - '14:00'
-                                - '19:00'
-                Coordonnées renseignées:
-                  value:
-                  - id: 011'
-                    name: BESSON CHAUSSURES COURNON
-                    address:
-                      - Z.I - 67 AVENUE D AUBIERE (à coté de B&M)
-                      - 63800 COURNON D AUVERGNE
-                    coordinates:
-                      lat: '45.7423'
-                      lng: '3.16893'
-                    timezoneOffset: '+02:00'
-                    hours:
-                            - - - '09:00'
-                                - '19:00'
-                            - - - '09:30'
-                                - '19:00'
-                            - - - '10:00'
-                                - '12:00'
-                              - - '14:00'
-                                - '19:00'
-                    distance: "85 km"
-
-  /news:
-    get:
-      tags:
-        - News
-      summary: Liste des actualités
-      parameters:
-        - name: language
-          in: query
-          description: Langue des actualitées
-          required: false
-          schema:
-            type: string
-            default: fr
-      description: >-
-        Retourne la liste des actualités Besson pour un utilisateur authentifié
-        par keycloak
-      responses:
-        '200':
-          description: OK
-          content:
-            text/json:
-              schema:
-                $ref: '#/components/schemas/News'
-        '404':
-          description: Not found
-          content:
-            text/json:
-              schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      msg:
-                        type: string
-                        examples:
-                          - No news found
-  /me:
-    get:
-      tags:
-        - Me
-      summary: Informations d'un client
-      description: Retourne les informations d'un client authentifié par keycloak
-      responses:
-        '200':
-          description: OK
-          content:
-            text/json:
-              schema:
-                $ref: '#/components/schemas/Me'
-    delete:
-      tags:
-        - Me
-      summary: Suppression d'un client
-      description: Supprime le client authentifié par keycloak
-      responses:
-        '204':
-          description: No Content
-          content:
-            text/json:
-              example: null
-        '404':
-          description: Not found
-          content:
-            text/json:
-              schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        msg:
-                          type: string
-                          examples:
-                            - The customer does not exist
-  /me/affected-store:
-    get:
-      tags:
-        - Me
-      summary: Informations du magasin affecté à un client
-      description: >-
-        Retourne les informations du magasin affecté à un client authentifié par
-        keycloak. Si le magasin d'affectation est le web, null est retourné.
-      responses:
-        '200':
-          description: OK
-          content:
-            text/json:
-              schema:
-                $ref: '#/components/schemas/AffectedStore'
-    post:
-      tags:
-        - Me
-      summary: Affecte le magasin d'affectation au client 
-      description: >-
-       Affecte le magasin d'affectation au client authentifié par keycloak
-      requestBody:
-        content:
-          text/json:
-            schema:
-              type: object
-              properties: 
-                id:
-                  type: string
-                  examples:
-                    - "001"
-      responses: 
-        '200':
-          description: OK
-          content:
-            text/json:
-              schema:
-                $ref: '#/components/schemas/AffectedStore'
-  /me/dematerialization:
-    post:
-      tags:
-        - Me
-      summary: Affecte le choix de l'optin dematerialisation du client
-      description: >-
-        Affecte le choix de l'optin dematerialisation du client yes / no /
-        not_pronounced
-      requestBody:
-        content:
-          text/json:
-            schema:
-              $ref: '#/components/schemas/OptinDematBody'
-        required: true
-      responses:
-        '200':
-          description: OK
-          content:
-            text/json:
-              schema:
-                $ref: '#/components/schemas/OptinDematResponse'
-        '400':
-          description: Bad Request
-          content:
-            text/json:
-              examples:
-                Empty body:
-                  value:
-                    errors:
-                      - msg: Choice is mandatory
-                        param: choice
-                        location: body
-                      - msg: Choice must be in 'yes', 'no', 'not_pronounced'
-                        param: choice
-                        location: body
-                Wrong value:
-                  value:
-                    msg: Choice must be in 'yes', 'no', 'not_pronounced'
-                    param: choice
-                    location: body
-                    value: tyes
-        '404':
-          description: Not found
-          content:
-            text/json:
-              schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        msg:
-                          type: string
-                          examples:
-                            - The customer does not exist
-  /me/family:
-    get:
-      tags:
-        - Me
-      summary: Liste des membres de la famille d'un client
-      description: Retourne les membres de la famille d'un client authentifié par keycloak
-      responses:
-        '200':
-          description: OK
-          content:
-            text/json:
-              examples:
-                Response:
-                  value:
-                    - id: 1
-                      relationshipType: "child"
-                      birthdate: "1990-05-15"
-                      firstname: "Alice"
-                    - id: 2
-                      relationshipType: "husband"
-                      birthdate: "1985-02-20"
-                      firstname: "John"
-                    - id: 3
-                      relationshipType: "wife"
-                      birthdate: "1988-11-10"
-                      firstname: "Emma"
-        '204':
-          description: No content
-          content:
-            text/json:
-              example: null
-        '404':
-          description: Not found
-          content:
-            text/json:
-              examples:
-                Customer Not Found:
-                  value:
-                    errors:
-                      msg:
-                        The customer does not exist
-  /me/offers:
-    get:
-      tags:
-        - Me
-      summary: Liste des offres d'un client
-      description: Retourne les offres associées à un client authentifié par keycloak
-      parameters:
-        - name: language
-          in: query
-          description: Langue des offres
-          required: false
-          schema:
-            type: string
-            default: fr
-      responses:
-        '200':
-          description: OK
-          content:
-            text/json:
-              examples:
-                Response:
-                  value:
-                    - id: 1
-                      type: "event"
-                      name: "AVANTAGE_ANNIVERSAIRE"
-                      image: 
-                          - light: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20anniversaire%20blanc.png"
-                            dark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20anniversaire%20noir.png"
-                      description: "TODO"
-                      isActive: true
-                      expirationDate: "11/12/2023"
-                    - id: 2
-                      type: "activable"
-                      name: "AVANTAGE_BIENVENUE"
-                      image: 
-                          - light: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20bienvenue%20blanc.png"
-                            dark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20bienvenue%20noir.png"
-                      description: "TODO"
-                      isActive: false
-                    - id: 5
-                      type: "points"
-                      name: "AVANTAGE-15%_250POINTS"
-                      image: 
-                          - light: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20250%20coeurs%20blanc.png"
-                            dark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20250%20coeurs%20noir.png"
-                      description: "TODO"
-                      isActive: true
-                      expirationDate: "23/01/2024"
-                    - id: 6
-                      type: "points"
-                      name: "AVANTAGE-20%_400POINTS"
-                      image: 
-                          - light: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20400%20coeurs%20blanc.png"
-                            dark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20400%20coeurs%20noir.png"
-                      description: "TODO"
-                      isActive: false
-                      missingPoints: 145
-  /me/offers/{id}/activate:
-    post:
-      tags:
-        - Me
-      summary: Active l'offre d'un client
-      description: >-
-        Active l'offre d'un client authentifié par keycloak. L'offre est
-        disponible immédiatement en caisse
-      parameters:
-        - name: id
-          in: path
-          description: id de l'offre à activer pour le client
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            text/json:
-              schema:
-                $ref: '#/components/schemas/ActivateOfferResponse'
-        '400':
-          description: Bad Request
-          content:
-            text/json:
-              examples:
-                Not Activable:
-                  value:
-                    errors:
-                      msg:
-                        This offer is not activable
-                Already Used or Activated:
-                  value:
-                    errors:
-                      msg:
-                        Offer already used or activated
-        '404':
-          description: Not found
-          content:
-            text/json:
-              examples:
-                Customer Not Found:
-                  value:
-                    errors:
-                      msg:
-                        The customer does not exist
-                Offer Not Found:
-                  value:
-                    errors:
-                      msg:
-                        The offer does not exist
-  /me/points-history:
-    get:
-      tags:
-        - Me
-      summary: Historique des points d'un client
-      description: Retourne l'histrique des points d'un client authentifié par keycloak
-      parameters:
-        - name: language
-          in: query
-          description: Langue des categories de mouvements de point
-          required: false
-          schema:
-            type: string
-            default: fr
-      responses:
-        '200':
-          description: OK
-          content:
-            text/json:
-              schema:
-                $ref: '#/components/schemas/PointsHistory'
-  /me/shoes-addict:
-    get:
-      tags:
-      - Me
-      summary: Rechercher les avantages shoes addict
-      description: Retourne les avantages shoes addict d'un client authentifié par keycloak
-      parameters:
-        - name: language
-          in: query
-          description: Langue des informations du partenaire
-          required: false
-          schema:
-            type: string
-            default: en
-      responses:
-        '200':
-          description: OK
-          content:
-            text/json:
-              examples:
-                Is Shoes Addict:
-                  value:
-                    sinceDate: "2023-02-19"
-                    benefitText: "-10% sur tous les produits d'entretien"
-                    benefitCode: "AVANTAGE_VIP"
-                    phoneNumber: "01 76 21 81 31"
-                    partners:
-                      - id: "nextory"
-                        logoLight: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_nextory_w.png"
-                        logoDark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_nextory_w.png"
-                        image: https://nextory.jpg
-                      - id: "homair"
-                        logoLight: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_homair_w.png"
-                        logoDark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_homair_w.png"
-                        image: https://homair.jpg
-                      - id: "pixum"
-                        logoLight: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_pixum_w.png"
-                        logoDark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_pixum_w.png"
-                        image: https://pixum.jpg
-                      - id: "wonderbox"
-                        logoLight: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_wonderbox_w.png"
-                        logoDark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_wonderbox_w.png"
-                        image: https://wonderbox.jpg
-                Is Not Shoes Addict:
-                  value:
-                    benefitText: "-10% sur tous les produits d'entretien"
-                    partners:
-                      - id: "nextory"
-                        logoLight: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_nextory_w.png"
-                        logoDark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_nextory_w.png"
-                      - id: "homair"
-                        logoLight: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_homair_w.png"
-                        logoDark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_homair_w.png"
-                      - id: "pixum"
-                        logoLight: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_pixum_w.png"
-                        logoDark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_pixum_w.png"
-                      - id: "wonderbox"
-                        logoLight: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_wonderbox_w.png"
-                        logoDark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_wonderbox_w.png"
-        '404':
-          description: Not found
-          content:
-            text/json:
-              examples:
-                Customer Not Found:
-                  value:
-                    errors:
-                      msg:
-                        The customer does not exist
-  /me/shoes-addict/partner/{id}:
-    get:
-      tags:
-      - Me
-      summary: Rechercher un partenaire
-      description: Retourne l'histrique des points d'un client authentifié par keycloak
-      parameters:
-        - name: id
-          in: path
-          description: id de l'offre à activer pour le client
-          required: true
-          schema:
-            type: string
-        - name: language
-          in: query
-          description: Langue des informations du partenaire
-          required: false
-          schema:
-            type: string
-            default: en
-      responses:
-        '200':
-          description: OK
-          content:
-            text/json:
-              schema:
-                $ref: '#/components/schemas/PartnerResponse'
-        '404':
-          description: Not found
-          content:
-            text/json:
-              examples:
-                Customer Not Found:
-                  value:
-                    errors:
-                      msg:
-                        The customer does not exist
-        '403':
-          description: Not choose addict
-          content:
-            text/json:
-              examples:
-                Not choose addict:
-                  value:
-                    errors:
-                      msg:
-                        The customer is not shoes addict
-
   /customers:
     get:
       tags:
@@ -997,6 +284,773 @@ paths:
                     errors:
                       msg:
                         The customer does not exist
+  /gift-card:
+    get:
+      tags:
+        - Gift-Card
+      summary: Informations d'une carte cadeau
+      description: Retourne les informations d'une carte cadeau authentifié par apikey
+      responses:
+        '200':
+          description: OK
+          content:
+            text/json:
+              examples:
+                Active:
+                  value:
+                      balance: 50.03
+                      expirationDate: "2024-12-31"
+                      status: "active"
+                Expired:
+                  value:
+                      balance: 10
+                      expirationDate: "2024-01-31"
+                      status: "expired"
+                Depleted:
+                  value:
+                      balance: 0
+                      expirationDate: "2024-12-31"
+                      status: "depleted"
+                Inactive:
+                  value:
+                      balance: 150.55
+                      expirationDate: "2025-12-31"
+                      status: "inactive"
+        '404':
+          description: Not found
+          content:
+            text/json:
+              examples:
+                Gift card not found:
+                  value:
+                    errors:
+                      msg:
+                        Gift card not found
+        '400':
+          description: Error occurred
+          content:
+            text/json:
+              examples:
+                Error occurred:
+                  value:
+                    errors:
+                      msg:
+                        Error occurred on CashGift WS
+  /me:
+    get:
+      tags:
+        - Me
+      summary: Informations d'un client
+      description: Retourne les informations d'un client authentifié par keycloak
+      responses:
+        '200':
+          description: OK
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Me'
+    delete:
+      tags:
+        - Me
+      summary: Suppression d'un client
+      description: Supprime le client authentifié par keycloak
+      responses:
+        '204':
+          description: No Content
+          content:
+            text/json:
+              example: null
+        '404':
+          description: Not found
+          content:
+            text/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+                          examples:
+                            - The customer does not exist
+  /me/affected-store:
+    get:
+      tags:
+        - Me
+      summary: Informations du magasin affecté à un client
+      description: >-
+        Retourne les informations du magasin affecté à un client authentifié par
+        keycloak. Si le magasin d'affectation est le web, null est retourné.
+      responses:
+        '200':
+          description: OK
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AffectedStore'
+    post:
+      tags:
+        - Me
+      summary: Affecte le magasin d'affectation au client 
+      description: >-
+       Affecte le magasin d'affectation au client authentifié par keycloak
+      requestBody:
+        content:
+          text/json:
+            schema:
+              type: object
+              properties: 
+                id:
+                  type: string
+                  examples:
+                    - "001"
+      responses: 
+        '200':
+          description: OK
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AffectedStore'
+  /me/dematerialization:
+    post:
+      tags:
+        - Me
+      summary: Affecte le choix de l'optin dematerialisation du client
+      description: >-
+        Affecte le choix de l'optin dematerialisation du client yes / no /
+        not_pronounced
+      requestBody:
+        content:
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OptinDematBody'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OptinDematResponse'
+        '400':
+          description: Bad Request
+          content:
+            text/json:
+              examples:
+                Empty body:
+                  value:
+                    errors:
+                      - msg: Choice is mandatory
+                        param: choice
+                        location: body
+                      - msg: Choice must be in 'yes', 'no', 'not_pronounced'
+                        param: choice
+                        location: body
+                Wrong value:
+                  value:
+                    msg: Choice must be in 'yes', 'no', 'not_pronounced'
+                    param: choice
+                    location: body
+                    value: tyes
+        '404':
+          description: Not found
+          content:
+            text/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+                          examples:
+                            - The customer does not exist
+  /me/family:
+    get:
+      tags:
+        - Me
+      summary: Liste des membres de la famille d'un client
+      description: Retourne les membres de la famille d'un client authentifié par keycloak
+      responses:
+        '200':
+          description: OK
+          content:
+            text/json:
+              examples:
+                Response:
+                  value:
+                    - id: 1
+                      relationshipType: "girl"
+                      birthdate: "1990-05-15"
+                      firstname: "Alice"
+                    - id: 2
+                      relationshipType: "boy"
+                      birthdate: "1991-06-02"
+                      firstname: "Michel"
+                    - id: 3
+                      relationshipType: "husband"
+                      birthdate: "1985-02-20"
+                      firstname: "John"
+                    - id: 4
+                      relationshipType: "wife"
+                      birthdate: "1988-11-10"
+                      firstname: "Emma"
+        '204':
+          description: No content
+          content:
+            text/json:
+              example: null
+        '404':
+          description: Not found
+          content:
+            text/json:
+              examples:
+                Customer Not Found:
+                  value:
+                    errors:
+                      msg:
+                        The customer does not exist
+  /me/offers:
+    get:
+      tags:
+        - Me
+      summary: Liste des offres d'un client
+      description: Retourne les offres associées à un client authentifié par keycloak
+      parameters:
+        - name: language
+          in: query
+          description: Langue des offres
+          required: false
+          schema:
+            type: string
+            default: fr
+      responses:
+        '200':
+          description: OK
+          content:
+            text/json:
+              examples:
+                Response:
+                  value:
+                    - id: 1
+                      type: "event"
+                      name: "AVANTAGE_ANNIVERSAIRE"
+                      image: 
+                          - light: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20anniversaire%20blanc.png"
+                            dark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20anniversaire%20noir.png"
+                      description: "TODO"
+                      isActive: true
+                      expirationDate: "11/12/2023"
+                    - id: 2
+                      type: "activable"
+                      name: "AVANTAGE_BIENVENUE"
+                      image: 
+                          - light: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20bienvenue%20blanc.png"
+                            dark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20bienvenue%20noir.png"
+                      description: "TODO"
+                      isActive: false
+                    - id: 5
+                      type: "points"
+                      name: "AVANTAGE-15%_250POINTS"
+                      image: 
+                          - light: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20250%20coeurs%20blanc.png"
+                            dark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20250%20coeurs%20noir.png"
+                      description: "TODO"
+                      isActive: true
+                      expirationDate: "23/01/2024"
+                    - id: 6
+                      type: "points"
+                      name: "AVANTAGE-20%_400POINTS"
+                      image: 
+                          - light: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20400%20coeurs%20blanc.png"
+                            dark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20400%20coeurs%20noir.png"
+                      description: "TODO"
+                      isActive: false
+                      missingPoints: 145
+  /me/offers/{id}/activate:
+    post:
+      tags:
+        - Me
+      summary: Active l'offre d'un client
+      description: >-
+        Active l'offre d'un client authentifié par keycloak. L'offre est
+        disponible immédiatement en caisse
+      parameters:
+        - name: id
+          in: path
+          description: id de l'offre à activer pour le client
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ActivateOfferResponse'
+        '400':
+          description: Bad Request
+          content:
+            text/json:
+              examples:
+                Not Activable:
+                  value:
+                    errors:
+                      msg:
+                        This offer is not activable
+                Already Used or Activated:
+                  value:
+                    errors:
+                      msg:
+                        Offer already used or activated
+        '404':
+          description: Not found
+          content:
+            text/json:
+              examples:
+                Customer Not Found:
+                  value:
+                    errors:
+                      msg:
+                        The customer does not exist
+                Offer Not Found:
+                  value:
+                    errors:
+                      msg:
+                        The offer does not exist
+  /me/points-history:
+    get:
+      tags:
+        - Me
+      summary: Historique des points d'un client
+      description: Retourne l'histrique des points d'un client authentifié par keycloak
+      parameters:
+        - name: language
+          in: query
+          description: Langue des categories de mouvements de point
+          required: false
+          schema:
+            type: string
+            default: fr
+      responses:
+        '200':
+          description: OK
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PointsHistory'
+  /me/shoes-addict:
+    get:
+      tags:
+      - Me
+      summary: Rechercher les avantages shoes addict
+      description: Retourne les avantages shoes addict d'un client authentifié par keycloak
+      parameters:
+        - name: language
+          in: query
+          description: Langue des informations du partenaire
+          required: false
+          schema:
+            type: string
+            default: en
+      responses:
+        '200':
+          description: OK
+          content:
+            text/json:
+              examples:
+                Is Shoes Addict:
+                  value:
+                    sinceDate: "2023-02-19"
+                    benefitText: "-10% sur tous les produits d'entretien"
+                    benefitCode: "AVANTAGE_VIP"
+                    phoneNumber: "01 76 21 81 31"
+                    partners:
+                      - id: "nextory"
+                        logoLight: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_nextory_w.png"
+                        logoDark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_nextory_w.png"
+                        image: https://nextory.jpg
+                      - id: "homair"
+                        logoLight: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_homair_w.png"
+                        logoDark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_homair_w.png"
+                        image: https://homair.jpg
+                      - id: "pixum"
+                        logoLight: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_pixum_w.png"
+                        logoDark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_pixum_w.png"
+                        image: https://pixum.jpg
+                      - id: "wonderbox"
+                        logoLight: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_wonderbox_w.png"
+                        logoDark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_wonderbox_w.png"
+                        image: https://wonderbox.jpg
+                Is Not Shoes Addict:
+                  value:
+                    benefitText: "-10% sur tous les produits d'entretien"
+                    partners:
+                      - id: "nextory"
+                        logoLight: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_nextory_w.png"
+                        logoDark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_nextory_w.png"
+                      - id: "homair"
+                        logoLight: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_homair_w.png"
+                        logoDark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_homair_w.png"
+                      - id: "pixum"
+                        logoLight: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_pixum_w.png"
+                        logoDark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_pixum_w.png"
+                      - id: "wonderbox"
+                        logoLight: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_wonderbox_w.png"
+                        logoDark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_wonderbox_w.png"
+        '404':
+          description: Not found
+          content:
+            text/json:
+              examples:
+                Customer Not Found:
+                  value:
+                    errors:
+                      msg:
+                        The customer does not exist
+  /me/shoes-addict/partner/{id}:
+    get:
+      tags:
+      - Me
+      summary: Rechercher un partenaire
+      description: Retourne l'histrique des points d'un client authentifié par keycloak
+      parameters:
+        - name: id
+          in: path
+          description: id de l'offre à activer pour le client
+          required: true
+          schema:
+            type: string
+        - name: language
+          in: query
+          description: Langue des informations du partenaire
+          required: false
+          schema:
+            type: string
+            default: en
+      responses:
+        '200':
+          description: OK
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PartnerResponse'
+        '404':
+          description: Not found
+          content:
+            text/json:
+              examples:
+                Customer Not Found:
+                  value:
+                    errors:
+                      msg:
+                        The customer does not exist
+        '403':
+          description: Not choose addict
+          content:
+            text/json:
+              examples:
+                Not choose addict:
+                  value:
+                    errors:
+                      msg:
+                        The customer is not shoes addict
+  /news:
+    get:
+      tags:
+        - News
+      summary: Liste des actualités
+      parameters:
+        - name: language
+          in: query
+          description: Langue des actualitées
+          required: false
+          schema:
+            type: string
+            default: fr
+      description: >-
+        Retourne la liste des actualités Besson pour un utilisateur authentifié
+        par keycloak
+      responses:
+        '200':
+          description: OK
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/News'
+        '404':
+          description: Not found
+          content:
+            text/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                        examples:
+                          - No news found
+  /onboarding:
+    get:
+      tags:
+        - Onboarding
+      summary: Onboarding d'un utilisateur dans l'application fidélité
+      description: >
+        Retourne l'étape d'onboarding de l'utilisaur dans l'application
+        fidélité. 
+
+          Les étapes possibles : 
+
+          * **SIGN_UP_FORM** (nouveau client)
+          * **PROFILE_COMPLETION_FORM** (client existant mais avec des infos manquantes)
+          * **CONSENTS** (acceptation des conditions pour les nouveaux clients)
+          * **STORE_SELECTION** (sélection de son magasin favoris)
+          * **DONE** (le client a déjà fait l'onboarding)
+      responses:
+        '200':
+          description: OK
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Onboarding'
+        '401':
+          description: Unauthorized
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+  /onboarding/sign-up:
+    post:
+      tags:
+        - Onboarding
+      summary: Valide l'étape SIGN_UP_FORM de l'utilisateur
+      description: |
+        Retourne l'étape d'onboarding **CONSENTS**
+      requestBody:
+        content:
+          text/json:
+            schema:
+              $ref: '#/components/schemas/SignUp'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Consents'
+        '401':
+          description: Unauthorized
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+        '422':
+          description: Unprocessable Entity
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableOnboarding'
+  /onboarding/complete-profile:
+    post:
+      tags:
+        - Onboarding
+      summary: Valide l'étape PROFILE_COMPLETION_FORM de l'utilisateur
+      description: |
+        Retourne l'étape d'onboarding **STORE_SELECTION**
+      requestBody:
+        content:
+          text/json:
+            schema:
+              $ref: '#/components/schemas/SignUp'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/json:
+              examples:
+                Pas de magasins affectation:
+                  value:
+                    step: STORE_SELECTION
+                    data: 
+                      isWeb: false
+                      store: null
+                Magasin affectation non web:
+                  value:
+                    step: STORE_SELECTION
+                    data:
+                      isWeb: false
+                      store:
+                        id: '001'
+                        name: Besson Chaussures CLERMONT AUBIERE
+                        address:
+                          - 1 rue des Frères Montgolfier null
+                          - 63170 AUBIERE
+                Magasin affectation web:
+                  value:
+                    step: STORE_SELECTION
+                    date:
+                      isWeb: true
+                      store: null
+        '401':
+          description: Unauthorized
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+        '422':
+          description: Unprocessable Entity
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableOnboarding'
+  /onboarding/consents:
+    post:
+      tags:
+        - Onboarding
+      summary: Valide l'étape CONSENTS de l'utilisateur
+      description: |
+        Retourne l'étape d'onboarding **STORE_SELECTION**
+      requestBody:
+        content:
+          text/json:
+            schema:
+              $ref: '#/components/schemas/TermOfUse'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/StoreSelectionConsents'
+        '401':
+          description: Unauthorized
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+        '422':
+          description: Unprocessable Entity
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableOnboarding'
+  /onboarding/store-selection:
+    post:
+      tags:
+        - Onboarding
+      summary: Valide l'étape STORE_SELECTION de l'utilisateur
+      description: |
+        Retourne l'étape d'onboarding **DONE**
+      requestBody:
+        content:
+          text/json:
+            schema:
+              $ref: '#/components/schemas/IdString'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Done'
+        '401':
+          description: Unauthorized
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+        '422':
+          description: Unprocessable Entity
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableOnboarding'
+  /stores:
+    get:
+      tags:
+        - Stores
+      summary: Liste de tous les magasins
+      parameters:
+        - name: lat
+          in: query
+          description: >-
+            Latitude de la position dont on veut connaître la distance aux
+            magasins
+          required: false
+          schema:
+            type: string
+        - name: lng
+          in: query
+          description: >-
+            Longitude de la position dont on veut connaître la distance aux
+            magasins
+          required: false
+          schema:
+            type: string
+      description: >-
+        Retourne la liste des magasins Besson pour un utilisateur authentifié
+        par keycloak. Si lat et lng sont renseignés, l'api retourne les 5 magasins les plus proches,
+        du plus proche ou plus lointain
+      responses:
+        '200':
+          description: OK
+          content:
+            text/json: 
+              examples:
+                Paramètres vides:
+                  value:
+                  - id: 011'
+                    name: BESSON CHAUSSURES COURNON
+                    address:
+                      - z.i - 67 avenue d aubiere (à coté de b&m)
+                      - 63800 COURNON D AUVERGNE
+                    coordinates:
+                      lat: '45.7423'
+                      lng: '3.16893'
+                    timezoneOffset: '+02:00'
+                    hours:
+                            - - - '09:00'
+                                - '19:00'
+                            - - - '09:30'
+                                - '19:00'
+                            - - - '10:00'
+                                - '12:00'
+                              - - '14:00'
+                                - '19:00'
+                Coordonnées renseignées:
+                  value:
+                  - id: 011'
+                    name: BESSON CHAUSSURES COURNON
+                    address:
+                      - Z.I - 67 AVENUE D AUBIERE (à coté de B&M)
+                      - 63800 COURNON D AUVERGNE
+                    coordinates:
+                      lat: '45.7423'
+                      lng: '3.16893'
+                    timezoneOffset: '+02:00'
+                    hours:
+                            - - - '09:00'
+                                - '19:00'
+                            - - - '09:30'
+                                - '19:00'
+                            - - - '10:00'
+                                - '12:00'
+                              - - '14:00'
+                                - '19:00'
+                    distance: "85 km"
 components:
   schemas:
     CustomerCreate:
