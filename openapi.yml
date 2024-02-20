@@ -485,19 +485,19 @@ paths:
               examples:
                 Response:
                   value:
-                    - id: 1
+                    - id: "1"
                       relationshipType: "girl"
                       birthdate: "1990-05-15"
                       firstname: "Alice"
-                    - id: 2
+                    - id: "2"
                       relationshipType: "boy"
                       birthdate: "1991-06-02"
                       firstname: "Michel"
-                    - id: 3
+                    - id: "3"
                       relationshipType: "husband"
                       birthdate: "1985-02-20"
                       firstname: "John"
-                    - id: 4
+                    - id: "4"
                       relationshipType: "wife"
                       birthdate: "1988-11-10"
                       firstname: "Emma"
