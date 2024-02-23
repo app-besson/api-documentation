@@ -340,7 +340,7 @@ paths:
       tags:
         - Gift-Card
       summary: Création d'une carte cadeau
-      description: Créer une carte cadeau du montant "amount" donné dans le body. Retourne le numéro de carte et son code PIN. Amount doit être un entier.
+      description: Créer une carte cadeau du montant "amount" donné dans le body. Retourne le numéro de carte et son code PIN. Amount doit être un entier. Appel sécurisé par apikey.
       requestBody:
         content:
           text/json:
@@ -375,34 +375,21 @@ paths:
     patch:
       tags:
         - Gift-Card
-      summary: Informations d'une carte cadeau
-      description: Retourne les informations d'une carte cadeau authentifié par apikey
+      summary: Modifie les points d'une carte cadeau
+      description: Modifie les points d'une carte cadeau. Amount doit être un nombre flottant. Authentifié par apikey.
+      requestBody:
+        content:
+          text/json:
+            examples:
+              Add 100.23:
+                value:
+                  amount: 100.23
+              Substract 100.23:
+                value:
+                  amount: -100.23
       responses:
-        '200':
-          description: OK
-          content:
-            text/json:
-              examples:
-                Active:
-                  value:
-                      balance: 50.03
-                      expirationDate: "2024-12-31"
-                      status: "active"
-                Expired:
-                  value:
-                      balance: 10
-                      expirationDate: "2024-01-31"
-                      status: "expired"
-                Depleted:
-                  value:
-                      balance: 0
-                      expirationDate: "2024-12-31"
-                      status: "depleted"
-                Inactive:
-                  value:
-                      balance: 150.55
-                      expirationDate: "2025-12-31"
-                      status: "inactive"
+        '204':
+          description: No Content
         '404':
           description: Not found
           content:
@@ -411,18 +398,73 @@ paths:
                 Gift card not found:
                   value:
                     errors:
-                      msg:
-                        Gift card not found
+                      - msg: Gift card not found
+                        code: "CARD_NOT_FOUND"
         '400':
           description: Error occurred
           content:
             text/json:
               examples:
+                Card number must be of thirteen digits:
+                  value:
+                    errors:
+                      - msg: Card number must be of thirteen digits
+                        code: INVALID_CARD_FORMAT
+                Pin must be of four digits:
+                  value:
+                    errors:
+                      - msg: Pin must be of four digits
+                        code: INVALID_PIN_FORMAT
+                Amount is mandatory:
+                  value:
+                    errors:
+                      - msg: Amount is mandatory
+                        code: MISSING_AMOUNT
+                Amount has too many decimals:
+                  value:
+                    errors:
+                      - msg: Amount can have at most two decimals
+                        code: TOO_MANY_DECIMALS
+                Blocked card:
+                  value:
+                    errors:
+                      - msg: Blocked card
+                        code: BLOCKED_CARD
+                Empty card:
+                  value:
+                    errors:
+                      - msg: Empty card
+                        code: EMPTY_CARD
+                Expired card:
+                  value:
+                    errors:
+                      - msg: Expired card
+                        code: EXPIRED
+                Invalid amount:
+                  value:
+                    errors:
+                      - msg: Invalid amount
+                        code: INVALID_AMOUNT
+                Inactive card:
+                  value:
+                    errors:
+                      - msg: Inactive card
+                        code: INACTIVE
+                Incorrect PIN:
+                  value:
+                    errors:
+                      - msg: Incorrect PIN
+                        code: INCORRECT_PIN
+                Insufficient balance:
+                  value:
+                    errors:
+                      - msg: Insufficient balance
+                        code: INSUFFICIENT_BALANCE
                 Error occurred:
                   value:
                     errors:
-                      msg:
-                        Error occurred on CashGift WS
+                      - msg: Error occurred on CashGift WS
+                        code: ERROR
   /me:
     get:
       tags:
