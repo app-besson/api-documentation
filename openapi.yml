@@ -378,6 +378,19 @@ paths:
         - Gift-Cards
       summary: Modifie les points d'une carte cadeau
       description: Modifie les points d'une carte cadeau. Amount doit être un nombre flottant. Authentifié par apikey.
+      parameters:
+        - name: cardNumber
+          in: path
+          description: numéro de la carte cadeau à modifier
+          required: true
+          schema:
+            type: integer
+        - name: PIN
+          in: path
+          description: code PIN de la carte à modifier
+          required: true
+          schema:
+            type: integer
       requestBody:
         content:
           text/json:
