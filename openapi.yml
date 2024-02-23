@@ -336,6 +336,93 @@ paths:
                     errors:
                       msg:
                         Error occurred on CashGift WS
+    post:
+      tags:
+        - Gift-Card
+      summary: Création d'une carte cadeau
+      description: Créer une carte cadeau du montant "amount" donné dans le body. Retourne le numéro de carte et son code PIN. Amount doit être un entier.
+      requestBody:
+        content:
+          text/json:
+            examples:
+              Create with 100:
+                value:
+                  amount: 100
+      responses:
+        '200':
+          description: OK
+          content:
+            text/json:
+              examples:
+                Return ok:
+                  value:
+                    giftCardNumber: "0910000001313"
+                    pin: "0211"
+        '400':
+          description: Error occurred
+          content:
+            text/json:
+              examples:
+                Invalid amount:
+                  value:
+                    errors:
+                      - msg: "Invalid amount"
+                Error occurred:
+                  value:
+                    errors:
+                      - msg:
+                          Error occurred on CashGift WS
+    patch:
+      tags:
+        - Gift-Card
+      summary: Informations d'une carte cadeau
+      description: Retourne les informations d'une carte cadeau authentifié par apikey
+      responses:
+        '200':
+          description: OK
+          content:
+            text/json:
+              examples:
+                Active:
+                  value:
+                      balance: 50.03
+                      expirationDate: "2024-12-31"
+                      status: "active"
+                Expired:
+                  value:
+                      balance: 10
+                      expirationDate: "2024-01-31"
+                      status: "expired"
+                Depleted:
+                  value:
+                      balance: 0
+                      expirationDate: "2024-12-31"
+                      status: "depleted"
+                Inactive:
+                  value:
+                      balance: 150.55
+                      expirationDate: "2025-12-31"
+                      status: "inactive"
+        '404':
+          description: Not found
+          content:
+            text/json:
+              examples:
+                Gift card not found:
+                  value:
+                    errors:
+                      msg:
+                        Gift card not found
+        '400':
+          description: Error occurred
+          content:
+            text/json:
+              examples:
+                Error occurred:
+                  value:
+                    errors:
+                      msg:
+                        Error occurred on CashGift WS
   /me:
     get:
       tags:
