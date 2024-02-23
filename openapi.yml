@@ -284,10 +284,10 @@ paths:
                     errors:
                       msg:
                         The customer does not exist
-  /gift-card:
+  /gift-cards:
     get:
       tags:
-        - Gift-Card
+        - Gift-Cards
       summary: Informations d'une carte cadeau
       description: Retourne les informations d'une carte cadeau authentifié par apikey
       responses:
@@ -338,7 +338,7 @@ paths:
                         Error occurred on CashGift WS
     post:
       tags:
-        - Gift-Card
+        - Gift-Cards
       summary: Création d'une carte cadeau
       description: Créer une carte cadeau du montant "amount" donné dans le body. Retourne le numéro de carte et son code PIN. Amount doit être un entier. Appel sécurisé par apikey.
       requestBody:
@@ -372,9 +372,10 @@ paths:
                     errors:
                       - msg:
                           Error occurred on CashGift WS
+  /gift-cards/{cardNumber}={PIN}/balance:
     patch:
       tags:
-        - Gift-Card
+        - Gift-Cards
       summary: Modifie les points d'une carte cadeau
       description: Modifie les points d'une carte cadeau. Amount doit être un nombre flottant. Authentifié par apikey.
       requestBody:
