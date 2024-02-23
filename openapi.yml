@@ -8,7 +8,7 @@ paths:
       tags:
         - Customers
       summary: Rechercher des clients
-      description: ''
+      description: ""
       parameters:
         - name: email
           in: query
@@ -83,7 +83,7 @@ paths:
           schema:
             type: string
       responses:
-        '404':
+        "404":
           description: Not found
           content:
             text/json:
@@ -103,7 +103,7 @@ paths:
       tags:
         - Customers
       summary: Créer un nouveau client
-      description: ''
+      description: ""
       requestBody:
         description: >-
           Créer un nouveau client ou prospect. Création en parallèle dans
@@ -111,16 +111,16 @@ paths:
         content:
           text/json:
             schema:
-              $ref: '#/components/schemas/CustomerCreate'
+              $ref: "#/components/schemas/CustomerCreate"
         required: true
       responses:
-        '201':
+        "201":
           description: Created
           content:
             text/json:
               schema:
-                $ref: '#/components/schemas/CustomerResponse201'
-        '400':
+                $ref: "#/components/schemas/CustomerResponse201"
+        "400":
           description: Bad Request
           content:
             text/json:
@@ -148,7 +148,7 @@ paths:
                           type: string
                           examples:
                             - test.test.fr
-        '422':
+        "422":
           description: Unprocessable Entity
           content:
             text/json:
@@ -169,23 +169,23 @@ paths:
       tags:
         - Customers
       summary: Modifier un client
-      description: ''
+      description: ""
       requestBody:
         description: >-
           Modifier un client. Envoi mail adhesion Splio (mobile wallet) si besoin.
         content:
           text/json:
             schema:
-              $ref: '#/components/schemas/CustomerPatch'
+              $ref: "#/components/schemas/CustomerPatch"
         required: true
       responses:
-        '200':
+        "200":
           description: OK
           content:
             text/json:
               schema:
-                $ref: '#/components/schemas/CustomerResponse201'
-        '400':
+                $ref: "#/components/schemas/CustomerResponse201"
+        "400":
           description: Bad Request
           content:
             text/json:
@@ -213,7 +213,7 @@ paths:
                           type: string
                           examples:
                             - test.test.fr
-        '422':
+        "422":
           description: Unprocessable Entity
           content:
             text/json:
@@ -242,12 +242,12 @@ paths:
           schema:
             type: integer
       responses:
-        '204':
+        "204":
           description: No content
           content:
             text/json:
               example: null
-        '404':
+        "404":
           description: Not found
           content:
             text/json:
@@ -255,8 +255,7 @@ paths:
                 Customer Not Found:
                   value:
                     errors:
-                      msg:
-                        The customer does not exist
+                      msg: The customer does not exist
   /customers/{customerId}/modify-points:
     post:
       tags:
@@ -274,14 +273,14 @@ paths:
         content:
           text/json:
             schema:
-              $ref: '#/components/schemas/CustomerModifyPoints'
+              $ref: "#/components/schemas/CustomerModifyPoints"
       responses:
-        '204':
+        "204":
           description: No content
           content:
             text/json:
               example: null
-        '404':
+        "404":
           description: Not found
           content:
             text/json:
@@ -289,8 +288,7 @@ paths:
                 Customer Not Found:
                   value:
                     errors:
-                      msg:
-                        The customer does not exist
+                      msg: The customer does not exist
   /gift-cards:
     get:
       tags:
@@ -298,32 +296,32 @@ paths:
       summary: Informations d'une carte cadeau
       description: Retourne les informations d'une carte cadeau authentifié par apikey
       responses:
-        '200':
+        "200":
           description: OK
           content:
             text/json:
               examples:
                 Active:
                   value:
-                      balance: 50.03
-                      expirationDate: "2024-12-31"
-                      status: "active"
+                    balance: 50.03
+                    expirationDate: "2024-12-31"
+                    status: "active"
                 Expired:
                   value:
-                      balance: 10
-                      expirationDate: "2024-01-31"
-                      status: "expired"
+                    balance: 10
+                    expirationDate: "2024-01-31"
+                    status: "expired"
                 Depleted:
                   value:
-                      balance: 0
-                      expirationDate: "2024-12-31"
-                      status: "depleted"
+                    balance: 0
+                    expirationDate: "2024-12-31"
+                    status: "depleted"
                 Inactive:
                   value:
-                      balance: 150.55
-                      expirationDate: "2025-12-31"
-                      status: "inactive"
-        '404':
+                    balance: 150.55
+                    expirationDate: "2025-12-31"
+                    status: "inactive"
+        "404":
           description: Not found
           content:
             text/json:
@@ -331,9 +329,8 @@ paths:
                 Gift card not found:
                   value:
                     errors:
-                      msg:
-                        Gift card not found
-        '400':
+                      msg: Gift card not found
+        "400":
           description: Error occurred
           content:
             text/json:
@@ -341,8 +338,7 @@ paths:
                 Error occurred:
                   value:
                     errors:
-                      msg:
-                        Error occurred on CashGift WS
+                      msg: Error occurred on CashGift WS
     post:
       tags:
         - Gift-Cards
@@ -356,7 +352,7 @@ paths:
                 value:
                   amount: 100
       responses:
-        '200':
+        "200":
           description: OK
           content:
             text/json:
@@ -365,7 +361,7 @@ paths:
                   value:
                     giftCardNumber: "0910000001313"
                     pin: "0211"
-        '400':
+        "400":
           description: Error occurred
           content:
             text/json:
@@ -377,8 +373,7 @@ paths:
                 Error occurred:
                   value:
                     errors:
-                      - msg:
-                          Error occurred on CashGift WS
+                      - msg: Error occurred on CashGift WS
   /gift-cards/{cardNumber}={PIN}/balance:
     patch:
       tags:
@@ -409,9 +404,9 @@ paths:
                 value:
                   amount: -100.23
       responses:
-        '204':
+        "204":
           description: No Content
-        '404':
+        "404":
           description: Not found
           content:
             text/json:
@@ -421,7 +416,7 @@ paths:
                     errors:
                       - msg: Gift card not found
                         code: "CARD_NOT_FOUND"
-        '400':
+        "400":
           description: Error occurred
           content:
             text/json:
@@ -493,24 +488,24 @@ paths:
       summary: Informations d'un client
       description: Retourne les informations d'un client authentifié par keycloak
       responses:
-        '200':
+        "200":
           description: OK
           content:
             text/json:
               schema:
-                $ref: '#/components/schemas/Me'
+                $ref: "#/components/schemas/Me"
     delete:
       tags:
         - Me
       summary: Suppression d'un client
       description: Supprime le client authentifié par keycloak
       responses:
-        '204':
+        "204":
           description: No Content
           content:
             text/json:
               example: null
-        '404':
+        "404":
           description: Not found
           content:
             text/json:
@@ -535,35 +530,35 @@ paths:
         Retourne les informations du magasin affecté à un client authentifié par
         keycloak. Si le magasin d'affectation est le web, null est retourné.
       responses:
-        '200':
+        "200":
           description: OK
           content:
             text/json:
               schema:
-                $ref: '#/components/schemas/AffectedStore'
+                $ref: "#/components/schemas/AffectedStore"
     post:
       tags:
         - Me
-      summary: Affecte le magasin d'affectation au client 
+      summary: Affecte le magasin d'affectation au client
       description: >-
-       Affecte le magasin d'affectation au client authentifié par keycloak
+        Affecte le magasin d'affectation au client authentifié par keycloak
       requestBody:
         content:
           text/json:
             schema:
               type: object
-              properties: 
+              properties:
                 id:
                   type: string
                   examples:
                     - "001"
-      responses: 
-        '200':
+      responses:
+        "200":
           description: OK
           content:
             text/json:
               schema:
-                $ref: '#/components/schemas/AffectedStore'
+                $ref: "#/components/schemas/AffectedStore"
   /me/dematerialization:
     post:
       tags:
@@ -576,16 +571,16 @@ paths:
         content:
           text/json:
             schema:
-              $ref: '#/components/schemas/OptinDematBody'
+              $ref: "#/components/schemas/OptinDematBody"
         required: true
       responses:
-        '200':
+        "200":
           description: OK
           content:
             text/json:
               schema:
-                $ref: '#/components/schemas/OptinDematResponse'
-        '400':
+                $ref: "#/components/schemas/OptinDematResponse"
+        "400":
           description: Bad Request
           content:
             text/json:
@@ -605,7 +600,7 @@ paths:
                     param: choice
                     location: body
                     value: tyes
-        '404':
+        "404":
           description: Not found
           content:
             text/json:
@@ -628,7 +623,7 @@ paths:
       summary: Liste des membres de la famille d'un client
       description: Retourne les membres de la famille d'un client authentifié par keycloak
       responses:
-        '200':
+        "200":
           description: OK
           content:
             text/json:
@@ -651,12 +646,12 @@ paths:
                       relationshipType: "wife"
                       birthdate: "1988-11-10"
                       firstname: "Emma"
-        '204':
+        "204":
           description: No content
           content:
             text/json:
               example: null
-        '404':
+        "404":
           description: Not found
           content:
             text/json:
@@ -664,8 +659,7 @@ paths:
                 Customer Not Found:
                   value:
                     errors:
-                      msg:
-                        The customer does not exist
+                      msg: The customer does not exist
   /me/offers:
     get:
       tags:
@@ -681,7 +675,7 @@ paths:
             type: string
             default: fr
       responses:
-        '200':
+        "200":
           description: OK
           content:
             text/json:
@@ -691,35 +685,35 @@ paths:
                     - id: 1
                       type: "event"
                       name: "AVANTAGE_ANNIVERSAIRE"
-                      image: 
-                          - light: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20anniversaire%20blanc.png"
-                            dark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20anniversaire%20noir.png"
+                      image:
+                        - light: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20anniversaire%20blanc.png"
+                          dark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20anniversaire%20noir.png"
                       description: "TODO"
                       isActive: true
                       expirationDate: "11/12/2023"
                     - id: 2
                       type: "activable"
                       name: "AVANTAGE_BIENVENUE"
-                      image: 
-                          - light: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20bienvenue%20blanc.png"
-                            dark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20bienvenue%20noir.png"
+                      image:
+                        - light: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20bienvenue%20blanc.png"
+                          dark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20bienvenue%20noir.png"
                       description: "TODO"
                       isActive: false
                     - id: 5
                       type: "points"
                       name: "AVANTAGE-15%_250POINTS"
-                      image: 
-                          - light: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20250%20coeurs%20blanc.png"
-                            dark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20250%20coeurs%20noir.png"
+                      image:
+                        - light: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20250%20coeurs%20blanc.png"
+                          dark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20250%20coeurs%20noir.png"
                       description: "TODO"
                       isActive: true
                       expirationDate: "23/01/2024"
                     - id: 6
                       type: "points"
                       name: "AVANTAGE-20%_400POINTS"
-                      image: 
-                          - light: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20400%20coeurs%20blanc.png"
-                            dark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20400%20coeurs%20noir.png"
+                      image:
+                        - light: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20400%20coeurs%20blanc.png"
+                          dark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20400%20coeurs%20noir.png"
                       description: "TODO"
                       isActive: false
                       missingPoints: 145
@@ -739,13 +733,13 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: OK
           content:
             text/json:
               schema:
-                $ref: '#/components/schemas/ActivateOfferResponse'
-        '400':
+                $ref: "#/components/schemas/ActivateOfferResponse"
+        "400":
           description: Bad Request
           content:
             text/json:
@@ -753,14 +747,12 @@ paths:
                 Not Activable:
                   value:
                     errors:
-                      msg:
-                        This offer is not activable
+                      msg: This offer is not activable
                 Already Used or Activated:
                   value:
                     errors:
-                      msg:
-                        Offer already used or activated
-        '404':
+                      msg: Offer already used or activated
+        "404":
           description: Not found
           content:
             text/json:
@@ -768,13 +760,11 @@ paths:
                 Customer Not Found:
                   value:
                     errors:
-                      msg:
-                        The customer does not exist
+                      msg: The customer does not exist
                 Offer Not Found:
                   value:
                     errors:
-                      msg:
-                        The offer does not exist
+                      msg: The offer does not exist
   /me/points-history:
     get:
       tags:
@@ -790,16 +780,16 @@ paths:
             type: string
             default: fr
       responses:
-        '200':
+        "200":
           description: OK
           content:
             text/json:
               schema:
-                $ref: '#/components/schemas/PointsHistory'
+                $ref: "#/components/schemas/PointsHistory"
   /me/shoes-addict:
     get:
       tags:
-      - Me
+        - Me
       summary: Rechercher les avantages shoes addict
       description: Retourne les avantages shoes addict d'un client authentifié par keycloak
       parameters:
@@ -811,7 +801,7 @@ paths:
             type: string
             default: en
       responses:
-        '200':
+        "200":
           description: OK
           content:
             text/json:
@@ -855,7 +845,7 @@ paths:
                       - id: "wonderbox"
                         logoLight: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_wonderbox_w.png"
                         logoDark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/partners/partenaire_wonderbox_w.png"
-        '404':
+        "404":
           description: Not found
           content:
             text/json:
@@ -863,12 +853,11 @@ paths:
                 Customer Not Found:
                   value:
                     errors:
-                      msg:
-                        The customer does not exist
+                      msg: The customer does not exist
   /me/shoes-addict/partner/{id}:
     get:
       tags:
-      - Me
+        - Me
       summary: Rechercher un partenaire
       description: Retourne l'histrique des points d'un client authentifié par keycloak
       parameters:
@@ -886,13 +875,13 @@ paths:
             type: string
             default: en
       responses:
-        '200':
+        "200":
           description: OK
           content:
             text/json:
               schema:
-                $ref: '#/components/schemas/PartnerResponse'
-        '404':
+                $ref: "#/components/schemas/PartnerResponse"
+        "404":
           description: Not found
           content:
             text/json:
@@ -900,9 +889,8 @@ paths:
                 Customer Not Found:
                   value:
                     errors:
-                      msg:
-                        The customer does not exist
-        '403':
+                      msg: The customer does not exist
+        "403":
           description: Not choose addict
           content:
             text/json:
@@ -910,8 +898,7 @@ paths:
                 Not choose addict:
                   value:
                     errors:
-                      msg:
-                        The customer is not shoes addict
+                      msg: The customer is not shoes addict
   /news:
     get:
       tags:
@@ -929,13 +916,13 @@ paths:
         Retourne la liste des actualités Besson pour un utilisateur authentifié
         par keycloak
       responses:
-        '200':
+        "200":
           description: OK
           content:
             text/json:
               schema:
-                $ref: '#/components/schemas/News'
-        '404':
+                $ref: "#/components/schemas/News"
+        "404":
           description: Not found
           content:
             text/json:
@@ -966,18 +953,18 @@ paths:
           * **STORE_SELECTION** (sélection de son magasin favoris)
           * **DONE** (le client a déjà fait l'onboarding)
       responses:
-        '200':
+        "200":
           description: OK
           content:
             text/json:
               schema:
-                $ref: '#/components/schemas/Onboarding'
-        '401':
+                $ref: "#/components/schemas/Onboarding"
+        "401":
           description: Unauthorized
           content:
             application/xml:
               schema:
-                $ref: '#/components/schemas/Unauthorized'
+                $ref: "#/components/schemas/Unauthorized"
   /onboarding/sign-up:
     post:
       tags:
@@ -989,27 +976,27 @@ paths:
         content:
           text/json:
             schema:
-              $ref: '#/components/schemas/SignUp'
+              $ref: "#/components/schemas/SignUp"
         required: true
       responses:
-        '200':
+        "200":
           description: OK
           content:
             text/json:
               schema:
-                $ref: '#/components/schemas/Consents'
-        '401':
+                $ref: "#/components/schemas/Consents"
+        "401":
           description: Unauthorized
           content:
             application/xml:
               schema:
-                $ref: '#/components/schemas/Unauthorized'
-        '422':
+                $ref: "#/components/schemas/Unauthorized"
+        "422":
           description: Unprocessable Entity
           content:
             text/json:
               schema:
-                $ref: '#/components/schemas/UnprocessableOnboarding'
+                $ref: "#/components/schemas/UnprocessableOnboarding"
   /onboarding/complete-profile:
     post:
       tags:
@@ -1021,10 +1008,10 @@ paths:
         content:
           text/json:
             schema:
-              $ref: '#/components/schemas/SignUp'
+              $ref: "#/components/schemas/SignUp"
         required: true
       responses:
-        '200':
+        "200":
           description: OK
           content:
             text/json:
@@ -1032,7 +1019,7 @@ paths:
                 Pas de magasins affectation:
                   value:
                     step: STORE_SELECTION
-                    data: 
+                    data:
                       isWeb: false
                       store: null
                 Magasin affectation non web:
@@ -1041,7 +1028,7 @@ paths:
                     data:
                       isWeb: false
                       store:
-                        id: '001'
+                        id: "001"
                         name: Besson Chaussures CLERMONT AUBIERE
                         address:
                           - 1 rue des Frères Montgolfier null
@@ -1052,18 +1039,18 @@ paths:
                     date:
                       isWeb: true
                       store: null
-        '401':
+        "401":
           description: Unauthorized
           content:
             application/xml:
               schema:
-                $ref: '#/components/schemas/Unauthorized'
-        '422':
+                $ref: "#/components/schemas/Unauthorized"
+        "422":
           description: Unprocessable Entity
           content:
             text/json:
               schema:
-                $ref: '#/components/schemas/UnprocessableOnboarding'
+                $ref: "#/components/schemas/UnprocessableOnboarding"
   /onboarding/consents:
     post:
       tags:
@@ -1075,27 +1062,27 @@ paths:
         content:
           text/json:
             schema:
-              $ref: '#/components/schemas/TermOfUse'
+              $ref: "#/components/schemas/TermOfUse"
         required: true
       responses:
-        '200':
+        "200":
           description: OK
           content:
             text/json:
               schema:
-                $ref: '#/components/schemas/StoreSelectionConsents'
-        '401':
+                $ref: "#/components/schemas/StoreSelectionConsents"
+        "401":
           description: Unauthorized
           content:
             application/xml:
               schema:
-                $ref: '#/components/schemas/Unauthorized'
-        '422':
+                $ref: "#/components/schemas/Unauthorized"
+        "422":
           description: Unprocessable Entity
           content:
             text/json:
               schema:
-                $ref: '#/components/schemas/UnprocessableOnboarding'
+                $ref: "#/components/schemas/UnprocessableOnboarding"
   /onboarding/store-selection:
     post:
       tags:
@@ -1107,27 +1094,27 @@ paths:
         content:
           text/json:
             schema:
-              $ref: '#/components/schemas/IdString'
+              $ref: "#/components/schemas/IdString"
         required: true
       responses:
-        '200':
+        "200":
           description: OK
           content:
             text/json:
               schema:
-                $ref: '#/components/schemas/Done'
-        '401':
+                $ref: "#/components/schemas/Done"
+        "401":
           description: Unauthorized
           content:
             application/xml:
               schema:
-                $ref: '#/components/schemas/Unauthorized'
-        '422':
+                $ref: "#/components/schemas/Unauthorized"
+        "422":
           description: Unprocessable Entity
           content:
             text/json:
               schema:
-                $ref: '#/components/schemas/UnprocessableOnboarding'
+                $ref: "#/components/schemas/UnprocessableOnboarding"
   /stores:
     get:
       tags:
@@ -1155,52 +1142,52 @@ paths:
         par keycloak. Si lat et lng sont renseignés, l'api retourne les 5 magasins les plus proches,
         du plus proche ou plus lointain
       responses:
-        '200':
+        "200":
           description: OK
           content:
-            text/json: 
+            text/json:
               examples:
                 Paramètres vides:
                   value:
-                  - id: 011'
-                    name: BESSON CHAUSSURES COURNON
-                    address:
-                      - z.i - 67 avenue d aubiere (à coté de b&m)
-                      - 63800 COURNON D AUVERGNE
-                    coordinates:
-                      lat: '45.7423'
-                      lng: '3.16893'
-                    timezoneOffset: '+02:00'
-                    hours:
-                            - - - '09:00'
-                                - '19:00'
-                            - - - '09:30'
-                                - '19:00'
-                            - - - '10:00'
-                                - '12:00'
-                              - - '14:00'
-                                - '19:00'
+                    - id: 011'
+                      name: BESSON CHAUSSURES COURNON
+                      address:
+                        - z.i - 67 avenue d aubiere (à coté de b&m)
+                        - 63800 COURNON D AUVERGNE
+                      coordinates:
+                        lat: "45.7423"
+                        lng: "3.16893"
+                      timezoneOffset: "+02:00"
+                      hours:
+                        - - - "09:00"
+                            - "19:00"
+                        - - - "09:30"
+                            - "19:00"
+                        - - - "10:00"
+                            - "12:00"
+                          - - "14:00"
+                            - "19:00"
                 Coordonnées renseignées:
                   value:
-                  - id: 011'
-                    name: BESSON CHAUSSURES COURNON
-                    address:
-                      - Z.I - 67 AVENUE D AUBIERE (à coté de B&M)
-                      - 63800 COURNON D AUVERGNE
-                    coordinates:
-                      lat: '45.7423'
-                      lng: '3.16893'
-                    timezoneOffset: '+02:00'
-                    hours:
-                            - - - '09:00'
-                                - '19:00'
-                            - - - '09:30'
-                                - '19:00'
-                            - - - '10:00'
-                                - '12:00'
-                              - - '14:00'
-                                - '19:00'
-                    distance: "85 km"
+                    - id: 011'
+                      name: BESSON CHAUSSURES COURNON
+                      address:
+                        - Z.I - 67 AVENUE D AUBIERE (à coté de B&M)
+                        - 63800 COURNON D AUVERGNE
+                      coordinates:
+                        lat: "45.7423"
+                        lng: "3.16893"
+                      timezoneOffset: "+02:00"
+                      hours:
+                        - - - "09:00"
+                            - "19:00"
+                        - - - "09:30"
+                            - "19:00"
+                        - - - "10:00"
+                            - "12:00"
+                          - - "14:00"
+                            - "19:00"
+                      distance: "85 km"
 components:
   schemas:
     CustomerCreate:
@@ -1212,11 +1199,11 @@ components:
         cardNumber:
           type: string
           examples:
-            - '9980007395396'
+            - "9980007395396"
         storeId:
           type: string
           examples:
-            - '195'
+            - "195"
         gender:
           type: string
           enum:
@@ -1233,11 +1220,11 @@ components:
         birthday:
           type: string
           examples:
-            - '2000-01-01'
+            - "2000-01-01"
         phoneNumber:
           type: string
           examples:
-            - '+33600000000'
+            - "+33600000000"
         optinEmail:
           type: boolean
           examples:
@@ -1273,11 +1260,11 @@ components:
                 - null
             city:
               type: string
-              examples: 
+              examples:
                 - Aubière
             postalCode:
               type: string
-              examples: 
+              examples:
                 - 63170
             countryCode:
               type: string
@@ -1302,11 +1289,11 @@ components:
         birthday:
           type: string
           examples:
-            - '2000-01-01'
+            - "2000-01-01"
         phoneNumber:
           type: string
           examples:
-            - '+33600000000'
+            - "+33600000000"
         optinEmail:
           type: boolean
           examples:
@@ -1342,11 +1329,11 @@ components:
                 - null
             city:
               type: string
-              examples: 
+              examples:
                 - Aubière
             postalCode:
               type: string
-              examples: 
+              examples:
                 - 63170
             countryCode:
               type: string
@@ -1366,7 +1353,7 @@ components:
         storeId:
           type: string
           examples:
-            - '195'
+            - "195"
         gender:
           type: string
           examples:
@@ -1382,11 +1369,11 @@ components:
         birthday:
           type: string
           examples:
-            - '2000-01-01'
+            - "2000-01-01"
         phoneNumber:
           type: string
           examples:
-            - '+33600000000'
+            - "+33600000000"
         optinEmail:
           type: boolean
           examples:
@@ -1403,7 +1390,7 @@ components:
             - not_pronounced
         source:
           type: string
-          examples: 
+          examples:
             - myCompany
         email:
           type: string
@@ -1422,11 +1409,11 @@ components:
                 - null
             city:
               type: string
-              examples: 
+              examples:
                 - Aubière
             postalCode:
               type: string
-              examples: 
+              examples:
                 - 63170
             countryCode:
               type: string
@@ -1458,16 +1445,16 @@ components:
           type: string
           format: date
           examples:
-            - '2000-01-01'
+            - "2000-01-01"
         birthday:
           type: string
           format: date
           examples:
-            - '2000-01-01'
+            - "2000-01-01"
         phoneNumber:
           type: string
           examples:
-            - '+33600000000'
+            - "+33600000000"
         optinEmail:
           type: boolean
           examples:
@@ -1489,7 +1476,7 @@ components:
         cardNumber:
           type: string
           examples:
-            - '9980003968037'
+            - "9980003968037"
         status:
           type: object
           properties:
@@ -1503,7 +1490,7 @@ components:
               format: date
               description: uniquement présent quand le client est lover
               examples:
-                - '2000-01-01'
+                - "2000-01-01"
         offersCount:
           type: integer
           format: int64
@@ -1527,7 +1514,7 @@ components:
             postalCode:
               type: string
               examples:
-                - '63170'
+                - "63170"
             countryCode:
               type: string
               examples:
@@ -1544,7 +1531,7 @@ components:
         id:
           type: string
           examples:
-            - '011'
+            - "011"
         name:
           type: string
           examples:
@@ -1562,15 +1549,15 @@ components:
             lat:
               type: string
               examples:
-                - '45.7423'
+                - "45.7423"
             lng:
               type: string
               examples:
-                - '3.16893'
+                - "3.16893"
         timezoneOffset:
           type: string
           examples:
-            - '+02:00'
+            - "+02:00"
         hours:
           type: array
           items:
@@ -1578,10 +1565,10 @@ components:
             items:
               type: array
               examples:
-                - - '09:00'
-                  - '12:00'
-                - - '14:00'
-                  - '19:00'
+                - - "09:00"
+                  - "12:00"
+                - - "14:00"
+                  - "19:00"
     Stores:
       type: array
       items:
@@ -1590,7 +1577,7 @@ components:
           id:
             type: string
             examples:
-              - '011'
+              - "011"
           name:
             type: string
             examples:
@@ -1608,26 +1595,26 @@ components:
               lat:
                 type: string
                 examples:
-                  - '45.7423'
+                  - "45.7423"
               lng:
                 type: string
                 examples:
-                  - '3.16893'
+                  - "3.16893"
           timezoneOffset:
             type: string
             examples:
-              - '+02:00'
+              - "+02:00"
           hours:
             type: array
             examples:
-                - - - '09:00'
-                    - '19:00'
-                - - - '09:30'
-                    - '19:00'
-                - - - '10:00'
-                    - '12:00'
-                  - - '14:00'
-                    - '19:00'
+              - - - "09:00"
+                  - "19:00"
+              - - - "09:30"
+                  - "19:00"
+              - - - "10:00"
+                  - "12:00"
+                - - "14:00"
+                  - "19:00"
           distance:
             type: string
             description: >-
@@ -1643,7 +1630,7 @@ components:
           id:
             type: string
             examples:
-              - '1'
+              - "1"
           type:
             type: string
             enum:
@@ -1681,7 +1668,7 @@ components:
             type: string
             format: date
             examples:
-              - '2030-12-01'
+              - "2030-12-01"
           isActive:
             type: integer
             description: Uniquement pour les offres de type activable
@@ -1693,7 +1680,7 @@ components:
         id:
           type: string
           examples:
-            - '1'
+            - "1"
         name:
           type: string
           examples:
@@ -1757,12 +1744,12 @@ components:
           id:
             type: string
             examples:
-              - '1'
+              - "1"
           date:
             type: string
             format: date
             examples:
-              - '2023-09-01'
+              - "2023-09-01"
           amount:
             type: integer
             format: int64
@@ -1827,7 +1814,7 @@ components:
               type: string
               description: Pour PROFILE_COMPLETION_FORM
               examples:
-                - '2000-01-01'
+                - "2000-01-01"
             countryCode:
               type: string
               description: Pour PROFILE_COMPLETION_FORM
@@ -1837,12 +1824,12 @@ components:
               type: string
               description: Pour PROFILE_COMPLETION_FORM
               examples:
-                - '63170'
+                - "63170"
             phoneNumber:
               type: string
               description: Pour PROFILE_COMPLETION_FORM
               examples:
-                - '+33600000000'
+                - "+33600000000"
             optinEmail:
               type: boolean
               description: Pour PROFILE_COMPLETION_FORM
@@ -1860,7 +1847,7 @@ components:
                   type: string
                   description: Pour STORE_SELECTION
                   examples:
-                    - '001'
+                    - "001"
                 name:
                   type: string
                   description: Pour STORE_SELECTION
@@ -1911,7 +1898,7 @@ components:
           type: string
           description: Pour PROFILE_COMPLETION_FORM
           examples:
-            - '2000-01-01'
+            - "2000-01-01"
         countryCode:
           type: string
           description: Pour PROFILE_COMPLETION_FORM
@@ -1921,12 +1908,12 @@ components:
           type: string
           description: Pour PROFILE_COMPLETION_FORM
           examples:
-            - '63170'
+            - "63170"
         phoneNumber:
           type: string
           description: Pour PROFILE_COMPLETION_FORM
           examples:
-            - '+33600000000'
+            - "+33600000000"
         optinEmail:
           type: boolean
           description: Pour PROFILE_COMPLETION_FORM
@@ -1961,7 +1948,7 @@ components:
           properties:
             isWeb:
               type: string
-              examples: 
+              examples:
                 - false
             storeId:
               type: string
@@ -1979,7 +1966,7 @@ components:
           properties:
             isWeb:
               type: string
-              examples: 
+              examples:
                 - false
             storeId:
               type: string
@@ -1991,7 +1978,7 @@ components:
         id:
           type: string
           examples:
-            - '001'
+            - "001"
     Done:
       type: object
       properties:
@@ -2011,16 +1998,16 @@ components:
       properties:
         choice:
           enum:
-            - 'yes'
-            - 'no'
+            - "yes"
+            - "no"
             - not_pronounced
     OptinDematResponse:
       type: object
       properties:
         optinDematerialization:
           enum:
-            - 'yes'
-            - 'no'
+            - "yes"
+            - "no"
             - not_pronounced
     ActivateOfferResponse:
       type: array
@@ -2030,7 +2017,7 @@ components:
           id:
             type: string
             examples:
-              - '2'
+              - "2"
           type:
             type: string
             examples:
@@ -2060,7 +2047,7 @@ components:
             type: string
             format: date
             examples:
-              - '01/12/2025'
+              - "01/12/2025"
           isActive:
             type: integer
             description: Uniquement pour les offres de type activable
@@ -2072,7 +2059,7 @@ components:
         id:
           type: string
           examples:
-            - 'homair'
+            - "homair"
         logoLight:
           type: string
           examples:
@@ -2092,4 +2079,4 @@ components:
         untilDate:
           type: string
           examples:
-            - '2024-02-19'
+            - "2024-02-19"
