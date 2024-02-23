@@ -235,7 +235,7 @@ paths:
       summary: Supprimer un client
       description: Supprime le client dont le code client est passé en paramètre.
       parameters:
-        - name: code client
+        - name: customerId
           in: path
           description: code client du client à supprimer
           required: true
@@ -263,6 +263,13 @@ paths:
         - Customers
       summary: Modifier les points d'un client
       description: Ajoute aux points du client dont le code client est passé en paramètre les points fournis dans le body.
+      parameters:
+        - name: customerId
+          in: path
+          description: code client du client à modifier
+          required: true
+          schema:
+            type: integer
       requestBody:
         content:
           text/json:
