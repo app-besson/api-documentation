@@ -351,10 +351,8 @@ paths:
       requestBody:
         content:
           text/json:
-            example:
-              Create with 100:
-                value:
-                  amount: 100
+            schema:
+              $ref: '#/components/schemas/PostGiftCard'
       responses:
         '200':
           description: OK
@@ -398,16 +396,16 @@ paths:
           required: true
           schema:
             type: integer
-      # requestBody:
-      #   content:
-      #     text/json:
-      #       examples:
-      #         Add 100.23:
-      #           value:
-      #             amount: 100.23
-      #         Substract 100.23:
-      #           value:
-      #             amount: -100.23
+      requestBody:
+        content:
+          text/json:
+            examples:
+              Add 100.23:
+                value:
+                  amount: 100.23
+              Substract 100.23:
+                value:
+                  amount: -100.23
       responses:
         '204':
           description: No Content
@@ -1203,6 +1201,13 @@ paths:
                     distance: "85 km"
 components:
   schemas:
+    PostGiftCard:
+      type: object
+      properties:
+        amount:
+          type: integer
+          examples: 
+            - 100
     CustomerCreate:
       type: object
       required:
