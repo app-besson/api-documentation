@@ -348,13 +348,13 @@ paths:
         - Gift-Cards
       summary: Création d'une carte cadeau
       description: Créer une carte cadeau du montant "amount" donné dans le body. Retourne le numéro de carte et son code PIN. Amount doit être un entier. Appel sécurisé par apikey.
-      # requestBody:
-      #   content:
-      #     text/json:
-      #       examples:
-      #         Create with 100:
-      #           value:
-      #             amount: 100
+      requestBody:
+        content:
+          text/json:
+            example:
+              Create with 100:
+                value:
+                  amount: 100
       responses:
         '200':
           description: OK
