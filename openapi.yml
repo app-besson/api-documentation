@@ -398,16 +398,16 @@ paths:
           required: true
           schema:
             type: integer
-      requestBody:
-        content:
-          text/json:
-            examples:
-              Add 100.23:
-                value:
-                  amount: 100.23
-              Substract 100.23:
-                value:
-                  amount: -100.23
+      # requestBody:
+      #   content:
+      #     text/json:
+      #       examples:
+      #         Add 100.23:
+      #           value:
+      #             amount: 100.23
+      #         Substract 100.23:
+      #           value:
+      #             amount: -100.23
       responses:
         '204':
           description: No Content
