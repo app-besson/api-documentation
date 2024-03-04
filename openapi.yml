@@ -399,13 +399,8 @@ paths:
       requestBody:
         content:
           text/json:
-            examples:
-              Add 100.23:
-                value:
-                  amount: 100.23
-              Substract 100.23:
-                value:
-                  amount: -100.23
+            schema:
+              $ref: '#/components/schemas/PatchGiftCard'
       responses:
         '204':
           description: No Content
@@ -1208,6 +1203,13 @@ components:
           type: integer
           examples: 
             - 100
+    PatchGiftCard:
+      type: object
+      properties:
+        amount:
+          type: number
+          examples: 
+            - 100.23
     CustomerCreate:
       type: object
       required:
