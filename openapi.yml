@@ -399,8 +399,13 @@ paths:
       requestBody:
         content:
           text/json:
-            schema:
-              $ref: '#/components/schemas/PatchGiftCard'
+            examples:
+              Positive Amount:
+                value:
+                  amount: 25.52
+              Negative Amount:
+                value:
+                  amount: 42.24
       responses:
         '204':
           description: No Content
@@ -1210,6 +1215,7 @@ components:
           type: number
           examples: 
             - 100.23
+            - 101.23
     CustomerCreate:
       type: object
       required:
