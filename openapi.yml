@@ -397,15 +397,15 @@ paths:
           schema:
             type: integer
       requestBody:
-        content:
-          text/json:
-            examples:
-              Positive Amount:
-                value:
-                  amount: 25.52
-              Negative Amount:
-                value:
-                  amount: 42.24
+          content:
+            text/json:
+              examples:
+                Positive Amount:
+                  value:
+                    amount: 25.52
+                Negative Amount:
+                  value:
+                    amount: 42.24
       responses:
         '204':
           description: No Content
