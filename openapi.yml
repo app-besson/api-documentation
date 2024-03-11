@@ -82,7 +82,32 @@ paths:
           required: false
           schema:
             type: string
+        - name: search
+          in: query
+          description: Accepte nom, prénom, email, numéro de téléphone, numéro de fidélité, code postal et date de naissance pour rechercher les clients correspondants. Possibilité de passer deux arguments séparés par un espace (nom / prenom, nom / code postal, prenom / code postal)
+          schema:
+            type: string
       responses:
+        '200':
+          description: OK
+          content:
+            text/json:
+              examples:
+                Ok response:
+                  value:
+                    - customers:
+                        - id: 329639
+                          firstname: JOHN
+                          lastname: DOE
+                          phoneNumber: "+33600000000"
+                          email: "john.doe@email.com"
+                          postalcode: "53000"
+                        - id: 329639
+                          firstname: JOHN
+                          lastname: DOE
+                          phoneNumber: "+33600000000"
+                          email: "john.doe@email.com"
+                          postalcode: "53000"
         '404':
           description: Not found
           content:
@@ -165,6 +190,65 @@ paths:
                           examples:
                             - Le compte client existe déjà (email en doublon)
   /customers/{customerId}:
+    get:
+      tags:
+        - Customers
+      summary: Retourne les informations d'un client
+      description: Retourne les informations du client dont le codeclient est passé en paramètre dans la requête.
+      parameters:
+        - name: customerId
+          in: path
+          description: code client du client à afficher
+          required: true
+          schema:
+            type: integer
+        - name: source
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: country
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/json:
+              examples:
+                With query parameters:
+                  value:
+                    gender: male
+                    firstname: JEAN
+                    lastname: DUPONT
+                    birthday: 1990-04-28
+                    phonenumber: "+33685245478"
+                    email: "john.doe@example"
+                    cardnumber: "9981231231234"
+                    optinEmail: false
+                    optinPhone: true
+                    billingAddresses: 
+                      - id: 328456
+                        address1: 1 Av. des Frères Montgolfier
+                        address2: 1 Av. des Frères
+                        city: Aubiere
+                        postalCode: "63170"
+                        countryCode: FR
+                      - id: 328456
+                        address1: 1 Av. des Frères Montgolfier
+                        address2: 1 Av. des Frères
+                        city: Aubiere
+                        postalCode: "63170"
+                        countryCode: FR
+                    deliveryAddresses:
+                      - id: 328456
+                        address1: 1 Av. des Frères Montgolfier
+                        address2: 1 Av. des Frères
+                        city: Aubiere
+                        postalCode: "63170"
+                        countryCode: FR
     patch:
       tags:
         - Customers
