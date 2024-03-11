@@ -323,7 +323,7 @@ paths:
                     email: "john.doe@example"
                     cardnumber: "9981231231234"
                     optinEmail: false
-                    optinPhone: true
+                    optinhone: true
                     billingAddresses: 
                       - id: 328456
                         address1: 1 Av. des Frères Montgolfier
@@ -394,6 +394,56 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/CustomerResponse201'
+              examples:
+                With country verification:
+                  value:
+                    gender: male
+                    firstname: JEAN
+                    lastname: DUPONT
+                    birthday: 1990-04-28
+                    phonenumber: "+33685245478"
+                    email: "john.doe@example"
+                    cardnumber: "9981231231234"
+                    optinEmail: false
+                    optinhone: true
+                    billingAddresses: 
+                      - id: 328456
+                        address1: 1 Av. des Frères Montgolfier
+                        address2: 1 Av. des Frères
+                        city: Aubiere
+                        postalCode: "63170"
+                        countryCode: FR
+                      - id: 328456
+                        address1: 1 Av. des Frères Montgolfier
+                        address2: 1 Av. des Frères
+                        city: Aubiere
+                        postalCode: "63170"
+                        countryCode: FR
+                    deliveryAddresses:
+                      - id: 328456
+                        address1: 1 Av. des Frères Montgolfier
+                        address2: 1 Av. des Frères
+                        city: Aubiere
+                        postalCode: "63170"
+                        countryCode: FR
+                Without country verification:
+                  value:
+                    gender: male
+                    firstname: JEAN
+                    lastname: DUPONT
+                    birthday: 1990-04-28
+                    phonenumber: "+33685245478"
+                    email: "john.doe@example"
+                    cardnumber: "9981231231234"
+                    optinEmail: false
+                    optinhone: true
+                    billingAddresses: 
+                      id: 328456
+                      address1: 1 Av. des Frères Montgolfier
+                      address2: 1 Av. des Frères
+                      city: Aubiere
+                      postalCode: "63170"
+                      countryCode: FR
         '400':
           description: Bad Request
           content:
