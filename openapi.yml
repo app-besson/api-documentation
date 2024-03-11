@@ -130,14 +130,21 @@ paths:
       summary: Créer un nouveau client
       description: ''
       requestBody:
+        required: true
         description: >-
           Créer un nouveau client ou prospect. Création en parallèle dans
           Cashfid et Splio (mobile wallet).
         content:
           text/json:
-            schema:
-              $ref: '#/components/schemas/CustomerCreate'
-        required: true
+              schema:
+                $ref: '#/components/schemas/CustomerCreate'
+              examples:
+                With delivery address:
+                  value:
+                    cardNumber: '9980007395396'
+                Without delivery address:
+                  value:
+                    cardNumber: '99800073953'
       responses:
         '201':
           description: Created
@@ -1308,12 +1315,8 @@ components:
       properties:
         cardNumber:
           type: string
-          examples:
-            - '9980007395396'
         storeId:
           type: string
-          examples:
-            - '195'
         gender:
           type: string
           enum:
@@ -1321,28 +1324,16 @@ components:
             - female
         firstname:
           type: string
-          examples:
-            - John
         lastname:
           type: string
-          examples:
-            - Doe
         birthday:
           type: string
-          examples:
-            - '2000-01-01'
         phoneNumber:
           type: string
-          examples:
-            - '+33600000000'
         optinEmail:
           type: boolean
-          examples:
-            - true
         optinPhone:
           type: boolean
-          examples:
-            - true
         optinDematerialization:
           type: string
           enum:
@@ -1351,35 +1342,21 @@ components:
             - not_pronounced
         email:
           type: string
-          examples:
-            - john.doe@mail.com
         source:
           type: string
-          examples:
-            - myEnterprise
         billingAddress:
           type: object
           properties:
             address1:
               type: string
-              examples:
-                - 1 avenue des frères montgolfier
             address2:
               type: string
-              examples:
-                - null
             city:
               type: string
-              examples: 
-                - Aubière
             postalCode:
               type: string
-              examples: 
-                - 63170
             countryCode:
               type: string
-              examples:
-                - FR
     CustomerPatch:
       type: object
       properties:
