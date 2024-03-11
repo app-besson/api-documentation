@@ -141,7 +141,27 @@ paths:
               examples:
                 With delivery address:
                   value:
-                    cardNumber: '9980007395396'
+                    storeId: '195'
+                    gender: male
+                    firstname: John
+                    lastname: Doe
+                    phoneNumber: "+33600000000"
+                    otpinEmail: true
+                    optinPhone: false
+                    source: myEnterprise
+                    email: john.doe@mail.com
+                    billingAddress:
+                      address1: 1 avenue des frères montgolfier
+                      address2: null
+                      city: Aubière
+                      postalCode: '63170'
+                      countryCode: FR
+                    deliveryAddress:
+                      address1: 1 avenue des frères montgolfier
+                      address2: null
+                      city: Aubière
+                      postalCode: '63170'
+                      countryCode: FR
                 Without delivery address:
                   value:
                     cardNumber: '9980007395396'
@@ -170,6 +190,56 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/CustomerResponse201'
+              examples:
+                With delivery address:
+                  value:
+                    id: 4733330
+                    cardNumber: "9980003979057"
+                    storeId: 195
+                    gender: male
+                    firstname: John
+                    lastname: Doe
+                    phoneNumber: '+33600000000'
+                    optinEmail: true
+                    optinPhone: false
+                    optinDematerialization: null
+                    source: myEnterprise
+                    email: john.doe@mail.com
+                    billingAddresses:
+                      - id: 3828813
+                        address1: 1 avenue des frères montgolfier
+                        address2: null
+                        city: Aubière
+                        postalCode: '63170'
+                        countryCode: FR
+                    deliveryAddresses:
+                      - id: 3828813
+                        address1: 1 avenue des frères montgolfier
+                        address2: null
+                        city: Aubière
+                        postalCode: '63170'
+                        countryCode: FR
+                Without delivery address:
+                  value:
+                    id: 4733330
+                    cardNumber: "9980003979057"
+                    storeId: 195
+                    gender: male
+                    firstname: John
+                    lastname: Doe
+                    phoneNumber: '+33600000000'
+                    optinEmail: true
+                    optinPhone: false
+                    optinDematerialization: yes
+                    source: myEnterprise
+                    email: john.doe@mail.com
+                    billingAddresses:
+                      id: 3828813
+                      address1: 1 avenue des frères montgolfier
+                      address2: null
+                      city: Aubière
+                      postalCode: '63170'
+                      countryCode: FR
         '400':
           description: Bad Request
           content:
@@ -1363,6 +1433,19 @@ components:
         source:
           type: string
         billingAddress:
+          type: object
+          properties:
+            address1:
+              type: string
+            address2:
+              type: string
+            city:
+              type: string
+            postalCode:
+              type: string
+            countryCode:
+              type: string
+        deliceryAddress:
           type: object
           properties:
             address1:
