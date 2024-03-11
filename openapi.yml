@@ -144,7 +144,25 @@ paths:
                     cardNumber: '9980007395396'
                 Without delivery address:
                   value:
-                    cardNumber: '99800073953'
+                    cardNumber: '9980007395396'
+                    storeId: '195'
+                    gender: 'male'
+                    firstname: John
+                    lastname: Doe
+                    birthday: 2000-01-01
+                    phoneNumber: '+33600000000'
+                    optinEmail: true
+                    optinPhone: false
+                    optinDematerialization: yes
+                    email: john.doe@mail.com
+                    source: myEnterprise
+                    billingAddress:
+                      address1: 1 avenue des frères montgolfier
+                      address2: null
+                      city: Aubière
+                      postalCode: '63170'
+                      countryCode: FR
+
       responses:
         '201':
           description: Created
