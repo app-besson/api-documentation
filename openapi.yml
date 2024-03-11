@@ -352,11 +352,41 @@ paths:
       requestBody:
         description: >-
           Modifier un client. Envoi mail adhesion Splio (mobile wallet) si besoin.
+        required: true
         content:
           text/json:
             schema:
               $ref: '#/components/schemas/CustomerPatch'
-        required: true
+            examples:
+              With country verification:
+                value:
+                  countryVerification: FR
+                  gender: male
+                  firstname: John
+                  lastname: Doe
+                  phoneNumber: "+33600000000"
+                  optinEmail: true
+                  optinPhone: false
+                  source: myEnterprise
+                  email: john.doe@email.com
+              Without country verification:
+                value: 
+                  gender: female
+                  firstname: John
+                  lastname: Doe
+                  birthday: '2000-01-01'
+                  phoneNumber: "+33600000000"
+                  optinEmail: true
+                  optinPhone: false
+                  optinDematerialization: yes
+                  email: test@mail.com
+                  source: myEnterprise
+                  billingAdddress:
+                    address1: 1 avenue des frères montgolfier
+                    address2: null
+                    city: Aubière
+                    postalCode: '63170'
+                    countryCode: FR
       responses:
         '200':
           description: OK
@@ -1461,6 +1491,10 @@ components:
     CustomerPatch:
       type: object
       properties:
+        countryVerification:
+          type: string
+          enum:
+            - FR
         gender:
           type: string
           enum:
