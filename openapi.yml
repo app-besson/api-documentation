@@ -516,6 +516,159 @@ paths:
                     errors:
                       msg:
                         The customer does not exist
+  /customers/{customerId}/addresses:
+    post:
+      tags:
+        - Customers addresses
+      summary: Créer une adresse client
+      description: ''
+      requestBody:
+        description: >-
+          Ajouter une adresse à un client existant.
+        content:
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CustomerAddressPost'
+        required: true
+      responses:
+        '204':
+          description: No content
+          content:
+            text/json:
+              example: null
+        '404':
+          description: Not found
+          content:
+            text/json:
+              examples:
+                Customer Not Found:
+                  value:
+                    errors:
+                      msg:
+                        The customer does not exist
+        '400':
+          description: Bad Request
+          content:
+            text/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+                          examples:
+                            - Country code must be of two characters (ISO 2 country code)
+                        param:
+                          type: string
+                          examples:
+                            - countryCode
+                        location:
+                          type: string
+                          examples:
+                            - body
+                        value:
+                          type: string
+                          examples:
+                            - FRA
+        '422':
+          description: Unprocessable Entity
+          content:
+            text/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+                          examples:
+                            - There can only have five billing address and five shipping addresses for each client.
+  /customers/{customerId}/addresses/{AddressId}:
+    put:
+      tags:
+        - Customers addresses
+      summary: Modifier une adresse client
+      description: ''
+      requestBody:
+        description: >-
+          Ajouter une adresse à un client existant.
+        content:
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CustomerAddressPost'
+        required: true
+      responses:
+        '204':
+          description: No content
+          content:
+            text/json:
+              example: null
+        '404':
+          description: Not found
+          content:
+            text/json:
+              examples:
+                Customer Not Found:
+                  value:
+                    errors:
+                      msg:
+                        The customer does not exist
+                Address Not Found:
+                  value:
+                    errors:
+                      msg:
+                        The address does not exist
+        '400':
+          description: Bad Request
+          content:
+            text/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+                          examples:
+                            - Country code must be of two characters (ISO 2 country code)
+                        param:
+                          type: string
+                          examples:
+                            - countryCode
+                        location:
+                          type: string
+                          examples:
+                            - body
+                        value:
+                          type: string
+                          examples:
+                            - FRA
+        '422':
+          description: Unprocessable Entity
+          content:
+            text/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+                          examples:
+                            - There can only have five billing address and five shipping addresses for each client.
   /customers/{customerId}/modify-points:
     post:
       tags:
@@ -1725,6 +1878,68 @@ components:
           type: string
           examples:
             - manual
+    CustomerAddressPost:
+      type: object
+      properties:
+        type:
+          type: integer
+          examples:
+            - 1
+        address1:
+          type: string
+          examples:
+            - 27 chemin de la chabanette
+        address2:
+          type: string
+          examples:
+            - lieu-dit 'la Côte'
+        postalCode:
+          type: string
+          examples:
+            - 63230
+        city:
+          type: string
+          examples:
+            - AURIERES
+        countryCode:
+          type: string
+          examples:
+            - FR
+        source:
+          type: string
+          examples:
+            - myCompany
+    CustomerAddressPatch:
+      type: object
+      properties:
+        type:
+          type: integer
+          examples:
+            - 1
+        address1:
+          type: string
+          examples:
+            - 27 chemin de la chabanette
+        address2:
+          type: string
+          examples:
+            - lieu-dit 'la Côte'
+        postalCode:
+          type: string
+          examples:
+            - 63230
+        city:
+          type: string
+          examples:
+            - AURIERES
+        countryCode:
+          type: string
+          examples:
+            - FR
+        source:
+          type: string
+          examples:
+            - myCompany
     Me:
       type: object
       properties:
