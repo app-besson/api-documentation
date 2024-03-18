@@ -598,7 +598,7 @@ paths:
       description: ''
       requestBody:
         description: >-
-          Ajouter une adresse à un client existant.
+          Modifier l'adresse d'un client existant.
         content:
           text/json:
             schema:
