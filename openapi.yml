@@ -602,7 +602,7 @@ paths:
         content:
           text/json:
             schema:
-              $ref: '#/components/schemas/CustomerAddressPost'
+              $ref: '#/components/schemas/CustomerAddressPut'
         required: true
       responses:
         '204':
@@ -1878,45 +1878,9 @@ components:
           type: string
           examples:
             - manual
-    CustomerAddressPost:
+    CustomerAddressPut:
       type: object
       properties:
-        type:
-          type: string
-          examples:
-            - billing
-            - delivery
-        address1:
-          type: string
-          examples:
-            - 27 chemin de la chabanette
-        address2:
-          type: string
-          examples:
-            - lieu-dit 'la Côte'
-        postalCode:
-          type: string
-          examples:
-            - 63230
-        city:
-          type: string
-          examples:
-            - AURIERES
-        countryCode:
-          type: string
-          examples:
-            - FR
-        source:
-          type: string
-          examples:
-            - myCompany
-    CustomerAddressPatch:
-      type: object
-      properties:
-        type:
-          type: integer
-          examples:
-            - 1
         address1:
           type: string
           examples:
