@@ -1882,9 +1882,10 @@ components:
       type: object
       properties:
         type:
-          type: integer
+          type: string
           examples:
-            - 1
+            - billing
+            - delivery
         address1:
           type: string
           examples:
