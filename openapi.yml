@@ -1569,16 +1569,6 @@ paths:
                     errors:
                       msg:
                         The customer does not exist
-        '403':
-          description: Not choose addict
-          content:
-            text/json:
-              examples:
-                Not choose addict:
-                  value:
-                    errors:
-                      msg:
-                        The customer is not shoes addict
   /stores:
     get:
       tags:
@@ -2615,15 +2605,17 @@ components:
                 image: 
                   - light: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20parrain%20light.png"
                     dark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20parrain%20dark.png"
-        headerText:
+                description: "TODO"
+                isActive: true
+                expirationDate: "11/12/2024"
+        godsons:
           type: string
           examples:
-            - "<p><strong>Vos vacances telles que vous les r&ecirc;viez avec HOMAIR !</strong></p>"
-        bodyHTML:
-          type: string
-          enum:
-            - "<p><span style=\"\"color:#e9454a\"\"><span style=\"\"font-size:16px\"\"><strong>-15% en moyenne et basse saisons</strong></span></span></p>\r\n\r\n<p><span style=\"\"color:#e9454a\"\"><span style=\"\"font-size:16px\"\"><strong>Jusqu&rsquo;&agrave; -5% en haute saison</strong></span></span></p>\r\n\r\n<p><span style=\"\"color:#e9454a\"\"><span style=\"\"font-size:16px\"\"><strong>Frais de dossier de 25&euro; offerts</strong></span></span></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><span style=\"\"font-size:12px\"\">R&eacute;servez sur le site <a href=\"\"https://www.homair.com/\"\">homair.com</a> ou par t&eacute;l&eacute;phone au 04 84 39 08 50 en indiquant votre code : </span></p>\r\n\r\n<p><span style=\"\"font-size:24px\"\"><span style=\"\"color:#ffffff\"\"><strong><span style=\"\"background-color:#e9454a\"\">&nbsp;BESSON63&nbsp;&nbsp;</span></strong></span></span></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p style=\"\"text-align:left\"\"><span style=\"\"color:#999999\"\"><span style=\"\"font-size:10px\"\">&nbsp;* Le code partenaire vous offre les avantages suivants (pour tout s&eacute;jour de 7 nuits minimum) cumulable avec de nombreuses promotions (Early Booking, ventes flash, derni&egrave;re minute&hellip;) :</span></span></p>\r\n\r\n<p><span style=\"\"color:#999999\"\"><span style=\"\"font-size:10px\"\">✔ -15% en basse et moyenne saisons</span></span></p>\r\n\r\n<p><span style=\"\"color:#999999\"\"><span style=\"\"font-size:10px\"\">✔ -5% en haute saison</span></span></p>\r\n\r\n<p><span style=\"\"color:#999999\"\"><span style=\"\"font-size:10px\"\">✔ les frais de dossier de 25&euro; offerts </span></span></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><span style=\"\"color:#999999\"\"><span style=\"\"font-size:10px\"\">Comment r&eacute;server ? </span></span></p>\r\n\r\n<p><span style=\"\"color:#999999\"\"><span style=\"\"font-size:10px\"\">Soit en se connectant au site web www.homair.com en renseignant le code partenaire BESSON63 lors de la finalisation de la r&eacute;servation. Acc&eacute;dez au process d&eacute;taill&eacute; de r&eacute;servation en ligne &gt;</span></span></p>\r\n\r\n<p><span style=\"\"color:#999999\"\"><span style=\"\"font-size:10px\"\">Soit par t&eacute;l&eacute;phone au 04 84 39 08 50 (n&deg; non surtax&eacute;) en indiquant le code partenaire BESSON63. </span></span></p>"
-        untilDate:
-          type: string
-          examples:
-            - '2024-02-19'
+            - - email : "referral1@example.com"
+                status: "pending"
+              - email : "referral2@example.com"
+                status: "validated"
+              - email : "referral3@example.com"
+                status: "expired"
+                
+        
