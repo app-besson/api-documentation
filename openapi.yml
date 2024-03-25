@@ -1643,6 +1643,8 @@ paths:
                     errors:
                       msg:
                         The customer does not exist
+                      code: 
+                        "SPONSOR_NOT_FOUND"
         '400':
           description: Bad Request
           content:
