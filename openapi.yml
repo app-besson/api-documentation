@@ -2783,7 +2783,7 @@ components:
                 description: "TODO"
                 isActive: true
                 expirationDate: "11/12/2024"
-        godsons:
+        godchildren:
           type: string
           examples:
             - - email : "referral1@example.com"
