@@ -1936,6 +1936,37 @@ components:
           type: string
           examples:
             - myCompany
+    CustomerAddressPost:
+      type: object
+      properties:
+        type:
+          type: string
+          examples:
+            - delivery
+        address1:
+          type: string
+          examples:
+            - 27 chemin de la chabanette
+        address2:
+          type: string
+          examples:
+            - lieu-dit 'la Côte'
+        postalCode:
+          type: string
+          examples:
+            - 63230
+        city:
+          type: string
+          examples:
+            - AURIERES
+        countryCode:
+          type: string
+          examples:
+            - FR
+        source:
+          type: string
+          examples:
+            - myCompany
     Me:
       type: object
       properties:
