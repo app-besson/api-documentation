@@ -1613,6 +1613,62 @@ paths:
                     errors:
                       msg:
                         The customer does not exist
+    post:
+      tags:
+      - Sponsorships
+      summary: Demande de parrainage
+      description: Permet de faire une demande de parrainage depuis une interface web ou depuis l'application web.
+      requestBody:
+        content:
+          text/json:
+            schema:
+              properties:
+                godchildEmail:
+                  type: string
+                  examples:
+                    - godchild@email.com
+      responses:
+        '204':
+          description: No content
+          content:
+            text/json:
+              example: null
+        '404':
+          description: Not found
+          content:
+            text/json:
+              examples:
+                Customer Not Found:
+                  value:
+                    errors:
+                      msg:
+                        The customer does not exist
+        '400':
+          description: Bad Request
+          content:
+            text/json:
+              examples:
+                INVALID_EMAIL_FORMAT:
+                  value:
+                    errors:
+                      msg:
+                        Invalid format for godchild's email
+                      code:
+                        INVALID_EMAIL_FORMAT
+                GODCHILD_ALREADY_CLIENT:
+                  value:
+                    errors:
+                      msg:
+                        The godchild is already a client
+                      code:
+                        GODCHILD_ALREADY_CLIENT
+                DISPOSABLE_EMAIL_NOT_ALLOWED:
+                  value:
+                    errors:
+                      msg:
+                        Disposable emails are not allowed
+                      code:
+                        DISPOSABLE_EMAIL_NOT_ALLOWED
   /stores:
     get:
       tags:
