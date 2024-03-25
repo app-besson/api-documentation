@@ -325,20 +325,20 @@ paths:
                     optinEmail: false
                     optinhone: true
                     billingAddresses: 
-                      - id: 328456
+                      - id: "328456"
                         address1: 1 Av. des Frères Montgolfier
                         address2: 1 Av. des Frères
                         city: Aubiere
                         postalCode: "63170"
                         countryCode: FR
-                      - id: 328456
+                      - id: "328456"
                         address1: 1 Av. des Frères Montgolfier
                         address2: 1 Av. des Frères
                         city: Aubiere
                         postalCode: "63170"
                         countryCode: FR
                     deliveryAddresses:
-                      - id: 328456
+                      - id: "328456"
                         address1: 1 Av. des Frères Montgolfier
                         address2: 1 Av. des Frères
                         city: Aubiere
