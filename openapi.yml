@@ -703,6 +703,50 @@ paths:
                     errors:
                       msg:
                         The customer does not exist
+  /prospect:
+    post:
+      tags:
+        - Prospects
+      summary: Crée un prospect dans la base clients
+      description: Crée un prospect dans la base clients avec ses informations clients, son adresse et ses enfants.
+      requestBody:
+        content:
+          text/json:
+            schema:
+              $ref: '#/components/schemas/PostProspect'
+            examples:
+              Prospect:
+                value:
+                  gender: "male"
+                  firstname: John
+                  lastname: Doe
+                  birthday: "1980-01-01"
+                  optinEmail: true
+                  email: john.doe@mail.com
+                  source: myEnterprise
+                  numberOfSons: 1
+                  numberOfDaughters: 2
+                  lastchild:
+                    gender: female
+                    birthdate: "2000-01-01"
+                  billingAddress:
+                    city: Aubière
+                    countryCode: FR
+      responses:
+        '204':
+          description: No content
+          content:
+            text/json:
+              example: null
+        '400':
+          description: Prospect already exists
+          content:
+            text/json:
+              examples:
+                Prospect already exists:
+                  value:
+                    errors:
+                      - msg: Prospect already exists
   /gift-cards:
     get:
       tags:
@@ -1644,6 +1688,48 @@ paths:
                     distance: "85 km"
 components:
   schemas:
+    PostProspect:
+      type: object
+      properties:
+        gender:
+          type: string
+          enum:
+            - male
+            - female
+            - other
+        firstname:
+          type: string
+        lastname:
+          type: string
+        birthday:
+          type: string
+        optinEmail:
+          type: boolean
+        email:
+          type: string
+        source:
+          type: string
+        numberOfSons:
+          type: integer
+        numberOfDaughters:
+          type: integer
+        lastchild:
+          type: object
+          properties:
+            gender:
+              type: string
+              enum:
+                - male
+                - female
+            birthdate:
+              type: string
+        billingAddress:
+          type: object
+          properties:
+            city:
+              type: string
+            contrycode:
+              type: string
     PostGiftCard:
       type: object
       properties:
@@ -2648,5 +2734,3 @@ components:
                 status: "validated"
               - email : "referral3@example.com"
                 status: "expired"
-                
-        
