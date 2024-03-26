@@ -193,9 +193,9 @@ paths:
               examples:
                 With delivery address:
                   value:
-                    id: 4733330
+                    id: "4733330"
                     cardNumber: "9980003979057"
-                    storeId: 195
+                    storeId: "195"
                     gender: male
                     firstname: John
                     lastname: Doe
@@ -206,14 +206,14 @@ paths:
                     source: myEnterprise
                     email: john.doe@mail.com
                     billingAddresses:
-                      - id: 3828813
+                      - id: "3828813"
                         address1: 1 avenue des frères montgolfier
                         address2: null
                         city: Aubière
                         postalCode: '63170'
                         countryCode: FR
                     deliveryAddresses:
-                      - id: 3828813
+                      - id: "3828813"
                         address1: 1 avenue des frères montgolfier
                         address2: null
                         city: Aubière
@@ -221,9 +221,9 @@ paths:
                         countryCode: FR
                 Without delivery address:
                   value:
-                    id: 4733330
+                    id: "4733330"
                     cardNumber: "9980003979057"
-                    storeId: 195
+                    storeId: "195"
                     gender: male
                     firstname: John
                     lastname: Doe
@@ -234,7 +234,7 @@ paths:
                     source: myEnterprise
                     email: john.doe@mail.com
                     billingAddresses:
-                      id: 3828813
+                      id: "3828813"
                       address1: 1 avenue des frères montgolfier
                       address2: null
                       city: Aubière
@@ -1995,6 +1995,10 @@ components:
         billingAddress:
           type: object
           properties:
+            id:
+              type: string
+              examples:
+                - "3828813"
             address1:
               type: string
               examples:
@@ -2018,6 +2022,10 @@ components:
         deliveryAddress:
           type: object
           properties:
+            id:
+              type: string
+              examples:
+                - "3828813"
             address1:
               type: string
               examples:
