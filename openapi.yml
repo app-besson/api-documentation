@@ -244,30 +244,19 @@ paths:
           description: Bad Request
           content:
             text/json:
-              schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        msg:
-                          type: string
-                          examples:
-                            - Invalid value
-                        param:
-                          type: string
-                          examples:
-                            - email
-                        location:
-                          type: string
-                          examples:
-                            - body
-                        value:
-                          type: string
-                          examples:
-                            - test.test.fr
+              examples:
+                Invalid phone number for the country:
+                  value:
+                    errors:
+                      - msg: "Phone Number is invalid for this country"
+                        code: "INVALID_PHONE_NUMBER"
+                No email found in email:
+                  value:
+                    errors:
+                      - msg: Invalid value
+                        param: email
+                        location: body
+                        value: test.test.fr
         '422':
           description: Unprocessable Entity
           content:
@@ -458,9 +447,8 @@ paths:
                 Invalid phone number for the country:
                   value:
                     errors:
-                      errors:
-                        - msg: "Phone Number is invalid for this country"
-                          code: "INVALID_PHONE_NUMBER"
+                      - msg: "Phone Number is invalid for this country"
+                        code: "INVALID_PHONE_NUMBER"
                 No email found in email:
                   value:
                     errors:
