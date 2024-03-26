@@ -360,7 +360,7 @@ paths:
             examples:
               With country verification:
                 value:
-                  countryVerification: FR
+                  countryCodeVerification: FR
                   gender: male
                   firstname: John
                   lastname: Doe
@@ -397,6 +397,9 @@ paths:
               examples:
                 With country verification:
                   value:
+                    id: "329639"
+                    cardNumber: "9991323279802"
+                    storeId: "195"
                     gender: male
                     firstname: JEAN
                     lastname: DUPONT
@@ -407,20 +410,20 @@ paths:
                     optinEmail: false
                     optinhone: true
                     billingAddresses: 
-                      - id: 328456
+                      - id: "328456"
                         address1: 1 Av. des Frères Montgolfier
                         address2: 1 Av. des Frères
                         city: Aubiere
                         postalCode: "63170"
                         countryCode: FR
-                      - id: 328456
+                      - id: "328456"
                         address1: 1 Av. des Frères Montgolfier
                         address2: 1 Av. des Frères
                         city: Aubiere
                         postalCode: "63170"
                         countryCode: FR
                     deliveryAddresses:
-                      - id: 328456
+                      - id: "328456"
                         address1: 1 Av. des Frères Montgolfier
                         address2: 1 Av. des Frères
                         city: Aubiere
@@ -428,6 +431,9 @@ paths:
                         countryCode: FR
                 Without country verification:
                   value:
+                    id: "329639"
+                    cardNumber: "9991323279802"
+                    storeId: "195"
                     gender: male
                     firstname: JEAN
                     lastname: DUPONT
@@ -438,7 +444,7 @@ paths:
                     optinEmail: false
                     optinhone: true
                     billingAddresses: 
-                      id: 328456
+                      id: "328456"
                       address1: 1 Av. des Frères Montgolfier
                       address2: 1 Av. des Frères
                       city: Aubiere
@@ -448,30 +454,20 @@ paths:
           description: Bad Request
           content:
             text/json:
-              schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        msg:
-                          type: string
-                          examples:
-                            - Invalid value
-                        param:
-                          type: string
-                          examples:
-                            - email
-                        location:
-                          type: string
-                          examples:
-                            - body
-                        value:
-                          type: string
-                          examples:
-                            - test.test.fr
+              examples:
+                Invalid phone number for the country:
+                  value:
+                    errors:
+                      errors:
+                        - msg: "Phone Number is invalid for this country"
+                          code: "INVALID_PHONE_NUMBER"
+                No email found in email:
+                  value:
+                    errors:
+                      - msg: Invalid value
+                        param: email
+                        location: body
+                        value: test.test.fr
         '422':
           description: Unprocessable Entity
           content:
@@ -1869,7 +1865,7 @@ components:
     CustomerPatch:
       type: object
       properties:
-        countryVerification:
+        countryCodeVerification:
           type: string
           enum:
             - FR
@@ -1943,7 +1939,7 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
           examples:
             - 15477
         cardNumber:
