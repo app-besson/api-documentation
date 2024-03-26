@@ -96,13 +96,13 @@ paths:
                 Ok response:
                   value:
                     - customers:
-                        - id: 329639
+                        - id: "329639"
                           firstname: JOHN
                           lastname: DOE
                           phoneNumber: "+33600000000"
                           email: "john.doe@email.com"
                           postalcode: "53000"
-                        - id: 329639
+                        - id: "329639"
                           firstname: JOHN
                           lastname: DOE
                           phoneNumber: "+33600000000"
