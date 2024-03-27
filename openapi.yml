@@ -506,6 +506,13 @@ paths:
         - Customers addresses
       summary: Créer une adresse client
       description: ''
+      parameters:
+        - name: customerId
+          in: path
+          description: code client du client auquel on crée une adresse
+          required: true
+          schema:
+            type: integer
       requestBody:
         description: >-
           Ajouter une adresse à un client existant.
@@ -574,12 +581,25 @@ paths:
                           type: string
                           examples:
                             - There can only have five billing address and five shipping addresses for each client.
-  /customers/{customerId}/addresses/{AddressId}:
+  /customers/{customerId}/addresses/{addressId}:
     put:
       tags:
         - Customers addresses
       summary: Modifier une adresse client
       description: ''
+      parameters:
+        - name: customerId
+          in: path
+          description: code client du client à afficher
+          required: true
+          schema:
+            type: integer
+        - name: addressId
+          in: path
+          description: id de l'adresse à afficher
+          required: true
+          schema: 
+            type: integer
       requestBody:
         description: >-
           Modifier l'adresse d'un client existant.
