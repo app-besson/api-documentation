@@ -3,6 +3,97 @@ info:
   title: API Besson documenation
   version: 1.0.0
 paths:
+  /baskets/calculate:
+    post:
+      tags:
+        - Basket
+      summary: Calcul du panier
+      description: "Calcul du panier client via l'appel du web service de Capinfo"
+      requestBody:
+        required: true
+        content:
+          text/json:
+              examples:
+                With all informations:
+                  value:
+                    customerCardNumber: '9980003977435'
+                    storeId: '195'
+                    language: 'FR'
+                    articles: 
+                      - sku: "999201969999"
+                        quantity: 1
+                        price: 4.99
+                      - sku: "220146301304"
+                        quantity: 1
+                        price: 49.99
+                      - sku: "220146301305"
+                        quantity: 1
+                        price: 69.99
+                    coupons:
+                      - "AVANTAGE_BIENVENUE"
+                      - "AVANTAGE-10%_150POINTS"
+                      - "AVANTAGE-5%_75POINTS"
+                      - "ac102"
+      responses:
+        '200':
+          description: OK
+          content:
+            text/json:
+              examples:
+                Ok response:
+                  value:
+                      footer:
+                          dataAnimations: "1#999#68#10,297#AVANTAGE-10%_150POINTS#1####-1#10,297;1#999#71#4,6335#AVANTAGE-5%_75POINTS#1####-1#4,6335"
+                          dataOperations: ""
+                          amount: 14.93
+                      articles:
+                        - id: "999201969999"
+                          quantity: 1
+                          price: 4.99
+                          dataAnimations: ""
+                          dataOperations: ""
+                          lineDiscount: 0
+                          footerDiscount: 0.73
+                        - id: "220146301304"
+                          quantity: 1
+                          price: 49.99
+                          dataAnimations: ""
+                          dataOperations: "1#999#29#4,999#10%SUP_WSHOP#1####-1#4,999"
+                          lineDiscount: 5
+                          footerDiscount: 6.52
+                        - id: "220146301305"
+                          quantity: 1
+                          price: 69.99
+                          dataAnimations: "1#999#36#10#AVANTAGE_BIENVENUE#1####-1#10"
+                          dataOperations: "1#999#29#6,999#10%SUP_WSHOP#1####-1#6,999"
+                          lineDiscount: 17
+                          footerDiscount: 7.68
+                      coupons:
+                        - coupon: "AVANTAGE_BIENVENUE"
+                          used: true
+                          label: "Avantage Bienvenue"
+                        - coupon: "AVANTAGE-10%_150POINTS"
+                          used: true
+                          label: "Avantage 10% - 150 points"
+                        - coupon: "AVANTAGE-5%_75POINTS"
+                          used: true
+                          label: "Avantage 5% - 75 points"
+                        - coupon: "ac102"
+                          used: true
+                          label: "Réduction ac102"
+                      offers:
+                        - coupon: "AVANTAGE_BIENVENUE"
+                          discount: 12
+                          label: "Réduction 10% WSHOP"
+                          removable: false
+                        - coupon: "AVANTAGE-10%_150POINTS"
+                          discount: 10
+                          label: "Avantage Bienvenue"
+                          removable: true
+                        - coupon: "AVANTAGE-5%_75POINTS"
+                          discount: 10.3
+                          label: "Avantage 10% - 150 points"
+                          removable: true
   /customers:
     get:
       tags:
