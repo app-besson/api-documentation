@@ -848,19 +848,6 @@ paths:
         - Gift-Cards
       summary: Création d'une carte cadeau
       description: Créer une carte cadeau du montant "amount" donné dans le body. Retourne le numéro de carte et son code PIN. Amount doit être un entier. Appel sécurisé par apikey.
-      parameters:
-        - name: cardNumber
-          in: path
-          description: numéro de la carte cadeau à modifier
-          required: true
-          schema:
-            type: integer
-        - name: PIN
-          in: path
-          description: code PIN de la carte à modifier
-          required: true
-          schema:
-            type: integer
       requestBody:
         content:
           text/json:
@@ -1069,22 +1056,22 @@ paths:
       summary: Ecrit les info reçut par mailgun dans une Rabbit MQ
       description: Ecrit les info reçut par mailgun statistics dans une Rabbit MQ 
       responses:
-      '204':
-          description: No content
-          content:
-            text/json:
-              example: null
-      '400':
-          description: Bad Request
-          content:
-            text/json:
-              examples:
-                Empty body:
-                  value:
-                    errors:
-                      - msg: The body must not be empty
-                        param: choice
-                        location: body
+        '204':
+            description: No content
+            content:
+              text/json:
+                example: null
+        '400':
+            description: Bad Request
+            content:
+              text/json:
+                examples:
+                  Empty body:
+                    value:
+                      errors:
+                        - msg: The body must not be empty
+                          param: choice
+                          location: body
   /me:
     get:
       tags:
