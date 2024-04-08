@@ -1035,6 +1035,29 @@ paths:
                     errors:
                       - msg: Error occurred on CashGift WS
                         code: ERROR
+  /mailgun:
+    post:
+      tags:
+        - Mailgun statistics
+      summary: Ecrit les info reçut par mailgun dans une Rabbit MQ
+      description: Ecrit les info reçut par mailgun statistics dans une Rabbit MQ 
+      responses:
+      '204':
+          description: No content
+          content:
+            text/json:
+              example: null
+      '400':
+          description: Bad Request
+          content:
+            text/json:
+              examples:
+                Empty body:
+                  value:
+                    errors:
+                      - msg: The body must not be empty
+                        param: choice
+                        location: body
   /me:
     get:
       tags:
