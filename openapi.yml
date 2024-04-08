@@ -842,6 +842,54 @@ paths:
                   value:
                     errors:
                       - msg: Prospect already exists
+  /gift-cards:
+    post:
+      tags:
+        - Gift-Cards
+      summary: Création d'une carte cadeau
+      description: Créer une carte cadeau du montant "amount" donné dans le body. Retourne le numéro de carte et son code PIN. Amount doit être un entier. Appel sécurisé par apikey.
+      parameters:
+        - name: cardNumber
+          in: path
+          description: numéro de la carte cadeau à modifier
+          required: true
+          schema:
+            type: integer
+        - name: PIN
+          in: path
+          description: code PIN de la carte à modifier
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          text/json:
+            schema:
+              $ref: '#/components/schemas/PostGiftCard'
+      responses:
+        '200':
+          description: OK
+          content:
+            text/json:
+              examples:
+                Return ok:
+                  value:
+                    giftCardNumber: "0910000001313"
+                    pin: "0211"
+        '400':
+          description: Error occurred
+          content:
+            text/json:
+              examples:
+                Invalid amount:
+                  value:
+                    errors:
+                      - msg: "Invalid amount"
+                Error occurred:
+                  value:
+                    errors:
+                      - msg:
+                          Error occurred on CashGift WS
   /gift-cards/{cardNumber}={PIN}:
     get:
       tags:
@@ -907,53 +955,6 @@ paths:
                     errors:
                       msg:
                         Error occurred on CashGift WS
-    post:
-      tags:
-        - Gift-Cards
-      summary: Création d'une carte cadeau
-      description: Créer une carte cadeau du montant "amount" donné dans le body. Retourne le numéro de carte et son code PIN. Amount doit être un entier. Appel sécurisé par apikey.
-      parameters:
-        - name: cardNumber
-          in: path
-          description: numéro de la carte cadeau à modifier
-          required: true
-          schema:
-            type: integer
-        - name: PIN
-          in: path
-          description: code PIN de la carte à modifier
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        content:
-          text/json:
-            schema:
-              $ref: '#/components/schemas/PostGiftCard'
-      responses:
-        '200':
-          description: OK
-          content:
-            text/json:
-              examples:
-                Return ok:
-                  value:
-                    giftCardNumber: "0910000001313"
-                    pin: "0211"
-        '400':
-          description: Error occurred
-          content:
-            text/json:
-              examples:
-                Invalid amount:
-                  value:
-                    errors:
-                      - msg: "Invalid amount"
-                Error occurred:
-                  value:
-                    errors:
-                      - msg:
-                          Error occurred on CashGift WS
   /gift-cards/{cardNumber}={PIN}/balance:
     patch:
       tags:
