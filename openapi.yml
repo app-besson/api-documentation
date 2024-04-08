@@ -1071,6 +1071,51 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/Me'
+    patch:
+      tags:
+        - Me
+      summary: Modifications d'un client
+      description: Modifie les informations d'un client authentifié par keycloak
+      requestBody:
+          content:
+            text/json: 
+              schema:
+                $ref: '#/components/schemas/PatchMe'
+              examples:
+                Example:
+                  value:
+                    gender: male
+                    firstname: John
+                    lastname: Doe
+                    birthday: "2000-01-01"
+                    phoneNumber: "+33600000000"
+                    billingAddress:
+                      address1: "1 AVENUE DES FRERES MONTGOLFIER"
+                      address2: null
+                      city: "Aubiere"
+                      postalCode: "63170"
+                      countryCode: "FR"
+      responses:
+        '200':
+          description: Ok
+          content:
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PatchMe200'
+        '404':
+          description: Not found
+          content:
+            text/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      msg: 
+                        type: string
+                        examples: 
+                          - "The customer does not exist"
     delete:
       tags:
         - Me
@@ -2332,6 +2377,128 @@ components:
             - yes
             - no
             - not_pronounced
+    PatchMe:
+      type: object
+      properties:
+        gender:
+          type: string
+          enum:
+            - male
+            - female
+            - other
+        firstname:
+          type: string
+          examples:
+            - John
+        lastname:
+          type: string
+          examples:
+            - DOE
+        birthday:
+          type: string
+          format: date
+          examples:
+            - '2000-01-01'
+        phoneNumber:
+          type: string
+          examples:
+            - '+33600000000'
+        billingAddress:
+          type: object
+          properties:
+            address1:
+              type: string
+              examples:
+                - 1 AVENUE DES FRERES MONTGOLFIER
+            address2:
+              type: string
+              examples:
+                - null
+            city:
+              type: string
+              examples:
+                - AUBIERE
+            postalCode:
+              type: string
+              examples:
+                - '63170'
+            countryCode:
+              type: string
+              examples:
+                - FR
+    PatchMe200:
+      type: object
+      properties:
+        gender:
+          type: string
+          enum:
+            - male
+            - female
+            - other
+        firstname:
+          type: string
+          examples:
+            - John
+        lastname:
+          type: string
+          examples:
+            - DOE
+        loyalSince:
+          type: string
+          format: date
+          examples:
+            - '2000-01-01'
+        birthday:
+          type: string
+          format: date
+          examples:
+            - '2000-01-01'
+        phoneNumber:
+          type: string
+          examples:
+            - '+33600000000'
+        status:
+          type: object
+          properties:
+            value:
+              type: string
+              enum:
+                - lover
+                - addict
+            endDate:
+              type: string
+              format: date
+              description: uniquement présent quand le client est lover
+              examples:
+                - '2000-01-01'
+        offersCount:
+          type: integer
+          format: int64
+          examples:
+            - 4
+        billingAddress:
+          type: object
+          properties:
+            address1:
+              type: string
+              examples:
+                - 1 AVENUE DES FRERES MONTGOLFIER
+            address2:
+              type: string
+              examples:
+                - null
+            city:
+              type: string
+              examples:
+                - AUBIERE
+            postalCode:
+              type: string
+              examples:
+                - '63170'
+            countryCode:
+              type: string
+              examples:
+                - FR
     AffectedStore:
       type: object
       properties:
