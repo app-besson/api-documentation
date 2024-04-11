@@ -1160,7 +1160,7 @@ paths:
   /me/affected-store:
     get:
       tags:
-        - Me
+        - Me affected store
       summary: Informations du magasin affecté à un client
       description: >-
         Retourne les informations du magasin affecté à un client authentifié par
@@ -1174,7 +1174,7 @@ paths:
                 $ref: '#/components/schemas/AffectedStore'
     post:
       tags:
-        - Me
+        - Me affected store
       summary: Affecte le magasin d'affectation au client 
       description: >-
        Affecte le magasin d'affectation au client authentifié par keycloak
@@ -1198,7 +1198,7 @@ paths:
   /me/dematerialization:
     post:
       tags:
-        - Me
+        - Me dematerialization
       summary: Affecte le choix de l'optin dematerialisation du client
       description: >-
         Affecte le choix de l'optin dematerialisation du client yes / no /
@@ -1255,7 +1255,7 @@ paths:
   /me/family:
     get:
       tags:
-        - Me
+        - Me family
       summary: Liste des membres de la famille d'un client
       description: Retourne les membres de la famille d'un client authentifié par keycloak
       responses:
@@ -1300,7 +1300,7 @@ paths:
   /me/offers:
     get:
       tags:
-        - Me
+        - Me offers
       summary: Liste des offres d'un client
       description: Retourne les offres associées à un client authentifié par keycloak
       parameters:
@@ -1354,10 +1354,20 @@ paths:
                       description: "TODO"
                       isActive: false
                       missingPoints: 145
+                    - id: "223457"
+                      barcode: "223457"
+                      type: "barcode"
+                      expirationDate: "29/04/2024"
+                      isActive: true
+                      name: "COUPON_PARRAIN"
+                      description: "DESC PARRAIN OFFER FR"
+                      image: 
+                        - light: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/Offres_Parrainage_Blanc_FR.png"
+                          dark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/Offres_Parrainage_Noir_FR.png"
   /me/offers/{id}/activate:
     post:
       tags:
-        - Me
+        - Me offers
       summary: Active l'offre d'un client
       description: >-
         Active l'offre d'un client authentifié par keycloak. L'offre est
@@ -1430,7 +1440,7 @@ paths:
   /me/shoes-addict:
     get:
       tags:
-      - Me
+      - Me shoes addict
       summary: Rechercher les avantages shoes addict
       description: Retourne les avantages shoes addict d'un client authentifié par keycloak
       parameters:
@@ -1499,7 +1509,7 @@ paths:
   /me/shoes-addict/partner/{id}:
     get:
       tags:
-      - Me
+      - Me shoes addict
       summary: Rechercher un partenaire
       description: Retourne l'histrique des points d'un client authentifié par keycloak
       parameters:
