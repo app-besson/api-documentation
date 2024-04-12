@@ -672,6 +672,73 @@ paths:
                           type: string
                           examples:
                             - There can only have five billing address and five shipping addresses for each client.
+  /customers/{cardNumber}/animations:
+     get:
+      tags:
+        - Customers animations
+      summary: Retourne les informations d'un client
+      description: Retourne les informations du client dont le codeclient est passé en paramètre dans la requête.
+      parameters:
+        - name: language
+          in: query
+          description: Langue de l’utilisateur (fr/es/en)
+          required: false
+          schema:
+            type: string
+            default: fr
+        - name: storeId
+          in: query
+          description: Numéro de magasin qui sera utilisé pour checker les animations du client
+          required: false
+          schema:
+            type: int
+            default: fr
+      responses:
+        '200':
+          description: OK
+          content:
+            text/json:
+              examples:
+                With animations:
+                  value:
+                    animations: 
+                      - code: "AVANTAGE_VIP"
+                        title: "-10% sur l'entretien"
+                        image: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20VIP%20noir.png"
+                      - code: "AVANTAGE-5%_75POINTS"
+                        title: "-5% pour 75 points"
+                        image: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%2075%20coeurs%20noir.png"
+                      - code: "MARO_30"
+                        title: "-30% sur la maroquinerie"
+                        image: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/default.png"
+        '404':
+          description: Not found
+          content:
+            text/json:
+              examples:
+                Customer Not Found:
+                  value:
+                    errors:
+                      msg:
+                        Customer not found
+                      code:
+                        NOT_FOUND
+        '422':
+          description: Unprocessable Entity
+          content:
+            text/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+                          examples:
+                            - CashFid Invalid response
   /customers/{customerId}/addresses/{addressId}:
     put:
       tags:
