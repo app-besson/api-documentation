@@ -13,6 +13,8 @@ paths:
         required: true
         content:
           text/json:
+            schema:
+              $ref: '#/components/schemas/BasketsCalculate'
             examples:
               With all informations:
                 value:
@@ -2193,6 +2195,25 @@ components:
               type: string
               examples:
                 - FR
+    BasketsCalculate:
+      type: object
+      properties:
+        customerCardNumber:
+          type: string
+          example: 9980003977435
+        storeId:
+          type: string
+          example: 195
+        language:
+          type: string
+          example: FR
+        articles:
+          type: object
+          properties:
+            sku:
+              type: string
+              examples:
+                - "999201969999"
     CustomerResponse201:
       type: object
       properties:
