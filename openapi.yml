@@ -13,27 +13,27 @@ paths:
         required: true
         content:
           text/json:
-              examples:
-                With all informations:
-                  value:
-                    customerCardNumber: '9980003977435'
-                    storeId: '195'
-                    language: 'FR'
-                    articles: 
-                      - sku: "999201969999"
-                        quantity: 1
-                        price: 4.99
-                      - sku: "220146301304"
-                        quantity: 1
-                        price: 49.99
-                      - sku: "220146301305"
-                        quantity: 1
-                        price: 69.99
-                    coupons:
-                      - "AVANTAGE_BIENVENUE"
-                      - "AVANTAGE-10%_150POINTS"
-                      - "AVANTAGE-5%_75POINTS"
-                      - "ac102"
+            examples:
+              With all informations:
+                value:
+                  customerCardNumber: '9980003977435'
+                  storeId: '195'
+                  language: 'FR'
+                  articles: 
+                    - sku: "999201969999"
+                      quantity: 1
+                      price: 4.99
+                    - sku: "220146301304"
+                      quantity: 1
+                      price: 49.99
+                    - sku: "220146301305"
+                      quantity: 1
+                      price: 69.99
+                  coupons:
+                    - "AVANTAGE_BIENVENUE"
+                    - "AVANTAGE-10%_150POINTS"
+                    - "AVANTAGE-5%_75POINTS"
+                    - "ac102"
       responses:
         '200':
           description: OK
