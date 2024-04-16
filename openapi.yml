@@ -2200,13 +2200,13 @@ components:
       properties:
         customerCardNumber:
           type: string
-          example: 9980003977435
+          examples: 9980003977435
         storeId:
           type: string
-          example: 195
+          examples: 195
         language:
           type: string
-          example: FR
+          examples: FR
         articles:
           type: object
           properties:
@@ -2214,6 +2214,19 @@ components:
               type: string
               examples:
                 - "999201969999"
+            quantity:
+              type: integer
+              examples:
+                - 1
+            price:
+              type: integer
+              examples:
+                - 11.99
+        coupons:
+          type: object
+          properties:
+            examples:
+                - AVANTAGE_BIENVENUE
     CustomerResponse201:
       type: object
       properties:
