@@ -234,6 +234,7 @@ paths:
               examples:
                 With delivery address:
                   value:
+                    keycloakId: "00070180-d169-4a60-975b-028f8cdc1e2b"
                     storeId: '195'
                     gender: male
                     firstname: John
@@ -257,6 +258,7 @@ paths:
                       countryCode: FR
                 Without delivery address:
                   value:
+                    keycloakId: "00070180-d169-4a60-975b-028f8cdc1e2b"
                     cardNumber: '9980007395396'
                     storeId: '195'
                     gender: 'male'
@@ -442,6 +444,7 @@ paths:
             examples:
               With country verification:
                 value:
+                  keycloakId: "00070180-d169-4a60-975b-028f8cdc1e2b"
                   countryCodeVerification: FR
                   gender: male
                   firstname: John
@@ -453,6 +456,7 @@ paths:
                   email: john.doe@email.com
               Without country verification:
                 value: 
+                  keycloakId: "00070180-d169-4a60-975b-028f8cdc1e2b"
                   gender: female
                   firstname: John
                   lastname: Doe
@@ -693,7 +697,7 @@ paths:
           description: Numéro de magasin qui sera utilisé pour checker les animations du client
           required: false
           schema:
-            type: int
+            type: integer
             default: fr
       responses:
         '200':
@@ -2062,9 +2066,10 @@ components:
     CustomerCreate:
       type: object
       required:
-        - storeId
         - email
       properties:
+        keycloakId:
+          type: string
         cardNumber:
           type: string
         storeId:
@@ -2125,6 +2130,8 @@ components:
     CustomerPatch:
       type: object
       properties:
+        keycloakId:
+          type: string
         countryCodeVerification:
           type: string
           enum:
