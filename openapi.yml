@@ -2414,6 +2414,10 @@ components:
           type: string
           examples:
             - myCompany
+        default:
+          type: boolean
+          examples:
+            - true
     Me:
       type: object
       properties:
