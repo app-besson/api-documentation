@@ -180,6 +180,11 @@ paths:
           description: Accepte nom, prénom, email, numéro de téléphone, numéro de fidélité, code postal et date de naissance pour rechercher les clients correspondants. Possibilité de passer deux arguments séparés par un espace (nom / prenom, nom / code postal, prenom / code postal)
           schema:
             type: string
+        - name: lead
+          in: query
+          description: Paramètre qui doit être "true" pour renvoyer les prospect.
+          schema:
+            type: boolean
       responses:
         '200':
           description: OK
