@@ -1235,6 +1235,19 @@ paths:
                           type: string
                           examples:
                             - The customer does not exist
+  /me/activate:
+    get:
+      tags:
+        - Me activate
+      summary: Active son compte client
+      description: >-
+        Active son compte client authentifié par keycloak. 
+      responses:
+        '204':
+          description: No content
+          content:
+            text/json:
+              example: null
   /me/affected-store:
     get:
       tags:
