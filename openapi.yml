@@ -2280,6 +2280,7 @@ components:
               type: string
               examples:
                 - FR
+        
     BasketsCalculate:
       type: object
       properties:
@@ -2591,6 +2592,22 @@ components:
             - yes
             - no
             - not_pronounced
+        optin_fidelite:
+          type: boolean
+        optin_women_news:
+          type: boolean
+        optin_good_deals:
+          type: boolean
+        optin_web_exclusives:
+          type: boolean
+        optin_store_news:
+          type: boolean
+        optin_men_news:
+          type: boolean
+        optin_bfc_news:
+          type: boolean
+        optin_children_news:
+          type: boolean
     PatchMe:
       type: object
       properties:
@@ -2713,6 +2730,22 @@ components:
               type: string
               examples:
                 - FR
+        optin_fidelite:
+          type: boolean
+        optin_women_news:
+          type: boolean
+        optin_good_deals:
+          type: boolean
+        optin_web_exclusives:
+          type: boolean
+        optin_store_news:
+          type: boolean
+        optin_men_news:
+          type: boolean
+        optin_bfc_news:
+          type: boolean
+        optin_children_news:
+          type: boolean
     AffectedStore:
       type: object
       properties:
