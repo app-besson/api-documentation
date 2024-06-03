@@ -2592,7 +2592,7 @@ components:
             - yes
             - no
             - not_pronounced
-        optin_fidelite:
+        optin_fidelity:
           type: boolean
         optin_women_news:
           type: boolean
@@ -2730,7 +2730,7 @@ components:
               type: string
               examples:
                 - FR
-        optin_fidelite:
+        optin_fidelity:
           type: boolean
         optin_women_news:
           type: boolean
