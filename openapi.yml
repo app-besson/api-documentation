@@ -1668,6 +1668,66 @@ paths:
                         type: string
                         examples:
                           - No news found
+  /newsletter:
+    post:
+      tags:
+        - Newsletter
+      summary: Permet d'optin aux emails et déclencher une offre si le client/prospect est    éligible
+      requestBody:
+        content:
+          text/json:
+            schema:
+              properties:
+                language:
+                  type: string
+                  examples:
+                    - fr
+                email:
+                  type: string
+                  examples:
+                    - john.die@email.com
+                gender:
+                  type: string
+                  examples:
+                    - female
+      responses:
+        '200':
+          description: OK
+          content:
+            text/json:
+              examples:
+                Jamais eu de coupon:
+                  value:
+                    code: COUPON_SENT_AND_OPTIN
+                Déjà eu coupon mais pas optin:
+                  value:
+                    code: COUPON_NOT_SENT_BUT_OPTIN
+        '400':
+          description: Bad Request
+          content:
+            text/json:
+              examples:
+                INVALID_EMAIL_FORMAT:
+                  value:
+                    errors:
+                      msg:
+                        Invalid email format
+                      code:
+                        INVALID_EMAIL_FORMAT
+                ALREADY_OPTIN:
+                  value:
+                    errors:
+                      msg:
+                        The godchild is already a client
+                      code:
+                        ALREADY_OPTIN
+                DISPOSABLE_EMAIL_NOT_ALLOWED:
+                  value:
+                    errors:
+                      msg:
+                        Disposable emails are not allowed
+                      code:
+                        INVALID_EMAIL_FORMAT
   /onboarding:
     get:
       tags:
