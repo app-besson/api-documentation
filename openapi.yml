@@ -1187,6 +1187,14 @@ paths:
                       city: "Aubiere"
                       postalCode: "63170"
                       countryCode: "FR"
+                    optinFidelity: true
+                    optinWomenNews: true
+                    optinGoodDeals: true
+                    optinWebExclusives: true
+                    optinStoreNews: true
+                    optinMenNews: true
+                    optinBfcNews: true
+                    optinChildrenNews: true
       responses:
         '200':
           description: Ok
