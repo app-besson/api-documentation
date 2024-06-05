@@ -261,6 +261,7 @@ paths:
                       city: Aubière
                       postalCode: '63170'
                       countryCode: FR
+                    activate: true
                 Without delivery address:
                   value:
                     keycloakId: "00070180-d169-4a60-975b-028f8cdc1e2b"
@@ -282,7 +283,7 @@ paths:
                       city: Aubière
                       postalCode: '63170'
                       countryCode: FR
-
+                    activate: true
       responses:
         '201':
           description: Created
@@ -319,6 +320,7 @@ paths:
                         city: Aubière
                         postalCode: '63170'
                         countryCode: FR
+                    activate: true
                 Without delivery address:
                   value:
                     id: "4733330"
@@ -340,6 +342,7 @@ paths:
                       city: Aubière
                       postalCode: '63170'
                       countryCode: FR
+                    activate: true
         '400':
           description: Bad Request
           content:
