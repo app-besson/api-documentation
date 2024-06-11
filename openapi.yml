@@ -1396,10 +1396,10 @@ paths:
                     errors:
                       msg:
                         The customer does not exist
-  /me/offers (V1):
+  /v1/me/offers:
     get:
       tags:
-        - Me offers (V1)
+        - Me offers v1
       summary: Liste des offres d'un client
       description: Retourne les offres associées à un client authentifié par keycloak
       parameters:
@@ -1453,11 +1453,11 @@ paths:
                       description: "TODO"
                       isActive: false
                       missingPoints: 145
-  /me/offers (V2):
+  /v2/me/offers:
     get:
       tags:
-        - Me offers (V2)
-      summary: Liste des offres d'un client (V1 + sponsorships)
+        - Me offers v2
+      summary: Liste des offres d'un client (v1 + sponsorships)
       description: Retourne les offres associées à un client authentifié par keycloak
       parameters:
         - name: language
