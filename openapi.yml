@@ -3327,8 +3327,8 @@ components:
                 name: "COUPON_PARRAIN"
                 barcode : "d9235adf"
                 image: 
-                  - light: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20parrain%20light.png"
-                    dark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20parrain%20dark.png"
+                  light: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20parrain%20light.png"
+                  dark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20parrain%20dark.png"
                 description: "TODO"
                 isActive: true
                 expirationDate: "11/12/2024"
