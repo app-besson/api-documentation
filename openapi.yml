@@ -1461,8 +1461,8 @@ paths:
                       name: "COUPON_PARRAIN"
                       description: "DESC PARRAIN OFFER FR"
                       image: 
-                        - light: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/Offres_Parrainage_Blanc_FR.png"
-                          dark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/Offres_Parrainage_Noir_FR.png"
+                        light: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/Offres_Parrainage_Blanc_FR.png"
+                        dark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/Offres_Parrainage_Noir_FR.png"
   /me/offers/{id}/activate:
     post:
       tags:
