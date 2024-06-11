@@ -1396,11 +1396,68 @@ paths:
                     errors:
                       msg:
                         The customer does not exist
-  /me/offers:
+  /me/offers (V1):
     get:
       tags:
-        - Me offers
+        - Me offers (V1)
       summary: Liste des offres d'un client
+      description: Retourne les offres associées à un client authentifié par keycloak
+      parameters:
+        - name: language
+          in: query
+          description: Langue des offres
+          required: false
+          schema:
+            type: string
+            default: fr
+      responses:
+        '200':
+          description: OK
+          content:
+            text/json:
+              examples:
+                Response:
+                  value:
+                    - id: 1
+                      type: "event"
+                      name: "AVANTAGE_ANNIVERSAIRE"
+                      image:
+                        light: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20anniversaire%20blanc.png"
+                        dark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20anniversaire%20noir.png"
+                      description: "TODO"
+                      isActive: true
+                      expirationDate: "11/12/2023"
+                    - id: 2
+                      type: "activable"
+                      name: "AVANTAGE_BIENVENUE"
+                      image: 
+                          light: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20bienvenue%20blanc.png"
+                          dark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20bienvenue%20noir.png"
+                      description: "TODO"
+                      isActive: false
+                    - id: 5
+                      type: "points"
+                      name: "AVANTAGE-15%_250POINTS"
+                      image: 
+                          light: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20250%20coeurs%20blanc.png"
+                          dark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20250%20coeurs%20noir.png"
+                      description: "TODO"
+                      isActive: true
+                      expirationDate: "23/01/2024"
+                    - id: 6
+                      type: "points"
+                      name: "AVANTAGE-20%_400POINTS"
+                      image: 
+                          light: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20400%20coeurs%20blanc.png"
+                          dark: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/offre%20400%20coeurs%20noir.png"
+                      description: "TODO"
+                      isActive: false
+                      missingPoints: 145
+  /me/offers (V2):
+    get:
+      tags:
+        - Me offers (V2)
+      summary: Liste des offres d'un client (V1 + sponsorships)
       description: Retourne les offres associées à un client authentifié par keycloak
       parameters:
         - name: language
