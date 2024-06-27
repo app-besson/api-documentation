@@ -876,6 +876,87 @@ paths:
                     errors:
                       msg:
                         The customer does not exist
+  /customers/{customerId}/subscriptions:
+    get:
+      tags:
+        - Customers subscriptions
+      summary: Retourne les souscriptions du client
+      description: ''
+      parameters:
+        - name: customerId
+          in: path
+          description: uuid du client à afficher
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/json:
+              schema:
+                type: object
+                properties:
+                  optinEmail:
+                    type: boolean
+                  optinPhone:
+                    type: boolean
+                  optinFidelity:
+                    type: boolean
+                  optinWomenNews:
+                    type: boolean
+                  optinGoodDeals:
+                    type: boolean
+                    example: false
+                  optinWebExclusives:
+                    type: boolean
+                  optinStoreNews:
+                    type: boolean
+                  optinMenNews:
+                    type: boolean
+                    example: false
+                  optinBfcNews:
+                    type: boolean
+                  optinChildrenNews:
+                    type: boolean
+        '404':
+          description: Not found
+          content:
+            text/json:
+              examples:
+                Customer Not Found:
+                  value:
+                    errors:
+                      msg:
+                        Customer not found
+        '400':
+          description: Bad Request
+          content:
+            text/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+                          examples:
+                            - Identifier in URL must be an Uuid
+                        param:
+                          type: string
+                          examples:
+                            - uuid
+                        location:
+                          type: string
+                          examples:
+                            - params
+                        value:
+                          type: string
+                          examples:
+                            - d037420a-7097-4e80-b877-e5cc2e41eber
   /prospect:
     post:
       tags:
@@ -1127,29 +1208,6 @@ paths:
                     errors:
                       - msg: Error occurred on CashGift WS
                         code: ERROR
-  /mailgun:
-    post:
-      tags:
-        - Mailgun statistics
-      summary: Ecrit les info reçut par mailgun dans une Rabbit MQ
-      description: Ecrit les info reçut par mailgun statistics dans une Rabbit MQ 
-      responses:
-        '204':
-            description: No content
-            content:
-              text/json:
-                example: null
-        '400':
-            description: Bad Request
-            content:
-              text/json:
-                examples:
-                  Empty body:
-                    value:
-                      errors:
-                        - msg: The body must not be empty
-                          param: choice
-                          location: body
   /me:
     get:
       tags:
