@@ -249,6 +249,7 @@ paths:
                     optinPhone: false
                     source: myEnterprise
                     email: john.doe@mail.com
+                    activationDate: '2024-07-17'
                     billingAddress:
                       address1: 1 avenue des frères montgolfier
                       address2: null
@@ -276,6 +277,7 @@ paths:
                     optinDematerialization: yes
                     email: john.doe@mail.com
                     source: myEnterprise
+                    activationDate: '2024-07-17'
                     billingAddress:
                       address1: 1 avenue des frères montgolfier
                       address2: null
@@ -459,6 +461,7 @@ paths:
                   optinPhone: false
                   source: myEnterprise
                   email: john.doe@email.com
+                  activationDate: '2024-07-17'
               Without country verification:
                 value: 
                   keycloakId: "00070180-d169-4a60-975b-028f8cdc1e2b"
@@ -472,6 +475,7 @@ paths:
                   optinDematerialization: yes
                   email: test@mail.com
                   source: myEnterprise
+                  activationDate: '2024-07-17'
                   billingAdddress:
                     address1: 1 avenue des frères montgolfier
                     address2: null
@@ -2423,6 +2427,8 @@ components:
           type: string
         source:
           type: string
+        activationDate:
+          type: string
         billingAddress:
           type: object
           properties:
@@ -2501,6 +2507,10 @@ components:
           type: string
           examples:
             - myEnterprise
+        activationDate: 
+          type: string 
+          examples:
+            - 2024-07-17
         billingAddress:
           type: object
           properties:
