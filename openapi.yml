@@ -1341,6 +1341,8 @@ paths:
                     lastname: Doe
                     birthday: "2000-01-01"
                     phoneNumber: "+33600000000"
+                    optinEmail: true
+                    optinPhone: false
                     billingAddress:
                       address1: "1 AVENUE DES FRERES MONTGOLFIER"
                       address2: null
@@ -2888,6 +2890,14 @@ components:
           type: string
           examples:
             - '+33600000000'
+        optinEmail:
+          type: boolean
+          examples:
+            - true
+        optinPhone:
+          type: boolean
+          examples:
+            - false
         billingAddress:
           type: object
           properties:
@@ -2911,6 +2921,22 @@ components:
               type: string
               examples:
                 - FR
+        optinFidelity:
+          type: boolean
+        optinWomenNews:
+          type: boolean
+        optinGoodDeals:
+          type: boolean
+        optinWebExclusives:
+          type: boolean
+        optinStoreNews:
+          type: boolean
+        optinMenNews:
+          type: boolean
+        optinBfcNews:
+          type: boolean
+        optinChildrenNews:
+          type: boolean
     PatchMe200:
       type: object
       properties:
@@ -2942,6 +2968,14 @@ components:
           type: string
           examples:
             - '+33600000000'
+        optinEmail:
+          type: boolean
+          examples:
+            - true
+        optinPhone:
+          type: boolean
+          examples:
+            - false
         status:
           type: object
           properties:
