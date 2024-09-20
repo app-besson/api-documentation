@@ -84,15 +84,18 @@ paths:
                           used: true
                           label: "Réduction ac102"
                       offers:
-                        - coupon: "AVANTAGE_BIENVENUE"
+                        - name: "AVANTAGE_BIENVENUE"
+                          coupon: "jeib7ilj"
                           discount: 12
                           label: "Réduction 10% WSHOP"
                           removable: false
-                        - coupon: "AVANTAGE-10%_150POINTS"
+                        - name: "AVANTAGE-10%_150POINTS"
+                          coupon: "14er25er"
                           discount: 10
                           label: "Avantage Bienvenue"
                           removable: true
-                        - coupon: "AVANTAGE-5%_75POINTS"
+                        - name: "AVANTAGE-5%_75POINTS"
+                          coupon: "jose4551"
                           discount: 10.3
                           label: "Avantage 10% - 150 points"
                           removable: true
