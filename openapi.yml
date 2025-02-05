@@ -99,7 +99,7 @@ paths:
                           discount: 10.3
                           label: "Avantage 10% - 150 points"
                           removable: true
-  /check-email:
+  /Check-email:
     post:
       tags:
       - check-email
