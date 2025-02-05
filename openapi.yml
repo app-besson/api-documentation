@@ -99,6 +99,68 @@ paths:
                           discount: 10.3
                           label: "Avantage 10% - 150 points"
                           removable: true
+  /check-email:
+    post:
+      tags:
+      - check-email
+      summary: Verification de la delivrabilité d'un mail
+      description: Verification de la delivrabilité d'un mail et s'il n'est pas jetable.
+      requestBody:
+        content:
+          text/json:
+            schema:
+              properties:
+                email:
+                  type: string
+                  examples:
+                    - prenom.nom@email.com
+      responses:
+        '200':
+          description: OK
+          content:
+            text/json:
+              examples:
+                Autocorrect:
+                  value:
+                    autocorrect: prenom.nom@gmail.com
+        '204':
+          description: No content
+          content:
+            text/json:
+              example: null
+        '400':
+          description: Bad Request
+          content:
+            text/json:
+              examples:
+                UNDELIVERABLE_EMAIL:
+                  value:
+                    errors:
+                      msg:
+                        Email addresses is undelivrable
+                      code:
+                        UNDELIVERABLE_EMAIL
+                DISPOSABLE_EMAIL:
+                  value:
+                    errors:
+                      msg:
+                        Disposable email addresses are not allowed
+                      code:
+                        DISPOSABLE_EMAIL
+                EMAIL_REQUIRED:
+                  value:
+                    errors:
+                      msg: 
+                        'Missing required field: email'
+                      code:
+                        EMAIL_REQUIRED
+                INVALID_EMAIL_FORMAT:
+                  value:
+                    errors:
+                      msg:
+                        Invalid email format
+                      code:
+                        INVALID_EMAIL_FORMAT
   /customers:
     get:
       tags:
