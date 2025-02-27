@@ -325,6 +325,7 @@ paths:
                       city: Aubière
                       postalCode: '63170'
                       countryCode: FR
+                    vatNumber: FR123456789
                 Without delivery address:
                   value:
                     keycloakId: "00070180-d169-4a60-975b-028f8cdc1e2b"
@@ -348,7 +349,7 @@ paths:
                       city: Aubière
                       postalCode: '63170'
                       countryCode: FR
-
+                    vatNumber: FR123456789
       responses:
         '201':
           description: Created
@@ -526,6 +527,7 @@ paths:
                   source: myEnterprise
                   email: john.doe@email.com
                   activationDate: '2024-07-17'
+                  vatNumber: FR123456789
               Without country verification:
                 value: 
                   keycloakId: "00070180-d169-4a60-975b-028f8cdc1e2b"
@@ -546,6 +548,7 @@ paths:
                     city: Aubière
                     postalCode: '63170'
                     countryCode: FR
+                  vatNumber: FR123456789
       responses:
         '200':
           description: OK
