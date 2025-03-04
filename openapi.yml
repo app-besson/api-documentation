@@ -102,7 +102,7 @@ paths:
   /check-email:
     post:
       tags:
-      - check-email
+      - Check-email
       summary: Verification de la delivrabilité d'un mail
       description: Verification de la delivrabilité d'un mail et s'il n'est pas jetable.
       requestBody:
@@ -748,10 +748,10 @@ paths:
                           type: string
                           examples:
                             - There can only have five billing address and five shipping addresses for each client.
-  /customers/{cardNumber}/animations:
+  /v1/customers/{cardNumber}/animations:
      get:
       tags:
-        - Customers animations
+        - Customers animations V1
       summary: Retourne les informations d'un client
       description: Retourne les informations du client dont le codeclient est passé en paramètre dans la requête.
       parameters:
@@ -787,6 +787,73 @@ paths:
                       - code: "MARO_30"
                         title: "-30% sur la maroquinerie"
                         image: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/default.png"
+        '404':
+          description: Not found
+          content:
+            text/json:
+              examples:
+                Customer Not Found:
+                  value:
+                    errors:
+                      msg:
+                        Customer not found
+                      code:
+                        NOT_FOUND
+        '422':
+          description: Unprocessable Entity
+          content:
+            text/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+                          examples:
+                            - CashFid Invalid response
+  /v2/customers/{cardNumber}/animations:
+     get:
+      tags:
+        - Customers animations V2
+      summary: Retourne les informations d'un client
+      description: Retourne les informations du client dont le codeclient est passé en paramètre dans la requête.
+      parameters:
+        - name: language
+          in: query
+          description: Langue de l’utilisateur (fr/es/en)
+          required: false
+          schema:
+            type: string
+            default: fr
+        - name: storeId
+          in: query
+          description: Numéro de magasin qui sera utilisé pour checker les animations du client
+          required: false
+          schema:
+            type: integer
+            default: fr
+      responses:
+        '200':
+          description: OK
+          content:
+            text/json:
+              examples:
+                With animations:
+                  value:
+                    animations: 
+                      - code: "AVANTAGE_VIP"
+                        title: "-10% sur l'entretien"
+                        title2: "Avantage VIP"
+                      - code: "AVANTAGE-5%_75POINTS"
+                        title: "-5% pour 75 points"
+                        title2: "-5% pour 75❤️"
+                      - code: "MARO_30"
+                        title: "-30% sur la maroquinerie"
+                        title2: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/default.png"
         '404':
           description: Not found
           content:
