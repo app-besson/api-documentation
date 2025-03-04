@@ -2008,7 +2008,7 @@ paths:
                   value:
                     errors:
                       msg:
-                        Disposable emails are not allowed
+                        Disposable email
                       code:
                         INVALID_EMAIL_FORMAT
   /onboarding:
