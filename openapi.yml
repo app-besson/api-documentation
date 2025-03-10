@@ -851,9 +851,6 @@ paths:
                       - code: "AVANTAGE-5%_75POINTS"
                         title: "-5% pour 75 points"
                         title2: "-5% pour 75❤️"
-                      - code: "MARO_30"
-                        title: "-30% sur la maroquinerie"
-                        title2: "-30% Maro."
         '404':
           description: Not found
           content:
