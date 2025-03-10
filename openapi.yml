@@ -853,7 +853,7 @@ paths:
                         title2: "-5% pour 75❤️"
                       - code: "MARO_30"
                         title: "-30% sur la maroquinerie"
-                        title2: "https://besson-assets.fra1.cdn.digitaloceanspaces.com/offers/default.png"
+                        title2: "-30% Maro."
         '404':
           description: Not found
           content:
