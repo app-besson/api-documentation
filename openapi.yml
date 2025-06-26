@@ -1473,7 +1473,6 @@ paths:
                     optinMenNews: true
                     optinBfcNews: true
                     optinChildrenNews: true
-                    activationDate: true
       responses:
         '200':
           description: Ok
@@ -2971,6 +2970,10 @@ components:
           type: boolean
         optinChildrenNews:
           type: boolean
+        activationDate:
+          type: string
+          examples:
+                - '2025-01-01'
     PatchMe:
       type: object
       properties:
