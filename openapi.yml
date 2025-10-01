@@ -2001,20 +2001,6 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/News'
-        '404':
-          description: Not found
-          content:
-            text/json:
-              schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      msg:
-                        type: string
-                        examples:
-                          - No news found
   /newsletter:
     post:
       tags:
