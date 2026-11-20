@@ -440,6 +440,17 @@ paths:
                           type: string
                           examples:
                             - Le compte client existe déjà (email en doublon)
+                        code:
+                          type: string
+                          description: Code d'erreur à exploiter côté appelant
+                          examples:
+                            - CUSTOMER_ALREADY_EXISTS
+              examples:
+                Customer already exists:
+                  value:
+                    errors:
+                      - msg: "Le compte client existe déjà (email en doublon)"
+                        code: "CUSTOMER_ALREADY_EXISTS"
   /customers/{customerId}:
     get:
       tags:
